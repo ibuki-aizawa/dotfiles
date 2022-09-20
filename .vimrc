@@ -46,6 +46,7 @@ let g:quickrun_config._ = {
 set splitbelow
 nnoremap <leader>r :QuickRun<CR>
 nnoremap <F5> :QuickRun<CR>
+nnoremap <leader>m :make<CR>
 
 let g:fern#default_hidden=1
 nnoremap <S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
