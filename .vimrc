@@ -1,3 +1,4 @@
+
 syntax on "シンタックスを有効化
 set title "タイトルを表示
 set number "行番号を表示
@@ -47,4 +48,4 @@ nnoremap <leader>r :QuickRun<CR>
 nnoremap <F5> :QuickRun<CR>
 
 let g:fern#default_hidden=1
-nnoremap <S-C-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+nnoremap <S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
