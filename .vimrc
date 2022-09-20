@@ -39,89 +39,37 @@ call plug#end()
 "colorscheme pulumi
 colorscheme 1989
 
+syntax on "シンタックスを有効化
+set title "タイトルを表示
+set number "行番号を表示
+set nowrap "折り返しなし
+set cursorline "行強調
+"タブ文字、行末空白を表示
+exec "set listchars=tab:\uBB.,trail:_"
+set list "listcharsを有効化
+set smartindent "自動インデント
+"set visualbell "ビープ音を可視化
+set belloff=all "ビープ音を無効化
+set shiftwidth=4 "行頭のタブ長
+set tabstop=4 "行頭以外のタブ長
+set formatoptions=r "改行時コメント継続
+set helplang=ja,en "ヘルプ言語
+set mouse=a
 
-"## 各種設定 ###
-set nu				"行番号
-set mouse=a			"マウス使用可能
-syntax on			"シンタックス
-set cursorline		"カーソルライン表示
-set visualbell		"Beep音を可視化(音も消える)
-"set belloff=all	"Beep音を鳴らさない
-set shiftwidth=4	"行頭でのタプ長
-set tabstop=4		"行頭以外でのタブ長
-"set smartindent	"カレント行のインデントをキープ、シンプル
-"set autoindent		"C言語風の自動インデント
-set cindent			"もっとも厳格にC言語特化
-set hlsearch		"検索結果をハイライト
-set formatoptions=r	"自動コメントアウト
-set helplang=ja
-"Esc二度押しでハイライト切り替え
+set noswapfile "スワップファイルを作らない
+set undodir=~/.vim/undo "アンドゥファイル用のディレクトリ
+set undofile "アンドゥの永続化
+
+set ignorecase "検索時大文字小文字を区別しない
+set wrapscan "検索時一周する
+set hlsearch "検索結果を強調
+"検索結果強調を切替
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+"ビジュアルモード時ctrl+cでシステムクリップボードにコピー
+vmap <C-C> "+y
 
-"### Ctags 設定 ###
-set fileformats=unix,dos,mac
-set fileencodings=utf-8,sjis
-set tags=.tags;$HOME
-function! s:execute_ctags() abort
-  " 探すタグファイル名
-  let tag_name = '.tags'
-  " ディレクトリを遡り、タグファイルを探し、パス取得
-  let tags_path = findfile(tag_name, '.;')
-  " タグファイルパスが見つからなかった場合
-  if tags_path ==# ''
-    return
-  endif
-  " タグファイルのディレクトリパスを取得
-  " `:p:h`の部分は、:h filename-modifiersで確認
-  let tags_dirpath = fnamemodify(tags_path, ':p:h')
-  " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラー出力破棄）
-  execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
-endfunction
-
-augroup ctags
-  autocmd!
-  autocmd BufWritePost * call s:execute_ctags()
-augroup END
-
-"### キーバインド系 ###
-nmap j gj
-nmap k gk
-imap <C-:> <Esc>:
-
-"### C/C++ ##########
-vmap c/ :s@^@\/\/@g<Enter>
-vmap c*	:s@^\(.*\)$@/* \1 */@g<Enter>/コメントアウトしたお( ^ω^ )<Enter>
-imap {<Enter> {<Enter>}<Esc><S-o>
-imap ?? /*  */<Left><Left><Left>
-imap /** /**<Enter>/<Esc><S-o>
-imap /:: / <C-h>**<Enter>/<Esc><S-o>@fn<Enter>@brief<Tab><Enter>@param<Tab><Enter>@return<Tab><Esc>3<Up><S-a><Tab><Tab>
-
-"### Temprates #####
-autocmd BufNewFile *.c 0r ~/Templates/sample.c
-autocmd BufNewFile *.cs 0r ~/Templates/sample.cs
-autocmd BufNewFile *.html 0r ~/Templates/sample.html
-"autocmd BufNewFile *.cpp 0r ~/Templates/cplusplus.cpp
-"autocmd BufNewFile *.cc 0r ~/Templates/cplusplus.cpp
-"autocmd BufNewFile *.tex 0r ~/Templates/tex.tex
-"autocmd BufNewFile beamer.tex 0r ~/Templates/beamer.tex
-"Autocmd BufNewFile Makefile 0r ~/Templates/Makefile
-
-"### 補完候補を常に表示 ###
-set completeopt=menuone
+set completeopt=menuone,preview "候補が一つでもポップアップ、負荷的な情報をプレビュー
+"補完候補を常に表示
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",'\zs')
-  exec "imap " . k . " " . k . "<C-N><C-P>"
+    exec "imap " . k . " " . k . "<C-N><C-P>"
 endfor
-imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
-
-"### html ###
-" imap <>! <!DOCTYPE html><Enter><html lang="ja"><Enter><head><Enter><meta charset="utf-8" /><Enter><title></title><Enter></head><Enter><body><Enter></body><Enter></html><Esc>4kwf<i
-" imap <>html <html></html><Left><Left><Left><Left><Left><Left><Left>
-" imap <>body <body></body><Left><Left><Left><Left><Left><Left><Left>
-" imap <>head <head></head><Left><Left><Left><Left><Left><Left><Left>
-" imap <>p <p></p><Left><Left><Left><Left>
-" imap <>a <a href="#"></a><Left><Left><Left><Left><Left><Left>
-" vmap c! :s@^\(.*\)@<!-- \1 -->@g<Enter>
-" vmap c1 :s@<!-- \(.*\) -->@\1@g<Enter>
-
-
-"### .vimrc end ###
