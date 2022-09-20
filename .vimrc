@@ -21,7 +21,7 @@ set noswapfile "スワップファイルを作らない
 set undodir=~/.vim/undo "アンドゥファイル用のディレクトリ
 set undofile "アンドゥの永続化
 
-set ignorecase "検索時大文字小文字を区別しない
+"set ignorecase "検索時大文字小文字を区別しない
 set wrapscan "検索時一周する
 "set hlsearch "検索結果を強調
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
