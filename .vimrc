@@ -55,4 +55,4 @@ nnoremap <F5> :QuickRun<CR>
 nnoremap <leader>m :make<CR>
 
 let g:fern#default_hidden=1
-nnoremap <C-S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+nnoremap <C-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
