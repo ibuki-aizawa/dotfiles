@@ -1,3 +1,4 @@
+" ~/.vimrc
 
 syntax on "シンタックスを有効化
 set title "タイトルを表示
@@ -24,10 +25,9 @@ set undofile "アンドゥの永続化
 "set ignorecase "検索時大文字小文字を区別しない
 set wrapscan "検索時一周する
 "set hlsearch "検索結果を強調
-"ビジュアルモード時ctrl+cでシステムクリップボードにコピー
-"vnoremap <C-C> "+y
+"ビジュアルモード時ctrl+cでシステムクリップボードにコピー"vnoremap <C-C> "+y
 
-set completeopt=menuone,preview "候補が一つでもポップアップ、負荷的な情報をプレビュー
+set completeopt=menuone,preview "候補が一つでもポップアップ、付加的な情報をプレビュー
 
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
@@ -40,13 +40,12 @@ call plug#end()
 
 let g:quickrun_config = get(g:, 'quickrun_config', {})
 let g:quickrun_config._ = {
-      \ 'outputter/buffer/opener': 'new',
-      \ 'outputter/buffer/close_on_empty': 1,
-      \ }
+        \ 'outputter/buffer/opener': 'new',
+        \ 'outputter/buffer/close_on_empty': 1,
+        \ }
 set splitbelow
 nnoremap <leader>r :QuickRun<CR>
 nnoremap <F5> :QuickRun<CR>
-nnoremap <leader>m :make<CR>
 
 let g:fern#default_hidden=1
 nnoremap <S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
