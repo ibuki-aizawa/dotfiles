@@ -1,4 +1,7 @@
 # ~/.profile.ps1
+#
+# PS> PowerShell Set-ExecutionPolicy RemoteSigned
+#
 # this file is loaded by 
 # %UserProfile%\'My Documents'\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 #
