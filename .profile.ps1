@@ -1,24 +1,12 @@
 # ~/.profile.ps1
-#
-# PS> Set-ExecutionPolicy RemoteSigned
-#
-# this file is loaded by 
-# %UserProfile%\'My Documents'\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
-#
-# $script = "$Home\.profile.ps1"
-#
-# if (Test-Path $script) {
-# 	. $script
-# }
-
-# terraformの設定
-# $Env:TF_LOG = 'DEBUG'
-# $Env:TF_LOG_PATH = './terraform.log'
 
 # ターミナルの基本操作系の設定
 Set-PsReadlineOption -EditMode vi
 Set-PSReadlineKeyHandler -Key 'Ctrl+h' -Function BackwardDeleteChar
 Set-PSReadlineKeyHandler -Key 'Ctrl+[' -Function ViCommandMode
+
+# 音を消す
+Set-PSReadlineOption -BellStyle None
 
 # エイリアス
 sal vi 'vim'
