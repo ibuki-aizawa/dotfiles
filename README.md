@@ -1,5 +1,8 @@
 # dotfiles
 
+## .zshrc
+https://github.com/romkatv/powerlevel10k
+
 ## .vimrc
 ```
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
