@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Ibuki Aizawa
+	email = ibuki.aizawa@sota.co.jp
+
+[alias]
+	push-f = push --force-with-lease
+[push]
+	autoSetupRemote = true
+[core]
+	quotepath = false
