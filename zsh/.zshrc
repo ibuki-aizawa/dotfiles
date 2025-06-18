@@ -9,11 +9,27 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+# vi モードを有効
 setopt vi
+
+# beepを無効
 setopt no_beep
+
+# タブ補完を有効
+setopt complete_in_word
+
+# タブ補完の履歴を有効
+setopt hist_verify
+
+# cdの補完を有効
 setopt autocd
-setopt share_history # ターミナル間でhistoryを共有する
-setopt interactivecomments # zshでもコメントを使えるようにする
+
+# ターミナル間でhistoryを共有する
+# setopt share_history
+
+# zshでもコメントを使えるようにする
+setopt INTERACTIVE_COMMENTS
+#setopt interactivecomments
 
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
@@ -34,7 +50,7 @@ alias grepf='grep -Rn --color=auto --exclude-dir={node_modules,.git,dist,.next,b
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
 alias diffu='diff --color=always -u'
-alias jwt='python3.11 ~/repos/jwt_tool/jwt_tool.py'
+alias jwt='python3.11 ~/repo/jwt_tool/jwt_tool.py'
 alias note='zed ~/.notes/`\date +"%Y%m%d_%H%M%S.txt"`'
 alias date='\date -Iseconds'
 
