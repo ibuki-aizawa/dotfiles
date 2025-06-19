@@ -43,8 +43,6 @@ dotfile('$(pwd)/base.lua');
 ## git
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "your-email@example.com"
 git config --global init.defaultBranch main
 git config --global pull.rebase false
 git config --global core.autocrlf input
