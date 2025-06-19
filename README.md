@@ -13,20 +13,6 @@ fi
 
 - https://github.com/romkatv/powerlevel10k
 
-
-## git
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your-email@example.com"
-git config --global init.defaultBranch main
-git config --global pull.rebase false
-git config --global core.autocrlf input
-git config --global core.quotepath false
-git config --global color.ui auto
-git config --global core.editor "nvim"
-```
-
 ## vim
 
 ```bash
@@ -54,6 +40,18 @@ dotfile('$(pwd)/base.lua');
 - https://github.com/lambdalisue/vim-fern
 - https://github.com/mattn/emmet-vim
 
+## git
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf input
+git config --global core.quotepath false
+git config --global color.ui auto
+git config --global core.editor "nvim"
+```
 
 ## PoserShell
 

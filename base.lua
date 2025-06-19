@@ -48,8 +48,10 @@ vim.call('plug#end')
 
 -- colorscheme
 
+-- vim.cmd.colorscheme "vscode"
+
 require('onedark').setup {
-	style = 'darker',
+	style = 'deep',
 }
 require('onedark').load()
 
