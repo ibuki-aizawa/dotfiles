@@ -4,9 +4,9 @@
 
 ```zsh
 echo "
-# load $(pwd)/.zshrc
-if [ -f $(pwd)/.zshrc ]; then
-	source $(pwd)/.zshrc
+# load $(pwd)/zshrc
+if [ -f $(pwd)/zshrc ]; then
+	source $(pwd)/zshrc
 fi
 " >> ~/.zshrc
 ```
@@ -32,10 +32,7 @@ git config --global core.editor "nvim"
 ```bash
 echo "
 
-# load $(pwd)/vimrc
-if [ -f $(pwd)/vimrc ]; then
-    source $(pwd)/vimrc
-fi
+source $(pwd)/vimrc
 
 " >> ~/.vimrc
 ```
@@ -45,13 +42,17 @@ fi
 ```bash
 echo "
 
-vim.cmd('source $(pwd)/vimrc')
-dotfile('$(pwd)/base.lua')
+vim.cmd('source $(pwd)/vimrc');
+dotfile('$(pwd)/base.lua');
 
 " >> ~/.config/nvim/init.lua
 ```
 
 - https://github.com/junegunn/vim-plug
+- https://github.com/github/copilot.vim
+- https://github.com/neoclide/coc.nvim
+- https://github.com/lambdalisue/vim-fern
+- https://github.com/mattn/emmet-vim
 
 
 ## PoserShell

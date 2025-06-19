@@ -6,7 +6,6 @@ vim.cmd('set undodir=~/.nvim/undo')
 -- ターミナルをインサートモードで開く
 vim.cmd('autocmd TermOpen * startinsert')
 
-
 -- keymap
 local opts = {
 	noremap = true,
@@ -36,20 +35,14 @@ local Plug = vim.fn['plug#'];
 -- plug
 vim.call('plug#begin')
 
-Plug('mattn/emmet-vim')
-
+Plug 'github/copilot.vim'
+Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 Plug('lambdalisue/fern.vim')
 Plug('lambdalisue/fern-git-status.vim')
-
--- 対応する括弧の補完
-Plug('cohama/lexima.vim')
-
-Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+Plug('mattn/emmet-vim')
 
 Plug('navarasu/onedark.nvim')
 Plug('Mofiqul/vscode.nvim')
-
-Plug 'github/copilot.vim'
 
 vim.call('plug#end')
 
