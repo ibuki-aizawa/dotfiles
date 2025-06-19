@@ -23,7 +23,7 @@ keymap('n', '<C-k>', '<C-w>k', opts);
 keymap('n', '<C-l>', '<C-w>l', opts);
 
 -- ターミナル切り替え
-keymap('n', 't', ':split<CR>:term<CR><C-\\><C-n>:resize 10<CR>i', opts);
+keymap('n', 't', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 keymap('n', '<C-j>', '<C-w>ji', opts);
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', opts);
