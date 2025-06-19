@@ -3,33 +3,34 @@
 ## zsh
 
 ```zsh
-mkdir -p ~/repo
-
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/repo/powerlevel10k
-echo 'source ~/repo/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-
-ln -s "$./zsh/.zshrc" "$HOME/.zshrc"
-
+echo "
+# load $(pwd)/.zshrc
+if [ -f $(pwd)/.zshrc ]; then
+	source $(pwd)/.zshrc
+fi
+" >> ~/.zshrc
 ```
+
+- https://github.com/romkatv/powerlevel10k
+
 
 ## git
 
 ```bash
-ln -s "./git/.gitconfig" "$HOME/.gitconfig"
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf input
+git config --global core.quotepath false
+git config --global color.ui auto
+git config --global core.editor "nvim"
 ```
 
-## vim
+## vim / neovim
 
-```
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
+- https://github.com/junegunn/vim-plug
 
-## neovim
-
-```bash
-
-```
 
 ## PoserShell
 
