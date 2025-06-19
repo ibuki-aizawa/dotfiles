@@ -1,5 +1,12 @@
 # dotfiles
 
+## setup
+
+```bash
+git clone https://github.com/ibuki-aizawa/dotfiles.git
+cd dotfiles
+```
+
 ## zsh
 
 ```zsh
