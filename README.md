@@ -27,7 +27,29 @@ git config --global color.ui auto
 git config --global core.editor "nvim"
 ```
 
-## vim / neovim
+## vim
+
+```bash
+echo "
+
+# load $(pwd)/vimrc
+if [ -f $(pwd)/vimrc ]; then
+    source $(pwd)/vimrc
+fi
+
+" >> ~/.vimrc
+```
+
+## nvim
+
+```bash
+echo "
+
+vim.cmd('source $(pwd)/vimrc')
+dotfile('$(pwd)/base.lua')
+
+" >> ~/.config/nvim/init.lua
+```
 
 - https://github.com/junegunn/vim-plug
 

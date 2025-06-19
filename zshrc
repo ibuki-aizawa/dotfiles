@@ -3,6 +3,7 @@
 CUR=$(dirname ${0} | sed 's/\/.+$//')
 
 setopt vi
+
 setopt no_beep
 setopt autocd
 setopt share_history # ターミナル間でhistoryを共有する
