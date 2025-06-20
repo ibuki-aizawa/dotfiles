@@ -1,30 +1,24 @@
 #! /bin/bash
 
-alias help_zip='echo "Usage: 7z <command> [<switches>...] <archive_name> [<file_names>...] \n7z a -tzip -scsWIN -p{PASSWORD}"'
-
 # aliases
 alias vi='nvim'
-
-alias re='cd ~/repo'
-alias ...='cd ../../'
 
 alias l='ls -Gl'
 alias ll='ls -GAhltr'
 alias la='ls -Ga'
-alias tree='find'
-alias clip='pbcopy'
+
 alias grep='grep -n --color=auto'
 alias grepf='grep -Rn --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
+
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
 alias diffu='diff --color=always -u'
-alias jwt='python3.11 ~/repo/jwt_tool/jwt_tool.py'
-alias note='zed ~/.notes/`\date +"%Y%m%d_%H%M%S.txt"`'
-alias notes='zed ~/.notes'
-alias date='\date -Iseconds'
 
-# adb
-alias logcat='adb logcat'
+alias note='nvim ~/.notes/`\date +"%Y%m%d_%H%M%S.txt"`'
+alias notes='nvim ~/.notes'
+
+# macOS
+alias clip='pbcopy'
 
 # Git
 alias g='git'
@@ -40,7 +34,6 @@ alias gl='git log --graph'
 alias gt='git tag'
 alias gr='git remote'
 
-alias main='git switch main'
 alias add='git add'
 alias commit='git commit'
 alias push='git push'
@@ -52,6 +45,6 @@ alias show='git show'
 # npm
 alias nr='npm run'
 alias nt='npm run test'
+alias nd='npm run dev'
 alias dev='npm run dev'
-alias debug='npm run debug'
 
