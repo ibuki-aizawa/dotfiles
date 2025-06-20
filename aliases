@@ -8,7 +8,8 @@ alias ll='ls -GAhltr'
 alias la='ls -Ga'
 
 alias grep='grep -n --color=auto'
-alias grepf='grep -Rn --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
+alias grepf='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
+alias grepl='grep -Rinl --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
