@@ -61,7 +61,7 @@ keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
 keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
 keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
-keymap('n', '<F12>', '<Plug>(coc-references)', opts)
+keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
 -- fern
 keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)
