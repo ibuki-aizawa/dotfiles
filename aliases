@@ -11,6 +11,9 @@ alias grep='grep -n --color=auto'
 alias grepf='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 alias grepl='grep -Rinl --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 
+# nkf
+alias url_decode='nkf -w --url-input'
+
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
 alias diffu='diff --color=always -u'
