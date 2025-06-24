@@ -11,10 +11,7 @@ cd dotfiles
 
 ```zsh
 echo "
-# load $(pwd)/zshrc
-if [ -f $(pwd)/zshrc ]; then
-	source $(pwd)/zshrc
-fi
+[[ ! -f $(pwd)/zshrc ]] || source $(pwd)/zshrc
 " >> ~/.zshrc
 ```
 
@@ -36,7 +33,7 @@ source $(pwd)/vimrc
 echo "
 
 vim.cmd('source $(pwd)/vimrc');
-dotfile('$(pwd)/base.lua');
+dofile('$(pwd)/base.lua');
 
 " >> ~/.config/nvim/init.lua
 ```
