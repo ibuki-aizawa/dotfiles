@@ -1,0 +1,23 @@
+#! /bin/bash
+
+NOTES_DIR=~/.notes
+EDITOR='nvim'
+
+# Function to create a new note
+note () {
+  dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
+
+  if [ $# -eq 0 ]; then
+    filename=$dir/`\date +"%H%M%S.txt"`
+  else
+    filename=$dir/`\date +"%H%M%S_$1.txt"`
+  fi
+
+  $EDITOR $filename
+}
+
+# Function to open the notes directory
+notes () {
+  dir=~/$NOTES_DIR
+  $EDITOR $dir
+}
