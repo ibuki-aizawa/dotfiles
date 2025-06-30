@@ -4,8 +4,8 @@
 alias vi='nvim'
 
 # alias l='ls -Glat'
-alias l='ls -hlt --color=always | head -n 20'
-alias la='ls -hAlt --color=always | head -n 20'
+#alias l='ls -hlt --color=always | head -n 20'
+#alias la='ls -hAlt --color=always | head -n 20'
 
 # alias ll='ls -GAhltr'
 alias ll='ls -Ghalt'

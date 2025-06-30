@@ -21,3 +21,11 @@ notes () {
   dir=~/$NOTES_DIR
   $EDITOR $dir
 }
+
+l () {
+  ls -hlt --color=always $* | head -n 20
+}
+
+la () {
+  ls -hAlt --color=always $* | head -n 20
+}
