@@ -22,10 +22,10 @@ notes () {
   $EDITOR $dir
 }
 
-l () {
-  ls -hlt --color=always $* | head -n 20
-}
+# l () {
+#  ls -hlt --color=always $* | head -n 20
+#}
 
-la () {
-  ls -hAlt --color=always $* | head -n 20
-}
+#la () {
+#  ls -hAlt --color=always $* | head -n 20
+#}
