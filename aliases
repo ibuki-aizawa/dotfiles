@@ -3,9 +3,12 @@
 # aliases
 alias vi='nvim'
 
-alias l='ls -Glat'
-alias ll='ls -GAhltr'
-alias la='ls -Ga'
+# alias l='ls -Glat'
+alias l='ls -hltr --color=always'
+alias la='ls -hAltr --color=always'
+
+# alias ll='ls -GAhltr'
+alias ll='ls -Ghalt'
 
 alias emacs='emacs -nw'
 alias grep='grep -n --color=auto'
@@ -18,9 +21,6 @@ alias url_decode='nkf -w --url-input'
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
 alias diffu='diff --color=always -u'
-
-alias note='nvim ~/.notes/`\date +"%Y%m%d_%H%M%S.txt"`'
-alias notes='nvim ~/.notes'
 
 # macOS
 alias clip='pbcopy'
