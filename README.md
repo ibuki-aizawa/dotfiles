@@ -33,7 +33,7 @@ source $(pwd)/vimrc
 echo "
 
 vim.cmd('source $(pwd)/vimrc');
-dofile('$(pwd)/base.lua');
+dofile('$(pwd)/nvim.lua');
 
 " >> ~/.config/nvim/init.lua
 ```
