@@ -13,7 +13,7 @@ alias ll='ls -Ghalt'
 alias e='emacs -nw'
 alias emacs='emacs -nw'
 
-alias grep='grep -n --color=auto'
+alias grep='grep --color=auto'
 alias grepf='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 alias grepl='grep -Rinl --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 
