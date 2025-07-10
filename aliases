@@ -10,7 +10,7 @@ alias la='ls -hAltr --color=always'
 # alias ll='ls -GAhltr'
 alias ll='ls -Ghalt'
 
-alias e='emacsclient -nw'
+alias e='emacsclient -c -nw'
 
 alias grep='grep --color=auto'
 alias grepf='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
