@@ -2,8 +2,8 @@
 
 CUR=$(dirname ${0} | sed 's/\/.+$//')
 
-# setopt vi
-setopt emacs
+# setopt emacs
+setopt vi
 
 setopt no_beep
 setopt autocd
