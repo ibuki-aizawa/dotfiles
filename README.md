@@ -48,8 +48,9 @@ dofile('$(pwd)/vim/nvim.lua');
 ```bash
 echo "
 
- (add-to-list 'load-path "$(pwd)/dotfiles")
+ (add-to-list 'load-path "$(pwd)/dotfiles/emacs")
  (load "emacs.el")
+
 " >> ~/.emacs.d/emacs.el
 
 ```
