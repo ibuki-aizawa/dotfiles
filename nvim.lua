@@ -56,18 +56,28 @@ require('onedark').setup {
 require('onedark').load()
 
 -- coc
+
+-- vim.cmd("autocmd CursorHold *.{ts,c,cpp,hpp,hs,py} if (coc#rpc#ready() && CocHasProvider('hover') && !coc#float#has_float()) | silent call CocActionAsync('doHover') | endif")
+
+-- keymap('n', '<C-/', ':CocCommand explorer<CR>', opts)
 keymap('n', 'gd', '<Plug>(coc-definition)', opts)
 keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
 keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
 keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
+keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
+
+keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
+keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
+keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
+
+keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 
 -- fern
 keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)
 
-keymap('n', '<C-s>', ':vs tmp<CR>:r! grep -Ril ', opts);
-keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
+-- keymap('n', '<C-s>', ':vs tmp<CR>:r! grep -Ril ', opts);
 
 
 function split(str, ts)

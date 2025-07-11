@@ -38,7 +38,7 @@ set formatoptions=r "改行時コメント継続
 
 set helplang=ja,en "ヘルプ言語
 
-set noswapfile "スワップファイルを作らない
+"set noswapfile "スワップファイルを作らない
 set undofile "アンドゥの永続化
 set undodir=~/.vim/undo "アンドゥファイル用のディレクトリ
 
