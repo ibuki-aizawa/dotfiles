@@ -33,16 +33,15 @@ source $(pwd)/vimrc
 echo "
 
 vim.cmd('source $(pwd)/vimrc');
+vim.cmd('source $(pwd)/coc.vim');
 dofile('$(pwd)/nvim.lua');
 
 " >> ~/.config/nvim/init.lua
 ```
 
 - https://github.com/junegunn/vim-plug
-- https://github.com/github/copilot.vim
 - https://github.com/neoclide/coc.nvim
-- https://github.com/lambdalisue/vim-fern
-- https://github.com/mattn/emmet-vim
+- https://github.com/github/copilot.vim
 
 ## git
 

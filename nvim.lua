@@ -37,12 +37,12 @@ vim.call('plug#begin')
 
 Plug 'github/copilot.vim'
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
-Plug('lambdalisue/fern.vim')
-Plug('lambdalisue/fern-git-status.vim')
-Plug('mattn/emmet-vim')
+-- Plug('lambdalisue/fern.vim')
+-- Plug('lambdalisue/fern-git-status.vim')
+-- Plug('mattn/emmet-vim')
 
 Plug('navarasu/onedark.nvim')
-Plug('Mofiqul/vscode.nvim')
+-- Plug('Mofiqul/vscode.nvim')
 
 vim.call('plug#end')
 
