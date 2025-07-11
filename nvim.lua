@@ -14,19 +14,19 @@ local opts = {
 
 local keymap = vim.api.nvim_set_keymap
 
--- 基本的なキーマッピング(macOS向け)
+-- command + s で保存(macOS)
 keymap('n', '<D-s>', ':w<CR>', opts);
 
 -- ウィンドウ切り替え
-keymap('n', '<C-h>', '<C-w>h', opts);
-keymap('n', '<C-k>', '<C-w>k', opts);
-keymap('n', '<C-l>', '<C-w>l', opts);
+-- keymap('n', '<C-h>', '<C-w>h', opts);
+-- keymap('n', '<C-k>', '<C-w>k', opts);
+-- keymap('n', '<C-l>', '<C-w>l', opts);
 
--- ターミナル切り替え
-keymap('n', 't', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
--- keymap('n', '<C-j>', '<C-w>ji', opts);
+-- ターミナル表示
+keymap('n', 'gt', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
+
+-- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
--- keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', opts);
 
 -- https://github.com/junegunn/vim-plug
 local vim = vim;
@@ -48,26 +48,49 @@ vim.call('plug#end')
 
 -- colorscheme
 
--- vim.cmd.colorscheme "vscode"
+-- require('vscode').load('dark')
 
 require('onedark').setup {
-	style = 'deep',
+	style = 'darker',
 }
 require('onedark').load()
 
 -- coc
+
+-- vim.cmd("autocmd CursorHold *.{ts,c,cpp,hpp,hs,py} if (coc#rpc#ready() && CocHasProvider('hover') && !coc#float#has_float()) | silent call CocActionAsync('doHover') | endif")
+-- vim.cmd("autocmd CursorHold * silent call CocActionAsync('highlight')")
+
+-- coc のフォーマットを使用する
+keymap('n', '=', '<Plug>(coc-format-selected)', opts);
+keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>', opts);
+
+-- keymap('n', '<C-/', ':CocCommand explorer<CR>', opts)
 keymap('n', 'gd', '<Plug>(coc-definition)', opts)
 keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
 keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
 keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
+keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
+keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
+
+keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
+keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
+keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
--- fern
-keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)
+keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)", opts)
+keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)", opts)
 
-keymap('n', '<C-s>', ':vs tmp<CR>:r! grep -Ril ', opts);
-keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
+-- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
+-- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)
+
+keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
+keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
+
+-- fern
+-- keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)
+
+-- keymap('n', '<C-s>', ':vs tmp<CR>:r! grep -Ril ', opts);
 
 
 function split(str, ts)

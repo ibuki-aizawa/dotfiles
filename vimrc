@@ -1,5 +1,16 @@
 " Vim configuration file
 
+" vim 備忘
+" zz 中央にスクロール
+" zt 上にスクロール
+" zb 下にスクロール
+" <C-y> 上に一行スクロール
+" <C-e> 下に一行スクロール
+" <C-u> 上に半画面スクロール
+" <C-d> 下に半画面スクロール
+" <C-f> 下に一画面スクロール
+" <C-b> 上に一画面スクロール
+
 syntax on " シンタックスハイライトを有効化
 
 set mouse=a "マウス使用
@@ -38,7 +49,7 @@ set formatoptions=r "改行時コメント継続
 
 set helplang=ja,en "ヘルプ言語
 
-set noswapfile "スワップファイルを作らない
+"set noswapfile "スワップファイルを作らない
 set undofile "アンドゥの永続化
 set undodir=~/.vim/undo "アンドゥファイル用のディレクトリ
 

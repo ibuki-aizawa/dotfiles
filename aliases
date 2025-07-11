@@ -8,7 +8,7 @@ alias l='ls -hltr --color=always'
 alias la='ls -hAltr --color=always'
 
 # alias ll='ls -GAhltr'
-alias ll='ls -Ghalt'
+alias ll='ls -Ghaltr'
 
 alias e='emacsclient -c -nw'
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
@@ -23,6 +23,10 @@ alias url_decode='nkf -w --url-input'
 #alias diff= 'diff --color=always '
 alias diffy='diff --color=always --suppress-common-line -y'
 alias diffu='diff --color=always -u'
+
+# fzf
+alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {}"'
+alias vif='vi $(fzf)'
 
 # macOS
 alias clip='pbcopy'
