@@ -43,6 +43,17 @@ dofile('$(pwd)/vim/nvim.lua');
 - https://github.com/neoclide/coc.nvim
 - https://github.com/github/copilot.vim
 
+## emacs
+
+```bash
+echo "
+
+ (add-to-list 'load-path "$(pwd)/dotfiles")
+ (load "emacs.el")
+" >> ~/.emacs.d/emacs.el
+
+```
+
 ## git
 
 ```bash
