@@ -5,16 +5,21 @@ CUR=$(dirname ${0} | sed 's/\/.+$//')
 # setopt emacs
 setopt vi
 
+# ビープ音を鳴らさない
 setopt no_beep
+
+# cd 省略
 setopt autocd
-setopt share_history # ターミナル間でhistoryを共有する
-setopt interactivecomments # zshでもコメントを使えるようにする
+
+# ターミナル間でhistoryを共有する
+# setopt share_history
+
+# zshでもコメントを使えるようにする
+setopt interactivecomments
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-
-LUA_PATH=~/repo/dotfiles
 
 # aliases
 [[ -f $CUR/aliases ]] && source $CUR/aliases
