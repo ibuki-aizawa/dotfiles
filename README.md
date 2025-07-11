@@ -11,7 +11,7 @@ cd dotfiles
 
 ```zsh
 echo "
-[[ ! -f $(pwd)/zshrc ]] || source $(pwd)/zshrc
+[[ ! -f $(pwd)/shell/zshrc ]] || source $(pwd)/shell/zshrc
 " >> ~/.zshrc
 ```
 
@@ -22,7 +22,7 @@ echo "
 ```bash
 echo "
 
-source $(pwd)/vimrc
+source $(pwd)/vim/vimrc
 
 " >> ~/.vimrc
 ```
@@ -32,9 +32,9 @@ source $(pwd)/vimrc
 ```bash
 echo "
 
-vim.cmd('source $(pwd)/vimrc');
-vim.cmd('source $(pwd)/coc.vim');
-dofile('$(pwd)/nvim.lua');
+vim.cmd('source $(pwd)/vim/vimrc');
+vim.cmd('source $(pwd)/vim/coc.vim');
+dofile('$(pwd)/vim/nvim.lua');
 
 " >> ~/.config/nvim/init.lua
 ```
@@ -60,7 +60,7 @@ git config --global core.pager "less -q"
 ```ps1
 Set-ExecutionPolicy RemoteSigned
 
-echo '$script = "$Home\.profile.ps1"
+echo '$script = "$(pwd)/powershell/profile.ps1"
 
 if (Test-Path $script) {
     . $script
