@@ -8,8 +8,12 @@ alias ll='ls -Ghaltr'
 
 # editors
 alias vi='nvim'
-alias e='emacsclient -c -nw'
-alias kill-emacs="emacsclient -e '(kill-emacs)'"
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias et='emacsclient -t'
+alias emacs_debug="emacs --debug-init"
+alias emacs_deamon="emacs --daemon"
+alias emacs_kill="emacsclient -e '(kill-emacs)'"
 
 # grep
 alias grep='grep --color=auto'
