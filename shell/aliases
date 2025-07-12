@@ -11,10 +11,9 @@ alias vi='nvim'
 alias e='emacsclient -t'
 alias ec='emacsclient -c'
 alias et='emacsclient -t'
-alias emacs_deamon="emacs --daemon"
-alias emacs_kill="emacsclient -e '(kill-emacs)'"
-alias emacs_restart="emacsclient -e '(restart-emacs)'"
-alias emacs_debug="emacs --debug-init -nw"
+alias emacs-deamon="emacs --daemon"
+alias emacs-kill="emacsclient -e '(kill-emacs)'"
+alias emacs-restart="emacsclient -e '(restart-emacs)'"
 
 # grep
 alias grep='grep --color=auto'
