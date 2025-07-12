@@ -11,7 +11,7 @@ alias vi='nvim'
 alias e='emacsclient -t'
 alias ec='emacsclient -c'
 alias et='emacsclient -t'
-alias emacs_debug="emacs --debug-init"
+alias emacs_debug="emacs --debug-init -nw"
 alias emacs_deamon="emacs --daemon"
 alias emacs_kill="emacsclient -e '(kill-emacs)'"
 
