@@ -2,9 +2,6 @@
 
 CUR=$(dirname ${0} | sed 's/\/.+$//')
 
-# setopt emacs
-setopt vi
-
 # ビープ音を鳴らさない
 setopt no_beep
 
@@ -20,6 +17,17 @@ setopt interactivecomments
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# setopt emacs
+setopt vi
+
+function peco_history() {
+  BUFFER=`history -$HISTSIZE | sort -r | cut -d ' ' -f 4- | awk '!a[$0]++' | peco`
+  zle reset-prompt
+  zle accept-line
+}
+zle -N peco_history
+bindkey "^_" peco_history
 
 # aliases
 [[ -f $CUR/aliases ]] && source $CUR/aliases
