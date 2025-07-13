@@ -22,6 +22,10 @@
 syntax on " シンタックスハイライトを有効化
 
 set mouse=a "マウス使用
+map <MouseDown> <C-Y>
+map <S-MouseDown> <C-U>
+map <MouseUp> <C-E>
+map <S-MouseUp> <C-D>
 
 set fileformats=unix,mac,dos " ファイルフォーマットを指定
 set encoding=utf-8 "文字コードをUTF-8に
