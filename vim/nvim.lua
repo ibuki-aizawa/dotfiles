@@ -17,6 +17,9 @@ local keymap = vim.api.nvim_set_keymap
 -- command + s で保存(macOS)
 keymap('n', '<D-s>', ':w<CR>', opts);
 
+keymap('n', 'n', 'nzz', opts);
+keymap('n', 'N', 'Nzz', opts);
+
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
 -- keymap('n', '<C-k>', '<C-w>k', opts);
@@ -62,7 +65,7 @@ require('onedark').load()
 
 -- coc のフォーマットを使用する
 keymap('n', '=', '<Plug>(coc-format-selected)', opts);
-keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>', opts);
+keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>zz', opts);
 
 -- keymap('n', '<C-/', ':CocCommand explorer<CR>', opts)
 keymap('n', 'gd', '<Plug>(coc-definition)', opts)
