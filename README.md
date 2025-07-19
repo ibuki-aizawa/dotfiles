@@ -49,7 +49,7 @@ git config --global core.pager "less -q"
 ```ps1
 Set-ExecutionPolicy RemoteSigned
 
-echo '$script = "$(pwd)/powershell/profile.ps1"
+echo '$script = "$(pwd)/profile.ps1"
 
 if (Test-Path $script) {
     . $script
