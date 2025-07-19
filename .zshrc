@@ -1,5 +1,34 @@
 #! /bin/bash
 
+CUR=$(dirname ${0} | sed 's/\/.+$//')
+
+# ビープ音を鳴らさない
+setopt no_beep
+
+# cd 省略
+setopt autocd
+
+# ターミナル間でhistoryを共有する
+# setopt share_history
+
+# zshでもコメントを使えるようにする
+setopt interactivecomments
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# setopt emacs
+setopt vi
+
+function peco_history() {
+  BUFFER=`history -$HISTSIZE | sort -r | cut -d ' ' -f 4- | awk '!a[$0]++' | peco`
+  zle reset-prompt
+  zle accept-line
+}
+zle -N peco_history
+bindkey "^_" peco_history
+
 # alias l='ls -Glat'
 alias l='ls -hltr --color=always'
 alias la='ls -hAltr --color=always'
@@ -57,4 +86,34 @@ alias clone='git clone'
 alias nr='npm run'
 alias nt='npm run test'
 alias dev='npm run dev'
+
+NOTES_DIR=~/.notes
+EDITOR='nvim'
+
+# Function to create a new note
+note () {
+  dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
+
+  if [ $# -eq 0 ]; then
+    filename=$dir/`\date +"%H%M%S.txt"`
+  else
+    filename=$dir/`\date +"%H%M%S_$1.txt"`
+  fi
+
+  $EDITOR $filename
+}
+
+# Function to open the notes directory
+notes () {
+  dir=~/$NOTES_DIR
+  $EDITOR $dir
+}
+
+# l () {
+#  ls -hlt --color=always $* | head -n 20
+#}
+
+#la () {
+#  ls -hAlt --color=always $* | head -n 20
+#}
 

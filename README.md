@@ -1,32 +1,25 @@
 # dotfiles
 
-## setup
+## bash
 
 ```bash
-git clone https://github.com/ibuki-aizawa/dotfiles.git
-cd dotfiles
+ln -s $(pwd)/.bashrc ~/.bashrc
 ```
 
 ## zsh
 
 ```zsh
-echo "
-[[ ! -f $(pwd)/shell/zshrc ]] || source $(pwd)/shell/zshrc
-" >> ~/.zshrc
+ln -s $(pwd)/.zshrc ~/.zshrc
 ```
 
 - https://github.com/romkatv/powerlevel10k
 
-## vim
+## vim / neovim
 
 ```bash
-ls -s $(pwd)/.vimrc ~/.vimrc
-```
-
-## nvim
-
-```bash
-ls -s $(pwd)/nvim ~/.config/nvim
+ln -s $(pwd)/.vimrc ~/.vimrc
+mkdir -p ~/.config/nvim
+ln -s $(pwd)/nvim ~/.config/nvim
 ```
 
 - https://github.com/junegunn/vim-plug
