@@ -20,23 +20,13 @@ echo "
 ## vim
 
 ```bash
-echo "
-
-source $(pwd)/vim/vimrc
-
-" >> ~/.vimrc
+ls -s $(pwd)/.vimrc ~/.vimrc
 ```
 
 ## nvim
 
 ```bash
-echo "
-
-vim.cmd('source $(pwd)/vim/vimrc');
-vim.cmd('source $(pwd)/vim/coc.vim');
-dofile('$(pwd)/vim/nvim.lua');
-
-" >> ~/.config/nvim/init.lua
+ls -s $(pwd)/nvim ~/.config/nvim
 ```
 
 - https://github.com/junegunn/vim-plug
@@ -46,13 +36,7 @@ dofile('$(pwd)/vim/nvim.lua');
 ## emacs
 
 ```bash
-echo "
-
- (add-to-list 'load-path "$(pwd)/dotfiles/emacs")
- (load "emacs.el")
-
-" >> ~/.emacs.d/emacs.el
-
+ln -s $(pwd)/.emacs.d ~/.emacs.d
 ```
 
 ## git
