@@ -1,6 +1,9 @@
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
+-- COC 設定
+vim.cmd('source ~/.config/nvim/coc.vim')
+
 -- undo ファイル用のディレクトリをvimと別に設定する
 vim.cmd('set undodir=~/.nvim/undo')
 
@@ -20,6 +23,11 @@ keymap('n', '<D-s>', ':w<CR>', opts);
 
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
+
+keymap('n', 'gj', '10jzz', opts);
+keymap('n', 'gk', '10kzz', opts);
+keymap('n', 'gl', '10lzz', opts);
+keymap('n', 'gh', '10hzz', opts);
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
@@ -65,8 +73,8 @@ require('onedark').load()
 -- vim.cmd("autocmd CursorHold * silent call CocActionAsync('highlight')")
 
 -- coc のフォーマットを使用する
-keymap('n', '=', '<Plug>(coc-format-selected)', opts);
-keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>zz', opts);
+-- keymap('n', '=', '<Plug>(coc-format-selected)', opts);
+-- keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>zz', opts);
 
 -- keymap('n', '<C-/', ':CocCommand explorer<CR>', opts)
 keymap('n', 'gd', '<Plug>(coc-definition)', opts)
@@ -78,12 +86,12 @@ keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
 
 keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
-keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
+keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)zz', opts);
 keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
-keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)", opts)
-keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)", opts)
+keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)zz", opts)
+keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
 
 -- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)

@@ -37,7 +37,7 @@ alias ll='ls -Ghaltr'
 
 # editors
 alias vi='nvim'
-alias e='emacsclient -t'
+alias e='emacsclient'
 alias ec='emacsclient -c'
 alias et='emacsclient -t'
 alias emacs-deamon="emacs --daemon"

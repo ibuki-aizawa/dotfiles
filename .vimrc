@@ -21,6 +21,8 @@
 
 syntax on " シンタックスハイライトを有効化
 
+"let mapleader = "\<Space>" "リーダーキーをスペースに設定
+
 set mouse=a "マウス使用
 map <MouseDown> <C-Y>
 map <S-MouseDown> <C-U>
@@ -35,6 +37,9 @@ set title "タイトルを表示
 
 " vimgrep の設定
 set wildignore+=.git/**,node_modules/**,dist/**,build/**,coverage/**,*.html
+
+set foldmethod=indent "インデントで折りたたみ
+set foldlevel=99 "折りたたみの初期レベルを99に設定
 
 " 正規表現エンジンを指定
 set re=0
@@ -59,6 +64,9 @@ set smartindent "自動インデント
 set expandtab "Tabキーでスペース入力
 set tabstop=2 "行頭以外のタブ長
 set shiftwidth=2 "行頭のタブ長
+set softtabstop=2 "ソフトタブの長さ
+
+autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 "Pythonファイルではタブをスペース4つに設定
 
 set formatoptions=r "改行時コメント継続
 

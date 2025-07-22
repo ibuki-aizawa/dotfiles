@@ -158,3 +158,5 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" coc-git
+nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR>
