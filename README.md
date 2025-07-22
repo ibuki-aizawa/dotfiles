@@ -3,6 +3,7 @@
 ## bash
 
 ```bash
+sudo update-alternatives --config editor
 ln -s $(pwd)/.bashrc ~/.bashrc
 ```
 
