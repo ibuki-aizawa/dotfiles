@@ -1,6 +1,13 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #! /bin/bash
 
-CUR=$(dirname ${0} | sed 's/\/.+$//')
+# CUR=$(dirname ${0} | sed 's/\/.+$//')
 
 # ビープ音を鳴らさない
 setopt no_beep
@@ -37,7 +44,7 @@ alias ll='ls -Ghaltr'
 
 # editors
 alias vi='nvim'
-alias e='emacsclient'
+alias e='emacsclient -c'
 alias ec='emacsclient -c'
 alias et='emacsclient -t'
 alias emacs-deamon="emacs --daemon"
@@ -92,6 +99,9 @@ EDITOR='nvim'
 
 # Function to create a new note
 note () {
+  if [ ! -d ~/$NOTES_DIR ]; then
+    mkdir -p ~/$NOTES_DIR
+  fi
   dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
 
   if [ $# -eq 0 ]; then
@@ -117,3 +127,12 @@ notes () {
 #  ls -hAlt --color=always $* | head -n 20
 #}
 
+[[ -f ~/repo/rupa/z/z.sh ]] && source ~/repo/rupa/z/z.sh
+
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+export N_PREFIX="$HOME/.n"
+export PATH="$N_PREFIX/bin:$PATH"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
