@@ -119,10 +119,11 @@ fi
 
 set -o vi
 
+export PATH="/usr/local/Python27/bin/:$PATH"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 CUR=$(dirname ${0} | sed 's/\/.+$//')
 
@@ -165,7 +166,13 @@ alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {
 alias vif='vi $(fzf)'
 
 # macOS
-alias clip='pbcopy'
+# alias clip='pbcopy'
+
+# ubuntu
+alias clit='xcel --clipboard --input'
+
+# bat
+alias bat='batcat'
 
 # Git
 alias g='git'
@@ -191,3 +198,4 @@ alias nr='npm run'
 alias nt='npm run test'
 alias dev='npm run dev'
 
+. "$HOME/.cargo/env"
