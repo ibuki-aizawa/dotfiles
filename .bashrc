@@ -199,3 +199,5 @@ alias nt='npm run test'
 alias dev='npm run dev'
 
 . "$HOME/.cargo/env"
+
+. "$HOME/repo/z/z.sh"
