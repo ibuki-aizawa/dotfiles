@@ -198,6 +198,10 @@ alias nr='npm run'
 alias nt='npm run test'
 alias dev='npm run dev'
 
-. "$HOME/.cargo/env"
+if [[ -f "$HOME/.cargo/env" ]]; then
+	. "$HOME/.cargo/env"
+fi
 
-. "$HOME/repo/z/z.sh"
+if [[ -f "$HOME/repo/z/z.sh" ]]; then
+	. "$HOME/repo/z/z.sh"
+fi

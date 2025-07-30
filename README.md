@@ -3,8 +3,45 @@
 ## bash
 
 ```bash
+./apt-install.sh
+
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# node
+nvm install --lts
+nvm use --lts
+
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# bashrc
+ln -sf $(pwd)/.bashrc ~/.bashrc
+
+# vim
+ln -sf $(pwd)/.vimrc ~/.vimrc
+
+# nvim
+mkdir -p ~/.config/
+ln -sf $(pwd)/nvim ~/.config/
+
+# vim.plug for nvim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# emacs
+ln -s $(pwd)/.emacs.d ~/.emacs.d
+
+# git
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf input
+git config --global core.quotepath false
+git config --global color.ui auto
+git config --global core.editor "nvim"
+git config --global core.pager "less -q"
+
 sudo update-alternatives --config editor
-ln -s $(pwd)/.bashrc ~/.bashrc
 ```
 
 ## zsh
@@ -13,37 +50,11 @@ ln -s $(pwd)/.bashrc ~/.bashrc
 ln -s $(pwd)/.zshrc ~/.zshrc
 ```
 
+## links
 - https://github.com/romkatv/powerlevel10k
-
-## vim / neovim
-
-```bash
-ln -s $(pwd)/.vimrc ~/.vimrc
-mkdir -p ~/.config/nvim
-ln -s $(pwd)/nvim ~/.config/nvim
-```
-
 - https://github.com/junegunn/vim-plug
 - https://github.com/neoclide/coc.nvim
 - https://github.com/github/copilot.vim
-
-## emacs
-
-```bash
-ln -s $(pwd)/.emacs.d ~/.emacs.d
-```
-
-## git
-
-```bash
-git config --global init.defaultBranch main
-git config --global pull.rebase false
-git config --global core.autocrlf input
-git config --global core.quotepath false
-git config --global color.ui auto
-git config --global core.editor "nvim"
-git config --global core.pager "less -q"
-```
 
 ## PoserShell
 
