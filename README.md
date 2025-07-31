@@ -18,6 +18,14 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # bashrc
 ln -sf $(pwd)/.bashrc ~/.bashrc
 
+# z
+mkdir -p ~/repo
+git clone https://github.com/rupa/z.git ~/repo/z
+
+# peda
+git clone https://github.com/longld/peda.git ~/repo/peda
+echo "source ~/repo/peda/peda.py" >> ~/.gdbinit
+
 # vim
 ln -sf $(pwd)/.vimrc ~/.vimrc
 
