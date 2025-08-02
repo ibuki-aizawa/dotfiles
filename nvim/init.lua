@@ -137,7 +137,7 @@ vim.api.nvim_create_autocmd("FileType", {
         cr = "<space>s<cr>",
         interrupt = "<space>s<space>",
         exit = "<space>sq",
-        exit = "<C-k>",
+        exit = "<C-h>",
         clear = "<space>cl",
       },
       -- If the highlight is on, you can change how it looks
@@ -147,6 +147,12 @@ vim.api.nvim_create_autocmd("FileType", {
       },
       ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
     }
+
+    -- ライン送信後にノーマルモードへ戻す
+    local function send_line_and_exit_insert()
+      iron.send_line()
+      vim.cmd("stopinsert")
+    end
 
     -- 選択範囲送信後にノーマルモードへ戻す
     local function visual_send_and_exit_insert()
@@ -161,7 +167,8 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 
     -- キーマップ設定
-    vim.keymap.set("n", "<C-j>", send_file_and_exit_insert, {desc = "Send file and exit insert"})
+    vim.keymap.set("n", "<C-j>", send_line_and_exit_insert, {desc = "Send line and exit insert"})
+    vim.keymap.set("n", "<C-k>", send_file_and_exit_insert, {desc = "Send file and exit insert"})
     vim.keymap.set("v", "<C-j>", visual_send_and_exit_insert, {desc = "Send selection and exit insert"})
   end,
 })
