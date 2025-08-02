@@ -67,6 +67,9 @@ alias diffu='diff --color=always -u'
 alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {}"'
 alias vif='vi $(fzf)'
 
+# bat
+alias bat='batcat'
+
 # macOS
 alias clip='pbcopy'
 
@@ -126,6 +129,16 @@ notes () {
 #la () {
 #  ls -hAlt --color=always $* | head -n 20
 #}
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+fi
+
+export PATH="/usr/local/Python27/bin/:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -f ~/repo/z/z.sh ]] && source ~/repo/z/z.sh
 
