@@ -67,6 +67,7 @@ set shiftwidth=2 "行頭のタブ長
 set softtabstop=2 "ソフトタブの長さ
 
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 "Pythonファイルではタブをスペース4つに設定
+autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 set formatoptions=r "改行時コメント継続
 
