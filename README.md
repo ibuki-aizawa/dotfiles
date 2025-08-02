@@ -1,6 +1,6 @@
 # dotfiles
 
-## bash
+## setup (bash, zsh)
 
 ```bash
 ./apt-install.sh
@@ -17,6 +17,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # bashrc
 ln -sf $(pwd)/.bashrc ~/.bashrc
+
+# zshrc
+ln -sf $(pwd)/.zshrc ~/.zshrc
+
+# .inputrc
+ln -sf $(pwd)/.inputrc ~/.inputrc
 
 # z
 mkdir -p ~/repo
@@ -50,12 +56,6 @@ git config --global core.editor "nvim"
 git config --global core.pager "less -q"
 
 sudo update-alternatives --config editor
-```
-
-## zsh
-
-```zsh
-ln -s $(pwd)/.zshrc ~/.zshrc
 ```
 
 ## links
