@@ -19,6 +19,7 @@ sudo apt install -y neovim
 sudo apt install -y bat
 
 sudo apt install -y emacs
+sudo apt install -y zsh
 
 sudo apt upgrade -y
 

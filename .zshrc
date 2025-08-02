@@ -127,9 +127,10 @@ notes () {
 #  ls -hAlt --color=always $* | head -n 20
 #}
 
-[[ -f ~/repo/rupa/z/z.sh ]] && source ~/repo/rupa/z/z.sh
+[[ -f ~/repo/z/z.sh ]] && source ~/repo/z/z.sh
 
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
 
 export N_PREFIX="$HOME/.n"
 export PATH="$N_PREFIX/bin:$PATH"

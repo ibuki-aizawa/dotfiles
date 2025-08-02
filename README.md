@@ -24,8 +24,12 @@ ln -sf $(pwd)/.zshrc ~/.zshrc
 # .inputrc
 ln -sf $(pwd)/.inputrc ~/.inputrc
 
-# z
 mkdir -p ~/repo
+
+# Powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/repo/powerlevel10k
+
+# z
 git clone https://github.com/rupa/z.git ~/repo/z
 
 # peda
@@ -56,6 +60,12 @@ git config --global core.editor "nvim"
 git config --global core.pager "less -q"
 
 sudo update-alternatives --config editor
+```
+
+## use zsh
+
+```bash
+sudo usermod -s /bin/zsh $(id -un)
 ```
 
 ## links
