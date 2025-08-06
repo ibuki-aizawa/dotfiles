@@ -68,7 +68,10 @@ alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {
 alias vif='vi $(fzf)'
 
 # bat
-alias bat='batcat'
+if [[ "$OSTYPE" == "linux"* ]]; then
+  # linux の場合は、batcat になっている
+  alias bat='batcat'
+fi
 
 # macOS
 alias clip='pbcopy'
@@ -136,17 +139,21 @@ fi
 
 export PATH="/usr/local/Python27/bin/:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [[ "$OSTYPE" == "linux"* ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+fi
+
 
 [[ -f ~/repo/z/z.sh ]] && source ~/repo/z/z.sh
 
 # source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
-
-export N_PREFIX="$HOME/.n"
-export PATH="$N_PREFIX/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
