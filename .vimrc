@@ -66,8 +66,10 @@ set tabstop=2 "行頭以外のタブ長
 set shiftwidth=2 "行頭のタブ長
 set softtabstop=2 "ソフトタブの長さ
 
+" filetype は :echo &filetype で確認できる
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 "Pythonファイルではタブをスペース4つに設定
 autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType rust setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 set formatoptions=r "改行時コメント継続
 
@@ -92,3 +94,7 @@ nmap <Esc><Esc> :nohlsearch<CR><ESC>
 
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
 vmap <C-C> "+y
+
+let g:IMState = 0
+autocmd InsertEnter * let &iminsert = g:IMState
+autocmd InsertLeave * let g:IMState = &iminsert|set iminsert=0 imsearch=0

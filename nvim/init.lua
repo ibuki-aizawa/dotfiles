@@ -58,6 +58,7 @@ Plug 'Vigemus/iron.nvim'
 
 Plug('navarasu/onedark.nvim')
 -- Plug('Mofiqul/vscode.nvim')
+Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
 Plug 'rust-lang/rust.vim'
 
@@ -71,6 +72,7 @@ vim.g.coc_global_extensions = {
   "coc-explorer",
   "coc-pyright",
   "coc-rust-analyzer",
+  "coc-pairs",
 }
 
 -- iron
@@ -188,10 +190,11 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- colorscheme
 
-require('onedark').setup {
-	style = 'darker',
-}
-require('onedark').load()
+--require('onedark').setup {
+--	style = 'darker',
+--}
+--require('onedark').load()
+vim.cmd.colorscheme "catppuccin"
 
 -- coc
 
