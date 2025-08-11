@@ -343,10 +343,10 @@ vim.api.nvim_create_user_command(
 )
 
 -- disable copilot
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.defer_fn(function()
-      vim.cmd('Copilot disable')
-    end, 1000)
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     vim.defer_fn(function()
+--       vim.cmd('Copilot disable')
+--     end, 1000)
+--   end,
+-- })
