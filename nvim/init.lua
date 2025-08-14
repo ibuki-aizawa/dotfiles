@@ -19,15 +19,26 @@ local opts = {
 local keymap = vim.api.nvim_set_keymap
 
 -- command + s で保存(macOS)
-keymap('n', '<D-s>', ':w<CR>', opts);
+keymap('n', '<D-s>', ':wa<CR>', opts);
+keymap('n', '<D-w>', ':qa<CR>', opts);
+
+keymap('n', '<Space>w', ':wa<CR>', opts);
+keymap('n', '<Space>q', ':qa<CR>', opts);
 
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
 
-keymap('n', 'gj', '10jzz', opts);
-keymap('n', 'gk', '10kzz', opts);
-keymap('n', 'gl', '10lzz', opts);
-keymap('n', 'gh', '10hzz', opts);
+keymap('n', 'gj', '20jzz', opts);
+keymap('n', 'gk', '20kzz', opts);
+keymap('n', 'gl', '20lzz', opts);
+keymap('n', 'gh', '20hzz', opts);
+
+keymap('n', '<Space>j', '20jzz', opts);
+keymap('n', '<Space>k', '20kzz', opts);
+keymap('n', '<Space>l', '20lzz', opts);
+keymap('n', '<Space>h', '20hzz', opts);
+
+keymap('n', '<Space>?', ':e ~/.vimrc<CR>', opts);
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);

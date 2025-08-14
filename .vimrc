@@ -95,6 +95,9 @@ nmap <Esc><Esc> :nohlsearch<CR><ESC>
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
 vmap <C-C> "+y
 
+"ウィンドウの幅を調整
+nmap <C-w><C-w> :vs<CR>:q<CR>
+
 let g:IMState = 0
 autocmd InsertEnter * let &iminsert = g:IMState
 autocmd InsertLeave * let g:IMState = &iminsert|set iminsert=0 imsearch=0
