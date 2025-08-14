@@ -1,3 +1,4 @@
+local vim = vim;
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
@@ -51,7 +52,6 @@ keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 
 -- https://github.com/junegunn/vim-plug
-local vim = vim;
 local Plug = vim.fn['plug#'];
 
 -- plug
@@ -161,7 +161,7 @@ vim.api.nvim_create_autocmd("FileType", {
         cr = "<space>s<cr>",
         interrupt = "<space>s<space>",
         exit = "<space>sq",
-        exit = "<C-h>",
+        -- exit = "<C-h>",
         clear = "<space>cl",
       },
       -- If the highlight is on, you can change how it looks
