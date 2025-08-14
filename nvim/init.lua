@@ -47,6 +47,7 @@ keymap('n', '<Space>?', ':e ~/.vimrc<CR>', opts);
 
 -- ターミナル表示
 keymap('n', 'gt', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
+keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 
 -- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
