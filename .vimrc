@@ -24,10 +24,10 @@ syntax on " シンタックスハイライトを有効化
 "let mapleader = "\<Space>" "リーダーキーをスペースに設定
 
 set mouse=a "マウス使用
-map <MouseDown> <C-Y>
-map <S-MouseDown> <C-U>
-map <MouseUp> <C-E>
-map <S-MouseUp> <C-D>
+map <MouseDown> <C-Y>M
+map <S-MouseDown> <C-U>M
+map <MouseUp> <C-E>M
+map <S-MouseUp> <C-D>M
 
 set fileformats=unix,mac,dos " ファイルフォーマットを指定
 set encoding=utf-8 "文字コードをUTF-8に
@@ -38,6 +38,7 @@ set title "タイトルを表示
 " vimgrep の設定
 set wildignore+=.git/**,node_modules/**,dist/**,build/**,coverage/**,*.html
 
+" zc で折りたたみ、zo で展開
 set foldmethod=indent "インデントで折りたたみ
 set foldlevel=99 "折りたたみの初期レベルを99に設定
 
@@ -97,6 +98,8 @@ vmap <C-C> "+y
 
 "ウィンドウの幅を調整
 nmap <C-w><C-w> :vs<CR>:q<CR>
+
+nmap <Space>t :tabnew<CR>
 
 let g:IMState = 0
 autocmd InsertEnter * let &iminsert = g:IMState

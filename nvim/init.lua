@@ -33,11 +33,12 @@ keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
 
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
+keymap('n', '*', '*zz', opts);
 
-keymap('n', 'gj', '20jzz', opts);
-keymap('n', 'gk', '20kzz', opts);
-keymap('n', 'gl', '20lzz', opts);
-keymap('n', 'gh', '20hzz', opts);
+keymap('n', 'gj', '15jzz', opts);
+keymap('n', 'gk', '15kzz', opts);
+keymap('n', 'gl', '15lzz', opts);
+keymap('n', 'gh', '15hzz', opts);
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
@@ -45,11 +46,14 @@ keymap('n', 'gh', '20hzz', opts);
 -- keymap('n', '<C-l>', '<C-w>l', opts);
 
 -- ターミナル表示
-keymap('n', 'gt', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
+keymap('n', '<Space>;', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 
 -- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
+
+-- ターミナル終了
+keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
