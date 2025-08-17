@@ -28,8 +28,8 @@ keymap('n', '<Space>q', ':qa<CR>', opts);
 keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 
 -- 設定ファイル
-keymap('n', '<Space>?', ':e ~/.config/nvim/init.lua<CR>', opts);
-keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
+keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
+keymap('n', '<Space>r', ':wa<CR>:so ~/.config/nvim/init.lua<CR>', opts);
 
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
