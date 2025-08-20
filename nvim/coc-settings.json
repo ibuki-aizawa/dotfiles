@@ -1,4 +1,5 @@
 {
+  "explorer.file.showHiddenFiles": true,
   "pyright.inlayHints.functionReturnTypes": false,
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.parameterTypes": false

@@ -1,4 +1,6 @@
 local vim = vim;
+local global = vim.g
+
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
@@ -24,12 +26,12 @@ keymap('n', '<D-s>', ':wa<CR>', opts);
 keymap('n', '<D-w>', ':qa<CR>', opts);
 
 keymap('n', '<Space>w', ':wa<CR>', opts);
-keymap('n', '<Space>q', ':qa<CR>', opts);
+keymap('n', '<Space>q', ':q<CR>', opts);
 keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 
 -- 設定ファイル
 keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
-keymap('n', '<Space>r', ':wa<CR>:so ~/.config/nvim/init.lua<CR>', opts);
+keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
 
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
@@ -195,9 +197,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 
     -- キーマップ設定
-    vim.keymap.set("n", "<C-j>", send_line_and_exit_insert, {desc = "Send line and exit insert"})
-    vim.keymap.set("n", "<C-k>", send_file_and_exit_insert, {desc = "Send file and exit insert"})
-    vim.keymap.set("v", "<C-j>", visual_send_and_exit_insert, {desc = "Send selection and exit insert"})
+    vim.keymap.set("n", "<Space>r", send_line_and_exit_insert, {desc = "Send line and exit insert"})
+    vim.keymap.set("n", "<F5>", send_file_and_exit_insert, {desc = "Send file and exit insert"})
+    vim.keymap.set("v", "<Space>r", visual_send_and_exit_insert, {desc = "Send selection and exit insert"})
   end,
 })
 
@@ -241,6 +243,10 @@ keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
 
 keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
 keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
+
+-- コパイロット
+keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
+global.copilot_no_tab_map = true
 
 -- fern
 -- keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)

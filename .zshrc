@@ -149,6 +149,17 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 fi
 
+export JAVA_HOME=`/usr/libexec/java_home -v 11.0.23`
+
+# Android dev
+export ANDROID_SDK=~/Library/Android/sdk/
+export ANDROID_HOME=~/Library/Android/sdk/
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+# avdmanager
+export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin/
+# emulator
+export PATH=$PATH:~/Library/Android/sdk/emulator/
+alias pixel='emulator -avd Pixel_8_API_35'
 
 [[ -f ~/repo/z/z.sh ]] && source ~/repo/z/z.sh
 
