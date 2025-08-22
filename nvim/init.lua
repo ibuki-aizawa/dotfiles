@@ -51,6 +51,8 @@ keymap('n', 'gh', '15hzz', opts);
 keymap('n', '<Space>;', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 
+keymap('n', 'gt', ':vs<CR><C-w>l<CR>:term<CR>', opts);
+
 -- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 

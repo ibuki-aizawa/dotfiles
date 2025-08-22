@@ -89,6 +89,27 @@ set completeopt=menuone,preview "候補が一つでもポップアップ、付�
 set splitbelow "スプリット
 
 " mapの設定
+nmap j jzz
+nmap k kzz
+nmap G Gzz
+nmap <C-w>l <C-w>lzz
+nmap <C-w>h <C-w>hzz
+nmap <C-o> <C-o>zz
+nmap <C-i> <C-i>zz
+nmap <C-u> <C-u>zz
+nmap <C-d> <C-d>zz
+nmap { {zz
+nmap } }zz
+
+vmap j jzz
+vmap k kzz
+vmap G Gzz
+vmap <C-o> <C-o>zz
+vmap <C-i> <C-i>zz
+vmap <C-u> <C-u>zz
+vmap <C-d> <C-d>zz
+vmap { {zz
+vmap } }zz
 
 "Escの2回押しでハイライト消去
 nmap <Esc><Esc> :nohlsearch<CR><ESC>
