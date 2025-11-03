@@ -170,3 +170,6 @@ source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [[ -f ~/.zsh_profile ]] && source ~/.zsh_profile
+
+# postgresql
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
