@@ -108,12 +108,18 @@ note () {
   if [ ! -d ~/$NOTES_DIR ]; then
     mkdir -p ~/$NOTES_DIR
   fi
-  dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
+
+  # dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
+  dir=~/$NOTES_DIR
+
+  if [ ! -d $dir ]; then
+    mkdir -p $dir
+  fi
 
   if [ $# -eq 0 ]; then
-    filename=$dir/`\date +"%H%M%S.txt"`
+    filename=$dir/`\date +"%Y%m%d.txt"`
   else
-    filename=$dir/`\date +"%H%M%S_$1.txt"`
+    filename=$dir/`\date +"%Y%m%d_$1.txt"`
   fi
 
   $EDITOR $filename
