@@ -155,7 +155,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 fi
 
-export JAVA_HOME=`/usr/libexec/java_home -v 11.0.23`
+# export JAVA_HOME=`/usr/libexec/java_home -v 11.0.23`
 
 # Android dev
 export ANDROID_SDK=~/Library/Android/sdk/

@@ -1,5 +1,11 @@
 # dotfiles
 
+## setup (macOS)
+
+```bash
+./setup-macos.sh
+```
+
 ## setup (bash, zsh)
 
 ```bash
