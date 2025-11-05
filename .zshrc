@@ -105,12 +105,12 @@ EDITOR='nvim'
 
 # Function to create a new note
 note () {
-  if [ ! -d ~/$NOTES_DIR ]; then
-    mkdir -p ~/$NOTES_DIR
+  if [ ! -d $NOTES_DIR ]; then
+    mkdir -p $NOTES_DIR
   fi
 
   # dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
-  dir=~/$NOTES_DIR
+  dir=$NOTES_DIR
 
   if [ ! -d $dir ]; then
     mkdir -p $dir
@@ -127,7 +127,7 @@ note () {
 
 # Function to open the notes directory
 notes () {
-  dir=~/$NOTES_DIR
+  dir=$NOTES_DIR
   $EDITOR $dir
 }
 
