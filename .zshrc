@@ -125,6 +125,17 @@ note () {
   $EDITOR $filename
 }
 
+catnote() {
+  dir=$NOTES_DIR
+  if [ $# -eq 0 ]; then
+    filename=$dir/`\date +"%Y%m%d.txt"`
+  else
+    filename=$dir/`\date +"%Y%m%d_$1.txt"`
+  fi
+
+  cat $filename
+}
+
 # Function to open the notes directory
 notes () {
   dir=$NOTES_DIR

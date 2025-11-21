@@ -120,12 +120,13 @@ vmap <C-C> "+y
 "ウィンドウの幅を調整
 nmap <C-w><C-w> :vs<CR>:q<CR>
 
-nmap <Space>t :tabnew<CR><C-o>
-nmap <Space>v :vs<CR>
+nmap <Space>tn :tabnew<CR><C-o>
+nmap <Space>tl :tabnext<CR>
+nmap <Space>th :tabprevious<CR>
+
+" nmap <Space>v :vs<CR>
 nmap <Space>? :e ~/.vimrc<CR>
 
-nmap <Space>l :tabnext<CR>
-nmap <Space>h :tabprevious<CR>
 
 nmap <Right> :tabnext<CR>
 nmap <Left> :tabprevious<CR>
