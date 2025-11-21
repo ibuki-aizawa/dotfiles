@@ -91,9 +91,11 @@ alias gl='git log --graph'
 alias gt='git tag'
 alias gf='git fetch'
 
-alias push='git push'
-alias pull='git pull'
 alias clone='git clone'
+alias fetch='git fetch'
+alias pull='git pull'
+alias push='git push'
+alias stash='git stash'
 
 # npm
 alias nr='npm run'
