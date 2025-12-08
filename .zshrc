@@ -124,6 +124,19 @@ note () {
     filename=$dir/`\date +"%Y%m%d_$1.txt"`
   fi
 
+  # ファイルがなければ、前回のノートの内容をコピーする
+  # 前回のノートもなければ、新規作成
+  # $1 が指定されていれば、新規作成
+  if [ ! -f $filename ]; then
+    last_note=$(ls -t $dir | head -n 1)
+    echo $last_note
+    if [ -n "$last_note" ] && [ $# -eq 0 ]; then
+      cp $dir/$last_note $filename
+    else
+      touch $filename
+    fi
+  fi
+
   $EDITOR $filename
 }
 
