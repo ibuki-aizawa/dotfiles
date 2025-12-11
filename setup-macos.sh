@@ -6,6 +6,7 @@
 brew install bat
 brew install fzf
 brew install neovim
+brew install p7zip
 
 # runtime
 brew install nvm
