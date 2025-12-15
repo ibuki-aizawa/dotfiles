@@ -131,7 +131,8 @@ note () {
     last_note=$(ls -t $dir | head -n 1)
     echo $last_note
     if [ -n "$last_note" ] && [ $# -eq 0 ]; then
-      cp $dir/$last_note $filename
+      echo 'Copying from last note: '$last_note > $filename
+      cat $dir/$last_note >> $filename
     else
       touch $filename
     fi
@@ -140,7 +141,7 @@ note () {
   $EDITOR $filename
 }
 
-catnote() {
+notecat() {
   dir=$NOTES_DIR
   if [ $# -eq 0 ]; then
     filename=$dir/`\date +"%Y%m%d.txt"`
@@ -149,6 +150,22 @@ catnote() {
   fi
 
   cat $filename
+}
+
+# Function to search notes
+notegrep () {
+  if [ ! -d $NOTES_DIR ]; then
+    echo "Notes directory does not exist."
+    return 1
+  fi
+
+  if [ $# -eq 0 ]; then
+    echo "Please provide a search term."
+    return 1
+  fi
+
+  term=$1
+  grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build} "$term" $NOTES_DIR
 }
 
 # Function to open the notes directory
