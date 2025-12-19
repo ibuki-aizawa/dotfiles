@@ -91,6 +91,7 @@ vim.g.coc_global_extensions = {
   "coc-pyright",
   "coc-rust-analyzer",
   "coc-pairs",
+  "coc-lists",
 }
 
 -- iron
@@ -245,6 +246,7 @@ keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
 
 keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
 keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
+keymap('n', '<Space>f', ':CocList grep<CR>', opts)
 
 -- コパイロット
 keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})

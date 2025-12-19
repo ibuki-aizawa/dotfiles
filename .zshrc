@@ -65,7 +65,7 @@ alias diffu='diff --color=always -u'
 
 # fzf
 alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {}"'
-alias vif='vi $(fzf)'
+alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
 # bat
 if [[ "$OSTYPE" == "linux"* ]]; then
