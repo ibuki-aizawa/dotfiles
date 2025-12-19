@@ -8,6 +8,7 @@ brew install fzf
 brew install neovim
 brew install p7zip
 brew install ripgrep
+brew install peco
 
 # runtime
 brew install nvm

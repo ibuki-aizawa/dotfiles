@@ -34,7 +34,8 @@ function peco_history() {
   zle accept-line
 }
 zle -N peco_history
-bindkey "^_" peco_history
+# bindkey "^_" peco_history
+bindkey "^y" peco_history
 
 # alias l='ls -Glat'
 alias l='ls -hltr --color=always'
@@ -106,7 +107,7 @@ NOTES_DIR=~/.notes
 EDITOR='nvim'
 
 # Function to create a new note
-note () {
+note() {
   if [ ! -d $NOTES_DIR ]; then
     mkdir -p $NOTES_DIR
   fi
@@ -141,19 +142,21 @@ note () {
   $EDITOR $filename
 }
 
-notecat() {
+catnote() {
   dir=$NOTES_DIR
+  cat=bat
+
   if [ $# -eq 0 ]; then
     filename=$dir/`\date +"%Y%m%d.txt"`
   else
     filename=$dir/`\date +"%Y%m%d_$1.txt"`
   fi
 
-  cat $filename
+  $cat $filename
 }
 
 # Function to search notes
-notegrep () {
+grepnote() {
   if [ ! -d $NOTES_DIR ]; then
     echo "Notes directory does not exist."
     return 1
@@ -169,9 +172,35 @@ notegrep () {
 }
 
 # Function to open the notes directory
-notes () {
+notes() {
   dir=$NOTES_DIR
   $EDITOR $dir
+}
+
+tailnote() {
+  dir=$NOTES_DIR
+  filename=$dir/`\date +"%Y%m%d.txt"`
+
+  if [ $# -eq 1 ]; then
+    n=$1
+  else
+    n=20
+  fi
+
+  tail -n $n $filename
+}
+
+headnote() {
+  dir=$NOTES_DIR
+  filename=$dir/`\date +"%Y%m%d.txt"`
+
+  if [ $# -eq 1 ]; then
+    n=$1
+  else
+    n=20
+  fi
+
+  head -n $n $filename
 }
 
 # l () {
