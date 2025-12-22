@@ -68,6 +68,31 @@ alias diffu='diff --color=always -u'
 alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {}"'
 alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
+vv() {
+  search=$1
+
+  if [ -z "$search" ]; then
+    files=$(fzf --walker-skip=.git,node_modules,dist,.next,build)
+
+    if [ -z "$files" ]; then
+      # No file selected
+      return 1
+    fi
+
+    $EDITOR $files
+    return 0
+  fi
+
+  list=$(rg --vimgrep $search 2> /dev/null)
+
+  if [ $? -ne 0 ]; then
+    echo "No matches found for '$search'"
+    return 1
+  fi
+
+  $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
+}
+
 # bat
 if [[ "$OSTYPE" == "linux"* ]]; then
   # linux の場合は、batcat になっている
