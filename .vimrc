@@ -89,17 +89,17 @@ set completeopt=menuone,preview "候補が一つでもポップアップ、付�
 set splitbelow "スプリット
 
 " mapの設定
-"nmap j jzz
-"nmap k kzz
-"nmap G Gzz
-"nmap <C-w>l <C-w>lzz
-"nmap <C-w>h <C-w>hzz
-"nmap <C-o> <C-o>zz
-"nmap <C-i> <C-i>zz
-"nmap <C-u> <C-u>zz
-"nmap <C-d> <C-d>zz
-"nmap { {zz
-"nmap } }zz
+"nnoremap j jzz
+"nnoremap k kzz
+"nnoremap G Gzz
+"nnoremap <C-w>l <C-w>lzz
+"nnoremap <C-w>h <C-w>hzz
+"nnoremap <C-o> <C-o>zz
+"nnoremap <C-i> <C-i>zz
+"nnoremap <C-u> <C-u>zz
+"nnoremap <C-d> <C-d>zz
+"nnoremap { {zz
+"nnoremap } }zz
 "
 "vmap j jzz
 "vmap k kzz
@@ -111,25 +111,30 @@ set splitbelow "スプリット
 "vmap { {zz
 "vmap } }zz
 
+nnoremap <F3> :vimgrep <C-R>=expand('<cword>')<CR> **<CR>:copen<CR>
+
+nnoremap <C-e> 5<C-e>M
+nnoremap <C-y> 5<C-y>M
+
 "Escの2回押しでハイライト消去
-nmap <Esc><Esc> :nohlsearch<CR><ESC>
+nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
 vmap <C-C> "+y
 
 "ウィンドウの幅を調整
-nmap <C-w><C-w> :vs<CR>:q<CR>
+nnoremap <C-w><C-w> :vs<CR>:q<CR>
 
-nmap <Space>tn :tabnew<CR><C-o>
-nmap <Space>tl :tabnext<CR>
-nmap <Space>th :tabprevious<CR>
+nnoremap <Space>tn :tabnew<CR><C-o>
+nnoremap <Space>tl :tabnext<CR>
+nnoremap <Space>th :tabprevious<CR>
 
-" nmap <Space>v :vs<CR>
-nmap <Space>? :e ~/.vimrc<CR>
+" nnoremap <Space>v :vs<CR>
+nnoremap <Space>? :e ~/.vimrc<CR>
 
 
-nmap <Right> :tabnext<CR>
-nmap <Left> :tabprevious<CR>
+nnoremap <Right> :tabnext<CR>
+nnoremap <Left> :tabprevious<CR>
 
 let g:IMState = 0
 autocmd InsertEnter * let &iminsert = g:IMState

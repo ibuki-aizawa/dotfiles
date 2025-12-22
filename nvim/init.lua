@@ -252,6 +252,39 @@ keymap('n', '<Space>f', ':CocList grep<CR>', opts)
 keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
 global.copilot_no_tab_map = true
 
+-- use rg for external-grep
+vim.opt.grepprg = table.concat({
+  'rg',
+  '--vimgrep',
+  '--trim',
+  '--hidden',
+  [[--glob='!.git']],
+  [[--glob='!*.lock']],
+  [[--glob='!*-lock.json']],
+  [[--glob='!*generated*']],
+}, ' ')
+vim.opt.grepformat = '%f:%l:%c:%m'
+
+-- vim.keymap.set('n', '<F3>', '<cmd>silent vimgrep//gj**|copen<cr>',
+--   { desc = 'Populate latest search result to quickfix list' })
+
+-- ref: `:NewGrep` in `:help grep`
+vim.api.nvim_create_user_command('Grep', function(arg)
+  local grep_cmd = 'silent grep! '
+    .. (arg.bang and '--fixed-strings -- ' or '')
+    .. vim.fn.shellescape(arg.args, true)
+  vim.cmd(grep_cmd)
+  if vim.fn.getqflist({ size = true }).size > 0 then
+    vim.cmd.copen()
+  else
+    vim.notify('no matches found', vim.log.levels.WARN)
+    vim.cmd.cclose()
+  end
+end, { nargs = '+', bang = true, desc = 'Enhounced grep' })
+
+vim.keymap.set('n', '<space>/', ':Grep ', { desc = 'Grep' })
+vim.keymap.set('n', '<space>?', ':Grep <c-r><c-w>', { desc = 'Grep current word' })
+
 -- fern
 -- keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)
 
