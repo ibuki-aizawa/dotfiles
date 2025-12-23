@@ -37,6 +37,8 @@ zle -N peco_history
 # bindkey "^_" peco_history
 bindkey "^y" peco_history
 
+alias nop=':'
+
 # alias l='ls -Glat'
 alias l='ls -hltr --color=always'
 alias la='ls -hAltr --color=always'
