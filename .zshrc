@@ -132,6 +132,9 @@ alias dev='npm run dev'
 
 NOTES_DIR=~/.notes
 EDITOR='nvim'
+CAT=bat
+# GREP='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
+GREP='rg'
 
 # Function to create a new note
 note() {
@@ -140,27 +143,27 @@ note() {
   fi
 
   # dir=~/$NOTES_DIR/`\date +"%Y%m%d"`
-  dir=$NOTES_DIR
+  # dir=$NOTES_DIR
 
-  if [ ! -d $dir ]; then
-    mkdir -p $dir
+  if [ ! -d $NOTES_DIR ]; then
+    mkdir -p $NOTES_DIR
   fi
 
   if [ $# -eq 0 ]; then
-    filename=$dir/`\date +"%Y%m%d.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
   else
-    filename=$dir/`\date +"%Y%m%d_$1.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.txt"`
   fi
 
   # ファイルがなければ、前回のノートの内容をコピーする
   # 前回のノートもなければ、新規作成
   # $1 が指定されていれば、新規作成
   if [ ! -f $filename ]; then
-    last_note=$(ls -t $dir | head -n 1)
+    last_note=$(ls -t $NOTES_DIR | head -n 1)
     echo $last_note
     if [ -n "$last_note" ] && [ $# -eq 0 ]; then
       echo 'Copying from last note: '$last_note > $filename
-      cat $dir/$last_note >> $filename
+      cat $NOTES_DIR/$last_note >> $filename
     else
       touch $filename
     fi
@@ -170,16 +173,13 @@ note() {
 }
 
 catnote() {
-  dir=$NOTES_DIR
-  cat=bat
-
   if [ $# -eq 0 ]; then
-    filename=$dir/`\date +"%Y%m%d.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
   else
-    filename=$dir/`\date +"%Y%m%d_$1.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.txt"`
   fi
 
-  $cat $filename
+  $CAT $filename
 }
 
 # Function to search notes
@@ -195,18 +195,17 @@ grepnote() {
   fi
 
   term=$1
-  grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build} "$term" $NOTES_DIR
+  # grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build} "$term" $NOTES_DIR
+  $GREP "$term" $NOTES_DIR
 }
 
 # Function to open the notes directory
 notes() {
-  dir=$NOTES_DIR
-  $EDITOR $dir
+  $EDITOR $NOTES_DIR
 }
 
 tailnote() {
-  dir=$NOTES_DIR
-  filename=$dir/`\date +"%Y%m%d.txt"`
+  filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
 
   if [ $# -eq 1 ]; then
     n=$1
@@ -218,8 +217,7 @@ tailnote() {
 }
 
 headnote() {
-  dir=$NOTES_DIR
-  filename=$dir/`\date +"%Y%m%d.txt"`
+  filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
 
   if [ $# -eq 1 ]; then
     n=$1
