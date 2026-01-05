@@ -70,6 +70,8 @@ alias diffu='diff --color=always -u'
 alias fzf='fzf --preview "bat --color=always --style=numbers --line-range :500 {}"'
 alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
+alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
+
 vv() {
   search=$1
 
@@ -132,7 +134,7 @@ alias dev='npm run dev'
 
 NOTES_DIR=~/.notes
 EDITOR='nvim'
-CAT=bat
+CAT='bat'
 # GREP='grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build}'
 GREP='rg'
 
