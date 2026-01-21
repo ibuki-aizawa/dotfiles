@@ -161,20 +161,20 @@ note() {
   # 前回のノートもなければ、新規作成
   # $1 が指定されていれば、新規作成
   if [ ! -f $filename ]; then
-    last_note=$(ls -t $NOTES_DIR | head -n 1)
-    echo $last_note
-    if [ -n "$last_note" ] && [ $# -eq 0 ]; then
-      echo 'Copying from last note: '$last_note > $filename
-      cat $NOTES_DIR/$last_note >> $filename
-    else
-      touch $filename
-    fi
+    touch $filename
+
+    # last_note=$(ls -t $NOTES_DIR | head -n 1)
+    # echo $last_note
+    # if [ -n "$last_note" ] && [ $# -eq 0 ]; then
+    #   echo 'Copying from last note: '$last_note > $filename
+    #   cat $NOTES_DIR/$last_note >> $filename
+    # fi
   fi
 
   $EDITOR $filename
 }
 
-catnote() {
+notecat() {
   if [ $# -eq 0 ]; then
     filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
   else
@@ -185,7 +185,7 @@ catnote() {
 }
 
 # Function to search notes
-grepnote() {
+notegrep() {
   if [ ! -d $NOTES_DIR ]; then
     echo "Notes directory does not exist."
     return 1
@@ -198,7 +198,7 @@ grepnote() {
 
   term=$1
   # grep -Rin --color=auto --exclude-dir={node_modules,.git,dist,.next,build} "$term" $NOTES_DIR
-  $GREP "$term" $NOTES_DIR
+  $GREP --no-line-number "$term" $NOTES_DIR
 }
 
 # Function to open the notes directory
@@ -206,7 +206,7 @@ notes() {
   $EDITOR $NOTES_DIR
 }
 
-tailnote() {
+notetail() {
   filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
 
   if [ $# -eq 1 ]; then
@@ -218,7 +218,7 @@ tailnote() {
   tail -n $n $filename
 }
 
-headnote() {
+notehead() {
   filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
 
   if [ $# -eq 1 ]; then
