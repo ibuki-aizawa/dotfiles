@@ -36,6 +36,10 @@
 "   - <C-r>{register}  レジスタの内容を挿入
 "
 
+" カレント行をコマンドモードで実行
+nnoremap <C-j> "cdd:<C-r>c<CR>
+"nnoremap <C-j> "cyy:<C-r>c<CR>
+
 syntax on " シンタックスハイライトを有効化
 
 "let mapleader = "\<Space>" "リーダーキーをスペースに設定
