@@ -30,9 +30,10 @@
 "   %:t - 開いているファイルのファイル名
 "
 " コマンドモード
-"   - <C-r>% - 開いているファイルのパスを挿入
-"   - ノーマルモードを使うには、<C-F> を使う
-"   - レジスタを使うには、<C-R>{レジスタ名} を使う
+"   - <C-f>      ノーマルモードを使う
+"   - <C-r>%     開いているファイルのパスを挿入
+"   - <C-r><C-w> カーソル下の単語を挿入
+"   - <C-r>{register}  レジスタの内容を挿入
 "
 
 syntax on " シンタックスハイライトを有効化
@@ -46,13 +47,13 @@ set mouse=a "マウス使用
 "map <S-MouseUp> <C-D>M
 
 set fileformats=unix,mac,dos " ファイルフォーマットを指定
-set encoding=utf-8 "文字コードをUTF-8に
+"set encoding=utf-8 "文字コードをUTF-8に
 
 set showmode "ステータスラインにモードを表示
 set title "タイトルを表示
 
 " vimgrep の設定
-set wildignore+=.git/**,node_modules/**,dist/**,build/**,coverage/**,*.html
+set wildignore+=.git/**,node_modules/**,dist/**,build/**,coverage/**,*.html,*.yaml,*.spec.ts
 
 " zc で折りたたみ、zo で展開
 set foldmethod=indent "インデントで折りたたみ
