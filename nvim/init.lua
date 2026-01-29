@@ -65,7 +65,9 @@ local Plug = vim.fn['plug#'];
 -- plug
 vim.call('plug#begin')
 
-Plug 'github/copilot.vim'
+Plug('junegunn/fzf')
+Plug('junegunn/fzf.vim')
+
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 -- Plug('lambdalisue/fern.vim')
 -- Plug('lambdalisue/fern-git-status.vim')
@@ -79,6 +81,8 @@ Plug('navarasu/onedark.nvim')
 Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
 Plug 'rust-lang/rust.vim'
+
+Plug 'github/copilot.vim'
 
 vim.call('plug#end')
 
