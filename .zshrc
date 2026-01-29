@@ -72,7 +72,7 @@ alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
 alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
-vv() {
+v() {
   search=$1
 
   if [ -z "$search" ]; then

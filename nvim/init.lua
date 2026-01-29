@@ -230,6 +230,7 @@ keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
 keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
 keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
+keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
 keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
 
