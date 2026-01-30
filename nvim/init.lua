@@ -25,22 +25,14 @@ local keymap = vim.api.nvim_set_keymap
 keymap('n', '<D-s>', ':wa<CR>', opts);
 keymap('n', '<D-w>', ':qa<CR>', opts);
 
-keymap('n', '<Space>w', ':wa<CR>', opts);
-keymap('n', '<Space>q', ':q<CR>', opts);
-keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
-
--- 設定ファイル
-keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
-keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
-
 keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
 keymap('n', '*', '*zz', opts);
 
-keymap('n', 'gj', '15jzz', opts);
-keymap('n', 'gk', '15kzz', opts);
-keymap('n', 'gl', '15lzz', opts);
-keymap('n', 'gh', '15hzz', opts);
+-- keymap('n', 'gj', '15jzz', opts);
+-- keymap('n', 'gk', '15kzz', opts);
+-- keymap('n', 'gl', '15lzz', opts);
+-- keymap('n', 'gh', '15hzz', opts);
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
@@ -65,7 +57,9 @@ local Plug = vim.fn['plug#'];
 -- plug
 vim.call('plug#begin')
 
-Plug 'github/copilot.vim'
+Plug('junegunn/fzf')
+Plug('junegunn/fzf.vim')
+
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
 -- Plug('lambdalisue/fern.vim')
 -- Plug('lambdalisue/fern-git-status.vim')
@@ -79,6 +73,8 @@ Plug('navarasu/onedark.nvim')
 Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
 Plug 'rust-lang/rust.vim'
+
+Plug 'github/copilot.vim'
 
 vim.call('plug#end')
 
@@ -232,7 +228,6 @@ keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
 keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
 keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
-keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
 
 keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
 keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)zz', opts);
@@ -245,9 +240,36 @@ keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
 -- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)
 
+keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
+
 keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
 keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
-keymap('n', '<Space>f', ':CocList grep<CR>', opts)
+
+-- keymap('n', '<Space>f', ':CocList grep<CR>', opts)
+
+keymap('n', '<Space>f', ':Files<CR>', opts)
+keymap('n', '<Space>r', ':Rg<CR>', opts)
+
+keymap('n', '<Space>b', ':Buffer<CR>', opts)
+keymap('n', '<Space>l', ':Lines<CR>', opts)
+keymap('n', '<Space>L', ':BLines<CR>', opts)
+
+keymap('n', '<Space>j', ':Jumps<CR>', opts)
+
+keymap('n', '<Space>w', ':Windows<CR>', opts)
+
+keymap('n', '<Space>h', ':History<CR>', opts)
+
+keymap('n', '<Space>m', ':Marks<CR>', opts)
+
+keymap('n', '<Space>w', ':wa<CR>', opts);
+keymap('n', '<Space>q', ':q<CR>', opts);
+keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
+
+-- 設定ファイル
+-- keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
+-- keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
+
 
 -- コパイロット
 keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
@@ -285,8 +307,8 @@ vim.opt.grepformat = '%f:%l:%c:%m'
 --   end
 -- end, { nargs = '+', bang = true, desc = 'Enhounced grep' })
 
-vim.keymap.set('n', '<space>/', ':Grep ', { desc = 'Grep' })
-vim.keymap.set('n', '<space>?', ':Grep <c-r><c-w>', { desc = 'Grep current word' })
+-- vim.keymap.set('n', '<space>/', ':Grep ', { desc = 'Grep' })
+-- vim.keymap.set('n', '<space>?', ':Grep <c-r><c-w>', { desc = 'Grep current word' })
 
 -- fern
 -- keymap('n', '<C-e>', ':Fern . -reveal=% -drawer -toggle -width=40<CR>', opts)

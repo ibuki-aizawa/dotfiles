@@ -39,9 +39,29 @@
 nnoremap <C-j> "cdd:<C-r>c<CR>
 "nnoremap <C-j> "cyy:<C-r>c<CR>
 
+nnoremap gb [{
+nnoremap gB ]}
+
+set path+=**
+set suffixesadd+=.rb,.js,.ts,.jsx,.tsx
+
+" パスを別バッファで見比べてひらく
+nnoremap gF :vert wincmd f<CR>
+
+" 無名バッファを作る
+command! Scratch vnew | setlocal buftype=nofile bufhidden=hide noswapfile
+
+" 無名バッファでgrepをかける
+command! -nargs=1 RgBuf vnew | setlocal buftype=nofile bufhidden=hide noswapfile | execute 'r !rg --vimgrep ' . <q-args>
+
+nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bb :b#<CR>
+
 syntax on " シンタックスハイライトを有効化
 
-"let mapleader = "\<Space>" "リーダーキーをスペースに設定
+let mapleader = "\<Space>" "リーダーキーをスペースに設定
 
 set mouse=a "マウス使用
 "map <MouseDown> <C-Y>M

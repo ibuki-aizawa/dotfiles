@@ -158,9 +158,10 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
 " coc-git
-nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR>
-nnoremap <silent> <space>l :<C-u>CocList --normal gstatus<CR>
+" nnoremap <silent> <space>g :<C-u>CocList --normal gstatus<CR>
+" nnoremap <silent> <space>l :<C-u>CocList --normal gstatus<CR>
 
 "nmap <Space>bl :ls<CR>
 "nmap <Space>bn :bnext<CR>
@@ -171,8 +172,8 @@ nnoremap <silent> <space>l :<C-u>CocList --normal gstatus<CR>
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 " navigate conflicts of current buffer
-nmap [c <Plug>(coc-git-prevconflict)
-nmap ]c <Plug>(coc-git-nextconflict)
+" nmap [c <Plug>(coc-git-prevconflict)
+" nmap ]c <Plug>(coc-git-nextconflict)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
