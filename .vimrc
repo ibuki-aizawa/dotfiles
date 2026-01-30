@@ -36,7 +36,8 @@
 "
 
 " カレント行をコマンドモードで実行
-nnoremap <C-j> "cdd:<C-r>c<CR>
+"nnoremap <C-j> "cdd:<C-r>c<CR>
+vnoremap <C-j> "cyy:<C-r>c<CR>
 "nnoremap <C-j> "cyy:<C-r>c<CR>
 
 nnoremap gb [{
@@ -84,7 +85,7 @@ set showtabline=2 "タブラインを常に表示
 "set statusline=%f\ %m%r%=%l/%L
 
 " 左側にファイル名、中央から右側に coc の情報や行番号を配置
-"set statusline=%{coc#status()}  " coc.nvim のステータス（これが大事！）
+set statusline=%{coc#status()}  " coc.nvim のステータス（これが大事！）
 set statusline+=%=               " ここから右寄せ
 "set statusline+=\ %t\ %m%r          " ファイル名(のみ)、修正フラグ、読込専用フラグ
 set statusline=\ %f\ %m%r          " ファイル名(相対パス)、修正フラグ、読込専用フラグ

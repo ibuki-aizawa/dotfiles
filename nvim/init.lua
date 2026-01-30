@@ -40,16 +40,16 @@ keymap('n', '*', '*zz', opts);
 -- keymap('n', '<C-l>', '<C-w>l', opts);
 
 -- ターミナル表示
-keymap('n', '<Space>;', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
-keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
+-- keymap('n', '<Space>;', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
+-- keymap('n', '<C-;>', ':split<CR>:term<CR><C-\\><C-n>:resize 15<CR>i', opts);
 
-keymap('n', 'gt', ':vs<CR><C-w>l<CR>:term<CR>', opts);
+-- keymap('n', 'gt', ':vs<CR><C-w>l<CR>:term<CR>', opts);
 
 -- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 
 -- ターミナル終了
-keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
+-- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
@@ -231,8 +231,14 @@ keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 
 keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
 keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)zz', opts);
-keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
+-- keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
+
+keymap("n", "[e", "<Plug>(coc-diagnostic-prev)zz", opts)
+keymap("n", "]e", "<Plug>(coc-diagnostic-next)zz", opts)
+
+-- keymap("n", "<Space>[", "<Plug>(coc-diagnostic-prev)zz", opts)
+-- keymap("n", "<Space>]", "<Plug>(coc-diagnostic-next)zz", opts)
 
 keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)zz", opts)
 keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
@@ -242,29 +248,37 @@ keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
 
 keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
 
-keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
+-- エクスプローラー
 keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
 
+-- エラー一覧
+keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
+keymap('n', 'ge', ':CocDiagnostics<CR>', opts);
+
 -- keymap('n', '<Space>f', ':CocList grep<CR>', opts)
-
-keymap('n', '<Space>f', ':Files<CR>', opts)
-keymap('n', '<Space>r', ':Rg<CR>', opts)
-
-keymap('n', '<Space>b', ':Buffer<CR>', opts)
-keymap('n', '<Space>l', ':Lines<CR>', opts)
-keymap('n', '<Space>L', ':BLines<CR>', opts)
-
-keymap('n', '<Space>j', ':Jumps<CR>', opts)
-
-keymap('n', '<Space>w', ':Windows<CR>', opts)
-
-keymap('n', '<Space>h', ':History<CR>', opts)
-
-keymap('n', '<Space>m', ':Marks<CR>', opts)
 
 keymap('n', '<Space>w', ':wa<CR>', opts);
 keymap('n', '<Space>q', ':q<CR>', opts);
 keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
+
+-- fzf.vim
+
+keymap('n', '<Space>F', ':Files<CR>', opts)
+keymap('n', '<Space>ff', ':Files<CR>', opts)
+
+keymap('n', '<Space>fg', ':Rg<CR>', opts)
+
+keymap('n', '<Space>fb', ':Buffer<CR>', opts)
+keymap('n', '<Space>fl', ':Lines<CR>', opts)
+keymap('n', '<Space>fL', ':BLines<CR>', opts)
+
+keymap('n', '<Space>fj', ':Jumps<CR>', opts)
+
+keymap('n', '<Space>fw', ':Windows<CR>', opts)
+
+keymap('n', '<Space>fh', ':History<CR>', opts)
+
+keymap('n', '<Space>fm', ':Marks<CR>', opts)
 
 -- 設定ファイル
 -- keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
