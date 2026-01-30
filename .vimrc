@@ -5,8 +5,7 @@
 " zt 上にスクロール
 " zb 下にスクロール
 " <C-y> 上に一行スクロール
-" <C-e> 下に一行スクロール
-"
+" <C-e> 下に一行スクロール "
 " :vimgrep <pattern> <file> でファイル内検索
 " :vimgrep <pattern> % で自ファイル内検索
 " :vimgrep <pattern> %:h** でカレントディレクトリ以下の全ファイルを検索
@@ -49,6 +48,30 @@ set mouse=a "マウス使用
 "map <S-MouseDown> <C-U>M
 "map <MouseUp> <C-E>M
 "map <S-MouseUp> <C-D>M
+
+set showtabline=2 "タブラインを常に表示
+"set tabline=%f
+
+" ステータスライン
+"set laststatus=2
+
+" ステータスラインの表示内容をカスタマイズ
+" %f: ファイル名（相対パス）
+" %m: 変更がある場合に [+] を表示
+" %r: 読み込み専用の場合に [RO] を表示
+" %=: これ以降の項目を右寄せにする
+" %l/%L: 現在行 / 総行数
+"set statusline=%f\ %m%r%=%l/%L
+
+" 左側にファイル名、中央から右側に coc の情報や行番号を配置
+"set statusline=%{coc#status()}  " coc.nvim のステータス（これが大事！）
+set statusline+=%=               " ここから右寄せ
+"set statusline+=\ %t\ %m%r          " ファイル名(のみ)、修正フラグ、読込専用フラグ
+set statusline=\ %f\ %m%r          " ファイル名(相対パス)、修正フラグ、読込専用フラグ
+set statusline+=\ %l/%L          " 行/総行数
+"set statusline+=\ %l/%L\ :%c    " 行/総行数 :列
+
+"set statusline=%f\ %h%m%r\ %y\ %=%-14.(%l,%c%V%)\ %P
 
 set fileformats=unix,mac,dos " ファイルフォーマットを指定
 "set encoding=utf-8 "文字コードをUTF-8に
