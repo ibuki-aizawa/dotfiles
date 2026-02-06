@@ -76,15 +76,10 @@ v() {
   search=$1
 
   if [ -z "$search" ]; then
-    files=$(fzf --walker-skip=.git,node_modules,dist,.next,build)
+    # 引数がなければ、変更されたファイル一覧を表示
+    list=$(git ls-files -m)
 
-    if [ -z "$files" ]; then
-      # No file selected
-      return 1
-    fi
-
-    $EDITOR $files
-    return 0
+    $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
   fi
 
   list=$(rg --vimgrep $search 2> /dev/null)
