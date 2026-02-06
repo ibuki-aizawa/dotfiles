@@ -79,6 +79,11 @@ v() {
     # 引数がなければ、変更されたファイル一覧を表示
     list=$(git ls-files -m)
 
+    if [ -z "$list" ]; then
+      $EDITOR
+      return 0
+    fi
+
     $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
   fi
 
