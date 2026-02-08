@@ -9,6 +9,8 @@ brew install neovim
 brew install p7zip
 brew install ripgrep
 brew install peco
+brew install fd
+
 brew install --cask zed
 
 # runtime

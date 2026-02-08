@@ -87,14 +87,23 @@ v() {
     $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
   fi
 
-  list=$(rg --vimgrep $search 2> /dev/null)
+  # ファイルが存在すれば、それを開く
+  if [ -f "$search" ]; then
+    $EDITOR $search
+    return 0
+  fi
 
-  if [ $? -ne 0 ]; then
-    echo "No matches found for '$search'"
+  # なければ、ファイル名を検索してpeco で選択
+  FIND=fd
+  list=$($FIND $search 2> /dev/null)
+
+  if [ -z "$list" ]; then
+    echo "No matching files found."
     return 1
   fi
 
-  $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
+  # $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
+  $EDITOR $(echo $list | peco)
 }
 
 # bat
@@ -278,3 +287,6 @@ source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
 
 # postgresql
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# fzf で fd を使う
+export FZF_DEFAULT_COMMAND='fd --type f'
