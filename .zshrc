@@ -72,11 +72,13 @@ alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
 alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
+# ファイルを開く際の便利関数
+# - 引数がなければ、gitで変更されたファイル一覧を表示して選択して開く
+# - 引数があれば、その文字列でファイル名を検索して選択して開く
 v() {
   search=$1
 
   if [ -z "$search" ]; then
-    # 引数がなければ、変更されたファイル一覧を表示
     list=$(git ls-files -m)
 
     if [ -z "$list" ]; then
@@ -84,26 +86,51 @@ v() {
       return 0
     fi
 
-    $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
+    file=$(echo $list | peco)
+
+    # 何も選択されなければ終了
+    if [ -z "$file" ]; then
+      return 0
+    fi
+
+    $EDITOR $file
+    # $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
+    return 0
   fi
 
   # ファイルが存在すれば、それを開く
-  if [ -f "$search" ]; then
-    $EDITOR $search
-    return 0
-  fi
+  # if [ -f "$search" ]; then
+  #   $EDITOR $search
+  #   return 0
+  # fi
 
   # なければ、ファイル名を検索してpeco で選択
   FIND=fd
   list=$($FIND $search 2> /dev/null)
+  # echo "Searching for files matching: $search"
+  # echo "$list"
 
   if [ -z "$list" ]; then
     echo "No matching files found."
     return 1
+  elif [ $(echo "$list" | wc -l) -eq 1 ]; then
+    # 一つだけ見つかった場合は、それを開く
+    file=$list
+    # echo "Opening file: $file"
+    $EDITOR $file
+    return 0
   fi
 
   # $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
-  $EDITOR $(echo $list | peco)
+  file=$(echo $list | peco)
+
+  # 何も選択されなければ終了
+  if [ -z "$file" ]; then
+    return 0
+  fi
+
+  # echo "Opening file: $file"
+  $EDITOR $file
 }
 
 # bat
