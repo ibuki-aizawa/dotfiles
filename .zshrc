@@ -72,6 +72,12 @@ alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
 alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
+alias vr='nvim -c "normal! '\''0"'
+alias vv='nvim -c "normal! '\''0"'
+
+# Vimを閉じる時に `:mksession!` を打つ習慣がある人向け
+alias vs='nvim -S'
+
 # ファイルを開く際の便利関数
 # - 引数がなければ、gitで変更されたファイル一覧を表示して選択して開く
 # - 引数があれば、その文字列でファイル名を検索して選択して開く
