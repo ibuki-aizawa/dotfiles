@@ -29,6 +29,9 @@ keymap('n', 'n', 'nzz', opts);
 keymap('n', 'N', 'Nzz', opts);
 keymap('n', '*', '*zz', opts);
 
+-- コマンドラインで %% と打つと、今のファイルがあるディレクトリに置換する
+vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%:h') . '/' : '%%'", { expr = true })
+
 -- keymap('n', 'gj', '15jzz', opts);
 -- keymap('n', 'gk', '15kzz', opts);
 -- keymap('n', 'gl', '15lzz', opts);

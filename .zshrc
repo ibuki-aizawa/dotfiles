@@ -76,61 +76,46 @@ alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 # - 引数がなければ、gitで変更されたファイル一覧を表示して選択して開く
 # - 引数があれば、その文字列でファイル名を検索して選択して開く
 v() {
-  search=$1
+  local search="$1"
+  local file list
 
   if [ -z "$search" ]; then
-    list=$(git ls-files -m)
+    # 引数なし：修正中のファイルを表示
+    # list=$(git ls-files -m)
+    list=$(git ls-files -m -o --exclude-standard)
 
     if [ -z "$list" ]; then
+      # 修正中がなければ普通にエディタを起動
       $EDITOR
       return 0
     fi
-
-    file=$(echo $list | peco)
-
-    # 何も選択されなければ終了
-    if [ -z "$file" ]; then
+  else
+    # 引数あり：ファイルが存在すれば即座に開く
+    if [ -f "$search" ]; then
+      $EDITOR "$search"
       return 0
     fi
 
-    $EDITOR $file
-    # $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
-    return 0
+    # ファイル検索（fd を使用、.git は除外）
+    # -H は隠しファイル、-E は除外
+    list=$(fd -H -E ".git" --type f "$search" 2> /dev/null)
+
+    if [ -z "$list" ]; then
+      echo "No matching files found."
+      return 1
+    fi
   fi
 
-  # ファイルが存在すれば、それを開く
-  # if [ -f "$search" ]; then
-  #   $EDITOR $search
-  #   return 0
-  # fi
-
-  # なければ、ファイル名を検索してpeco で選択
-  FIND='fd'
-  list=$($FIND -H $search 2> /dev/null)
-  # echo "Searching for files matching: $search"
-  # echo "$list"
-
-  if [ -z "$list" ]; then
-    echo "No matching files found."
-    return 1
-  elif [ $(echo "$list" | wc -l) -eq 1 ]; then
-    # 一つだけ見つかった場合は、それを開く
-    file=$list
-    # echo "Opening file: $file"
-    $EDITOR $file
-    return 0
+  # 1件なら即起動、複数あれば選択
+  if [ $(echo "$list" | wc -l) -eq 1 ]; then
+    file="$list"
+  else
+    # fzf を使っているなら fzf に、peco が良ければ peco に
+    file=$(echo "$list" | fzf --query "$search" --select-1 --exit-0)
   fi
 
-  # $EDITOR $(echo $list | peco | sed -r 's/^(.*):([0-9]*):([0-9]*):.*/\1 +\2/')
-  file=$(echo $list | peco)
-
-  # 何も選択されなければ終了
-  if [ -z "$file" ]; then
-    return 0
-  fi
-
-  # echo "Opening file: $file"
-  $EDITOR $file
+  # 選択されたら開く
+  [ -n "$file" ] && $EDITOR "$file"
 }
 
 # bat
@@ -323,4 +308,5 @@ source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
 # fzf で fd を使う
-export FZF_DEFAULT_COMMAND='fd -H --type f'
+# export FZF_DEFAULT_COMMAND='fd -H --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
