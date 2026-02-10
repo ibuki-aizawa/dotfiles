@@ -81,40 +81,43 @@ v() {
 
   if [ -z "$search" ]; then
     # 引数なし：修正中のファイルを表示
-    # list=$(git ls-files -m)
     list=$(git ls-files -m -o --exclude-standard)
 
     if [ -z "$list" ]; then
-      # 修正中がなければ普通にエディタを起動
       $EDITOR
       return 0
     fi
+
+    # プレビューで git diff を表示する（新規ファイルは中身を表示）
+    file=$(echo "$list" | fzf --ansi --preview '
+      if git ls-files --error-unmatch {} >/dev/null 2>&1; then
+        git diff --color=always {}
+      else
+        bat --color=always --style=numbers {} || cat {}
+      fi
+    ')
   else
-    # 引数あり：ファイルが存在すれば即座に開く
+    # 引数あり：通常のファイル検索
     if [ -f "$search" ]; then
       $EDITOR "$search"
       return 0
     fi
 
-    # ファイル検索（fd を使用、.git は除外）
-    # -H は隠しファイル、-E は除外
     list=$(fd -H -E ".git" --type f "$search" 2> /dev/null)
 
     if [ -z "$list" ]; then
       echo "No matching files found."
       return 1
+    elif [ $(echo "$list" | wc -l) -eq 1 ]; then
+      $EDITOR "$list"
+      return 0
     fi
+
+    # 通常検索時は bat 等で中身をプレビュー
+    file=$(echo "$list" | fzf --query "$search" --select-1 --exit-0 \
+             --preview 'bat --color=always --style=numbers {} || cat {}')
   fi
 
-  # 1件なら即起動、複数あれば選択
-  if [ $(echo "$list" | wc -l) -eq 1 ]; then
-    file="$list"
-  else
-    # fzf を使っているなら fzf に、peco が良ければ peco に
-    file=$(echo "$list" | fzf --query "$search" --select-1 --exit-0)
-  fi
-
-  # 選択されたら開く
   [ -n "$file" ] && $EDITOR "$file"
 }
 
