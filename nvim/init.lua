@@ -120,11 +120,36 @@ vim.api.nvim_create_user_command('GitDiff', function() show_git_diff('current') 
 -- 全体版
 vim.api.nvim_create_user_command('GitDiffAll', function() show_git_diff('all') end, {})
 
+-- git status を表示する関数
+local function git_status_project()
+  vim.cmd('enew')
+
+  -- 使い捨てバッファの設定
+  -- filetype=gitcommit にすると、変更されたファイル名などが色付きで見やすくなります
+  -- vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile filetype=gitcommit')
+  vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=gitcommit')
+
+  -- git status を実行して読み込み
+  -- -s (short) ではなく、あえて詳細版を表示して「何が起きているか」を把握しやすくします
+  vim.cmd('r !git status')
+  vim.cmd('1delete')
+
+  -- 'q' で閉じる設定
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
+
+  -- 先頭に移動
+  vim.cmd('normal! gg')
+end
+
+-- コマンド登録
+vim.api.nvim_create_user_command('GitStatus', git_status_project, {})
+
 -- Lua から Vim script のコマンドを実行する
 vim.cmd([[
   cabbrev gd GitDiff
   cabbrev gda GitDiffAll
   cabbrev gb GitBlame
+  cabbrev gs GitStatus
 ]])
 
 -- https://github.com/junegunn/vim-plug
