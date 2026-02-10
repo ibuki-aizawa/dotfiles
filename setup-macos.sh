@@ -6,9 +6,12 @@
 brew install bat
 brew install fzf
 brew install neovim
+# windows 受け渡し圧縮用
 brew install p7zip
+# rp コマンド
 brew install ripgrep
-brew install peco
+# peco は fzf で代替可能なため
+# brew install peco
 brew install fd
 
 brew install --cask zed
