@@ -105,8 +105,8 @@ v() {
   # fi
 
   # なければ、ファイル名を検索してpeco で選択
-  FIND=fd
-  list=$($FIND $search 2> /dev/null)
+  FIND='fd'
+  list=$($FIND -H $search 2> /dev/null)
   # echo "Searching for files matching: $search"
   # echo "$list"
 
@@ -149,6 +149,7 @@ alias gs='git status'
 alias gsw='git show'
 alias ga='git add'
 alias gc='git commit'
+alias gm='git commit'
 alias gch='git checkout'
 alias gd='git diff'
 alias gb='git branch'
@@ -316,4 +317,4 @@ source ~/repo/powerlevel10k/powerlevel10k.zsh-theme
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
 # fzf で fd を使う
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd -H --type f'

@@ -37,7 +37,7 @@
 
 " カレント行をコマンドモードで実行
 "nnoremap <C-j> "cdd:<C-r>c<CR>
-vnoremap <C-j> "cyy:<C-r>c<CR>
+"nnoremap <C-j> "cdd:<C-r>c<CR>
 "nnoremap <C-j> "cyy:<C-r>c<CR>
 
 nnoremap gb [{
@@ -197,6 +197,12 @@ nnoremap <Space>th :tabprevious<CR>
 " nnoremap <Space>v :vs<CR>
 nnoremap <Space>? :e ~/.vimrc<CR>
 
+" q: の代替、ちょっとはやいけど、q: に慣れればそっちでもいい
+nnoremap <C-;> :<C-f>
+"nnoremap <Leader>gb :vnew <bar> setlocal buftype=nofile <bar> r !git blame # <bar> set scrollbind <bar> execute "normal! \<C-w>p" <bar> set scrollbind
+"nnoremap <Leader>gb :vnew <Bar> setlocal buftype=nofile <Bar> r !git blame # <Bar> set scrollbind <Bar> exe "normal! \<Lt>C-w>p" <Bar> set scrollbind<CR>
+"nnoremap <Leader>gb :set splitright <Bar> vnew <Bar> setlocal buftype=nofile <Bar> exec 'read !git blame ' . expand('%') <Bar> set scrollbind <Bar> wincmd p <Bar> set scrollbind<CR>
+"nnoremap <Leader>gb :set splitright <Bar> vnew <Bar> setlocal buftype=nofile <Bar> exe 'r !git blame ' . shellescape(expand('%:p')) <Bar> set scrollbind <Bar> wincmd p <Bar> set scrollbind<CR>
 
 nnoremap <Right> :tabnext<CR>
 nnoremap <Left> :tabprevious<CR>

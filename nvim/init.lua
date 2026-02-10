@@ -51,6 +51,33 @@ keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 -- ターミナル終了
 -- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
+-- git blame 表示関数
+local function git_blame_current_buf()
+  -- 現在のファイルパスと行番号を保存
+  local path = vim.fn.expand('%:p')
+  local current_line = vim.fn.line('.')
+
+  -- 新しい空バッファを作成
+  vim.cmd('enew')
+
+  -- 使い捨てバッファの設定
+  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile')
+
+  -- git blame を実行して読み込み
+  vim.cmd('r !git blame ' .. vim.fn.shellescape(path))
+  vim.cmd('1delete')
+
+  -- 元いた行に移動して中央表示
+  vim.api.nvim_win_set_cursor(0, {current_line, 0})
+  vim.cmd('normal! zz')
+
+  -- このバッファ内だけで有効な 'q' で閉じる設定
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
+end
+
+vim.keymap.set('n', 'gb', git_blame_current_buf, { desc = 'Git Blame (Short)' })
+vim.keymap.set('n', '<Leader>gb', git_blame_current_buf, { desc = 'Git Blame (Leader)' })
+
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
 
@@ -263,6 +290,7 @@ keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 
 -- fzf.vim
 
+-- keymap('n', '<Space><Space>', ':Files<CR>', opts)
 keymap('n', '<Space>ff', ':Files<CR>', opts)
 keymap('n', '<Space>fb', ':Buffer<CR>', opts)
 keymap('n', '<Space>fl', ':Lines<CR>', opts)
