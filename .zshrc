@@ -164,6 +164,12 @@ alias pull='git pull'
 alias push='git push'
 alias stash='git stash'
 
+alias gdf='git ls-files -m | fzf -m | xargs -r git diff'
+alias gaf='git ls-files -m -o --exclude-standard | fzf -m | xargs -r git add'
+# alias gwf='git branch | grep -v "^*" | fzf | xargs -r git checkout'
+alias gsw='git branch --all | grep -v "^*" | fzf | sed "s/.* //" | xargs -r git switch'
+alias grs='git ls-files -m | fzf -m | xargs -r git restore'
+
 # npm
 alias nr='npm run'
 alias nt='npm run test'
