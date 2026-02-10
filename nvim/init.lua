@@ -51,32 +51,78 @@ keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 -- ターミナル終了
 -- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
--- git blame 表示関数
+-- git blame 表示関数 色付き版
 local function git_blame_current_buf()
-  -- 現在のファイルパスと行番号を保存
   local path = vim.fn.expand('%:p')
   local current_line = vim.fn.line('.')
 
-  -- 新しい空バッファを作成
   vim.cmd('enew')
-
-  -- 使い捨てバッファの設定
   vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile')
 
-  -- git blame を実行して読み込み
+  -- git blame を読み込み
   vim.cmd('r !git blame ' .. vim.fn.shellescape(path))
   vim.cmd('1delete')
 
-  -- 元いた行に移動して中央表示
+  -- ★ ここから色付け（Syntaxハイライト）の設定 ★
+  -- 1. ハッシュ（先頭の8文字くらい）を特定の色に
+  vim.cmd('syntax match BlameHash /^\\^\\?\\x\\+/')
+  vim.cmd('highlight default link BlameHash Statement') -- 黄色/オレンジ系
+
+  -- 2. 作者名（カッコの中の最初の部分）を特定の色に
+  vim.cmd('syntax match BlameUser /([^)]\\+)/')
+  vim.cmd('highlight default link BlameUser Type') -- 緑/水色系
+
+  -- 3. 日付（202x-xx-xx 形式）を特定の色に
+  vim.cmd('syntax match BlameDate /\\d\\{4}-\\d\\{2}-\\d\\{2}/')
+  vim.cmd('highlight default link BlameDate Comment') -- グレー/青系
+  -- ★ ここまで ★
+
   vim.api.nvim_win_set_cursor(0, {current_line, 0})
   vim.cmd('normal! zz')
-
-  -- このバッファ内だけで有効な 'q' で閉じる設定
   vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
 end
 
-vim.keymap.set('n', 'gb', git_blame_current_buf, { desc = 'Git Blame (Short)' })
-vim.keymap.set('n', '<Leader>gb', git_blame_current_buf, { desc = 'Git Blame (Leader)' })
+-- vim.keymap.set('n', 'gb', git_blame_current_buf, { desc = 'Git Blame (Short)' })
+-- vim.keymap.set('n', '<Leader>gb', git_blame_current_buf, { desc = 'Git Blame (Leader)' })
+vim.api.nvim_create_user_command('GitBlame', function() git_blame_current_buf() end, {})
+
+-- Git Diff を表示する共通コア関数
+local function show_git_diff(scope)
+  local cmd = 'git diff'
+  if scope == 'current' then
+    cmd = cmd .. ' ' .. vim.fn.shellescape(vim.fn.expand('%:p'))
+  end
+
+  vim.cmd('enew')
+  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile filetype=diff')
+
+  -- 外部コマンド実行（エラーハンドリング込）
+  local output = vim.fn.system(cmd)
+  if output == "" then
+    print("No changes found.")
+    vim.cmd('bd') -- 差分がなければ閉じる
+    return
+  end
+
+  -- バッファに内容をセット
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, '\n'))
+
+  -- 仕上げ
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
+  vim.cmd('normal! gg')
+end
+
+-- カレントバッファ版
+vim.api.nvim_create_user_command('GitDiff', function() show_git_diff('current') end, {})
+-- 全体版
+vim.api.nvim_create_user_command('GitDiffAll', function() show_git_diff('all') end, {})
+
+-- Lua から Vim script のコマンドを実行する
+vim.cmd([[
+  cabbrev gd GitDiff
+  cabbrev gda GitDiffAll
+  cabbrev gb GitBlame
+]])
 
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
