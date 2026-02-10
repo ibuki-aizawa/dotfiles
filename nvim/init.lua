@@ -32,6 +32,20 @@ keymap('n', '*', '*zz', opts);
 -- コマンドラインで %% と打つと、今のファイルがあるディレクトリに置換する
 vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%:h') . '/' : '%%'", { expr = true })
 
+-- %: : ディレクトリ + 今のファイル名
+-- これで :e %: と打つと "path/to/current_file.lua" が展開される
+vim.keymap.set('c', '%:', "getcmdtype() == ':' ? expand('%:p') : '%:'", { expr = true })
+
+-- %. : 拡張子抜きのフルパス (例: main.lua -> main)
+-- 「main_spec.lua」などを隣に作りたい時に便利！
+vim.keymap.set('c', '%.', "getcmdtype() == ':' ? expand('%:p:r') : '%.'", { expr = true })
+
+-- %t : ファイル名だけ (例: path/to/login.ts -> login.ts)
+vim.keymap.set('c', '%t', "getcmdtype() == ':' ? expand('%:t') : '%t'", { expr = true })
+
+-- %h : ファイル名だけ（拡張子なし） (例: login.ts -> login)
+vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr = true })
+
 -- keymap('n', 'gj', '15jzz', opts);
 -- keymap('n', 'gk', '15kzz', opts);
 -- keymap('n', 'gl', '15lzz', opts);
