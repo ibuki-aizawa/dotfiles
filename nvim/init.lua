@@ -294,19 +294,22 @@ keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 keymap('n', '<Space>ff', ':Files<CR>', opts)
 keymap('n', '<Space>fb', ':Buffer<CR>', opts)
 keymap('n', '<Space>fl', ':Lines<CR>', opts)
-keymap('n', '<Space>fg', ':Rg<CR>', opts)
+keymap('n', '<Space>fr', ':Rg<CR>', opts)
+-- keymap('n', '<Space>fg', ':Rg<CR>', opts)
 keymap('n', '<Space>fj', ':Jumps<CR>', opts)
 keymap('n', '<Space>fw', ':Windows<CR>', opts)
 keymap('n', '<Space>fh', ':History<CR>', opts)
 keymap('n', '<Space>fm', ':Marks<CR>', opts)
 keymap('n', '<Space>fc', ':Commands<CR>', opts)
 
--- keymap('n', '<Space>b', ':Buffer<CR>', opts)
--- keymap('n', '<Space>l', ':BLines<CR>', opts)
--- keymap('n', '<Space>w', ':Windows<CR>', opts)
+keymap('n', '<Space>bf', ':Buffer<CR>', opts)
+keymap('n', '<Space>bl', ':BLines<CR>', opts)
+keymap('n', '<Space>bt', ':BTags<CR>', opts)
+keymap('n', '<Space>bm', ':BMarks<CR>', opts)
+keymap('n', '<Space>bc', ':BCommands<CR>', opts)
 
--- keymap('n', '<Space>fbl', ':BLines<CR>', opts)
--- keymap('n', '<Space>fbt', ':BTags<CR>', opts)
+keymap('n', '<Space>gf', ':GFiles<CR>', opts)
+keymap('n', '<Space>fg', ':GFiles<CR>', opts)
 
 -- 設定ファイル
 -- keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
