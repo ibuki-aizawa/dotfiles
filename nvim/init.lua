@@ -68,6 +68,104 @@ keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 -- ターミナル終了
 -- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
+local function run_jest_current()
+  -- 現在のファイルが .spec.ts かどうかを確認（あるいはそのまま実行）
+  local file = vim.fn.expand('%:p')
+
+  -- 実行するコマンド（npx jest パス）
+  -- 別のバッファで結果を見たいので、新しいタブか分割で開くのがおすすめ
+  vim.cmd('vnew') -- 縦分割で新しいバッファを作成
+  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile filetype=sh')
+
+  -- テスト実行。npx jest にフルパスを渡す
+  -- append(0, ...) でバッファの先頭に結果を書き込む
+  local cmd = "npx jest " .. file
+  -- local cmd = "npm run api test -- -- " .. file
+  vim.fn.append(0, "Running: " .. cmd)
+  vim.cmd('r !' .. cmd)
+
+  -- 'q' で結果バッファを閉じれるようにする
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
+  vim.cmd('normal! gg')
+end
+
+local function run_jest_async()
+  local file = vim.fn.expand('%:p')
+
+  -- 本体ファイルなら対応する spec を、そうでなければそのまま実行
+  if not file:match('%.spec%.ts$') then
+    file = vim.fn.expand('%:p:r') .. ".spec.ts"
+  end
+
+  -- 出力用のバッファを作成
+  vim.cmd('vnew')
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile filetype=sh')
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "🚀 Running Jest (async)...", "" })
+
+  -- Jestの結果バッファに対してだけ有効にする
+  vim.cmd([[
+    syntax match JestPass /PASS/
+    syntax match JestFail /FAIL/
+    highlight JestPass guifg=#98c379 gui=bold
+    highlight JestFail guifg=#e06c75 gui=bold
+  ]])
+
+  -- 非同期で実行開始
+  -- vim.fn.jobstart({ "npx", "jest", "--color", file }, {
+  vim.fn.jobstart({ "npm", "run", "api", "test", "--", "--", "--no-colors", file }, {
+    env = { NO_COLOR = "1" },
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stdout = function(_, data)
+      if data then
+        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+      end
+    end,
+    on_stderr = function(_, data)
+      if data then
+        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+      end
+    end,
+    on_exit = function()
+      vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "✅ Finished!" })
+      -- 終わったことがわかるように、自動的に末尾へスクロール（任意）
+      vim.cmd('normal! G')
+    end,
+  })
+
+  -- 元のウィンドウ（コード側）に一瞬で戻る
+  vim.cmd('wincmd p')
+
+  -- 'q' で閉じれるように設定
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = bufnr, silent = true })
+end
+
+-- 関数の中身をこれに差し替えると、より柔軟になります
+local function run_jest_smart()
+    local file = vim.fn.expand('%:p')
+
+    -- もし .spec.ts じゃないファイルなら、対応する .spec.ts を探す
+    if not file:match('%.spec%.ts$') then
+        file = vim.fn.expand('%:p:r') .. ".spec.ts"
+    end
+
+    vim.cmd('vnew | setlocal buftype=nofile bufhidden=wipe noswapfile')
+    -- vim.cmd('r !npx jest ' .. file)
+    vim.cmd('r !npm run api test -- -- ' .. file)
+    vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
+end
+
+-- コマンド登録
+vim.api.nvim_create_user_command('Jest', run_jest_current, {})
+vim.api.nvim_create_user_command('JestSmart', run_jest_smart, {})
+vim.api.nvim_create_user_command('JestAsync', run_jest_async, {})
+
+
+-- エイリアス（小文字でサクッと）
+-- vim.cmd([[ cabbrev jt Jest ]])
+vim.cmd([[ cabbrev jt JestAsync ]])
+
 -- git blame 表示関数 色付き版
 local function git_blame_current_buf()
   local path = vim.fn.expand('%:p')

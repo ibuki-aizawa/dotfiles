@@ -197,8 +197,11 @@ nnoremap <Space>th :tabprevious<CR>
 " nnoremap <Space>v :vs<CR>
 nnoremap <Space>? :e ~/.vimrc<CR>
 
+" !押すのが大変だから
+nnoremap <C-;> :!
+
 " q: の代替、ちょっとはやいけど、q: に慣れればそっちでもいい
-nnoremap <C-;> :<C-f>
+"nnoremap <C-;> :<C-f>
 "nnoremap <Leader>gb :vnew <bar> setlocal buftype=nofile <bar> r !git blame # <bar> set scrollbind <bar> execute "normal! \<C-w>p" <bar> set scrollbind
 "nnoremap <Leader>gb :vnew <Bar> setlocal buftype=nofile <Bar> r !git blame # <Bar> set scrollbind <Bar> exe "normal! \<Lt>C-w>p" <Bar> set scrollbind<CR>
 "nnoremap <Leader>gb :set splitright <Bar> vnew <Bar> setlocal buftype=nofile <Bar> exec 'read !git blame ' . expand('%') <Bar> set scrollbind <Bar> wincmd p <Bar> set scrollbind<CR>
