@@ -115,8 +115,8 @@ local function run_jest_async()
   -- vim.fn.jobstart({ "npx", "jest", "--color", file }, {
   vim.fn.jobstart({ "npm", "run", "api", "test", "--", "--", "--no-colors", file }, {
     env = { NO_COLOR = "1" },
-    stdout_buffered = true,
-    stderr_buffered = true,
+    stdout_buffered = false,
+    stderr_buffered = false,
     on_stdout = function(_, data)
       if data then
         vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
@@ -141,6 +141,77 @@ local function run_jest_async()
   vim.keymap.set('n', 'q', ':bd<CR>', { buffer = bufnr, silent = true })
 end
 
+local function run_jest_realtime()
+  local src_buf = vim.api.nvim_get_current_buf()
+  local file = vim.fn.expand('%:p')
+  if not file:match('%.spec%.ts$') then
+    file = vim.fn.expand('%:p:r') .. ".spec.ts"
+  end
+
+  local buf_name = "JEST_RESULT"
+  local test_buf = vim.fn.bufnr(buf_name)
+
+  -- 1. バッファの作成または再利用
+  if test_buf == -1 then
+    vim.cmd('vnew')
+    vim.cmd('file ' .. buf_name)
+    test_buf = vim.api.nvim_get_current_buf()
+  else
+    local winid = vim.fn.bufwinid(test_buf)
+    if winid == -1 then
+      vim.cmd('vsplit | b' .. test_buf)
+    else
+      vim.fn.win_gotoid(winid)
+    end
+  end
+
+  -- 2. 設定と初期化（前回の内容を消去）
+  vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=sh')
+  vim.api.nvim_buf_set_lines(test_buf, 0, -1, false, { "🚀 Running: " .. file, "" })
+
+  -- 3. 連動して閉じる設定
+  vim.api.nvim_create_autocmd("BufWipeout", {
+    buffer = src_buf,
+    once = true,
+    callback = function()
+      if vim.api.nvim_buf_is_valid(test_buf) then
+        vim.api.nvim_buf_delete(test_buf, { force = true })
+      end
+    end,
+  })
+
+  -- 4. 非同期実行（リアルタイム・ストリーミング）
+  -- vim.fn.jobstart({ "npx", "jest", "--no-colors", file }, {
+  vim.fn.jobstart({ "npm", "run", "api", "test", "--", "--", "--no-colors", file }, {
+    -- ここを false にするのが肝！
+    stdout_buffered = false,
+    stderr_buffered = false,
+    on_stdout = function(_, data)
+      if data and ( #data > 1 or data[1] ~= "" ) then
+        vim.api.nvim_buf_set_lines(test_buf, -1, -1, false, data)
+        -- 常に最新の行にスクロール
+        local line_count = vim.api.nvim_buf_line_count(test_buf)
+        vim.api.nvim_win_set_cursor(vim.fn.bufwinid(test_buf), {line_count, 0})
+      end
+    end,
+    on_stderr = function(_, data)
+      if data and ( #data > 1 or data[1] ~= "" ) then
+        vim.api.nvim_buf_set_lines(test_buf, -1, -1, false, data)
+        -- 常に最新の行にスクロール
+        local line_count = vim.api.nvim_buf_line_count(test_buf)
+        vim.api.nvim_win_set_cursor(vim.fn.bufwinid(test_buf), {line_count, 0})
+      end
+    end,
+    on_exit = function()
+      vim.api.nvim_buf_set_lines(test_buf, -1, -1, false, { "", "✅ Finished!" })
+    end,
+  })
+
+  -- 5. コード側にフォーカスを戻す
+  vim.cmd('wincmd p')
+  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = test_buf, silent = true })
+end
+
 -- 関数の中身をこれに差し替えると、より柔軟になります
 local function run_jest_smart()
     local file = vim.fn.expand('%:p')
@@ -160,11 +231,39 @@ end
 vim.api.nvim_create_user_command('Jest', run_jest_current, {})
 vim.api.nvim_create_user_command('JestSmart', run_jest_smart, {})
 vim.api.nvim_create_user_command('JestAsync', run_jest_async, {})
+vim.api.nvim_create_user_command('JestRealtime', run_jest_realtime, {})
 
+-- キャメルケース変換関数
+local function to_camel_case()
+  -- ビジュアルモードの開始点と終了点を取得
+  -- table.unpack を使用
+  local _unpack = table.unpack or unpack
+  local _, s_row, s_col, _ = _unpack(vim.fn.getpos("'<"))
+  local _, e_row, e_col, _ = _unpack(vim.fn.getpos("'>"))
+
+  -- 選択範囲のテキストを取得
+  local lines = vim.api.nvim_buf_get_text(0, s_row - 1, s_col - 1, e_row - 1, e_col, {})
+  if #lines == 0 then return end
+
+  -- 文字列を結合して変換 (snake_case -> camelCase)
+  local text = table.concat(lines, "\n")
+  local camel = text:gsub("(_)([a-z])", function(_, l)
+    return l:upper()
+  end)
+
+  -- バッファに書き戻し
+  vim.api.nvim_buf_set_text(0, s_row - 1, s_col - 1, e_row - 1, e_col, { camel })
+end
+
+-- ユーザーコマンド :Camel の登録
+vim.api.nvim_create_user_command('Camel', to_camel_case, { range = true })
+
+-- ビジュアルモード用のキーマップ (例: <leader>cc)
+vim.keymap.set('v', '<leader>cc', ':Camel<CR>', { silent = true })
 
 -- エイリアス（小文字でサクッと）
 -- vim.cmd([[ cabbrev jt Jest ]])
-vim.cmd([[ cabbrev jt JestAsync ]])
+vim.cmd([[ cabbrev jt JestRealtime ]])
 
 -- git blame 表示関数 色付き版
 local function git_blame_current_buf()

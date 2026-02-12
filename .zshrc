@@ -120,11 +120,71 @@ v() {
     fi
 
     # 通常検索時は bat 等で中身をプレビュー
-    file=$(echo "$list" | fzf --query "$search" --select-1 --exit-0 \
+    file=$(echo "$list" | fzf --query "$search " --select-1 --exit-0 \
              --preview 'bat --color=always --style=numbers {} || cat {}')
   fi
 
   [ -n "$file" ] && $EDITOR "$file"
+}
+
+zz() {
+  local dir
+  dir=$(z -l | fzf --height 15 \
+    --layout=reverse \
+    --border \
+    --prompt="⚡ " \
+    --header="Select Directory" \
+    --nth 2.. --tac \
+    | awk '{print $2}')
+  [ -n "$dir" ] && cd "$dir"
+}
+
+## Interactive Grep to Nvim
+rf() {
+  RELOAD='reload:rg --column --line-number --no-heading --color=always --smart-case {q} || true'
+  fzf --disabled --ansi --query "$1" \
+    --bind "start:$RELOAD" \
+    --bind "change:$RELOAD" \
+    --delimiter : \
+    --preview 'bat --color=always --highlight-line {2} {1}' \
+    --preview-window 'up,60%,border-bottom,+{2}+3/3' \
+    --bind 'enter:become(nvim {1} +{2})'
+}
+
+# 1. 検索文字列を rg パイプラインに変換する補助関数
+_rfa_gen_cmd() {
+  local query="$1"
+  # スペースで分割して配列に入れる
+  local words=(${(z)query})
+
+  if [[ ${#words[@]} -eq 0 ]]; then
+    rg --column --line-number --no-heading --color=always --smart-case .
+    return
+  fi
+
+  # 最初の単語でベースを作る
+  local cmd="rg --column --line-number --no-heading --color=always --smart-case -- ${words[1]}"
+
+  # 2つ目以降をパイプで繋ぐ
+  for ((i=2; i<=${#words[@]}; i++)); do
+    cmd+=" | rg --color=always -- ${words[$i]}"
+  done
+
+  eval "$cmd"
+}
+
+# 2. 本体
+rfa() {
+  # fzf の中から上の関数を呼び出す
+  # export -f は bash 用なので、zsh ではそのまま呼べるように工夫
+  fzf --disabled --ansi \
+      --query "$*" \
+      --bind "start:reload:_rfa_gen_cmd {q}" \
+      --bind "change:reload:_rfa_gen_cmd {q}" \
+      --delimiter : \
+      --preview 'bat --color=always --highlight-line {2} {1}' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3' \
+      --bind 'enter:become(nvim {1} +{2})'
 }
 
 # bat
