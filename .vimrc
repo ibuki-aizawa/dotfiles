@@ -34,14 +34,32 @@
 "   - <C-r><C-w> カーソル下の単語を挿入
 "   - <C-r>{register}  レジスタの内容を挿入
 "
+" インサートモード
+"   - <C-o> 一回だけコマンドを実行
+"   - <C-t> 右インデント
+"   - <C-d> 左インデント
+"   - <C-x><C-l> 行入力保管
+"   - <C-y> 上の行と同じ入力
+"
+" 補完メニュー
+"   - <C-y> 確定
+"   - <C-e> キャンセル
+"   - <C-p> 上
+"   - <C-n> 下
 
 " カレント行をコマンドモードで実行
 "nnoremap <C-j> "cdd:<C-r>c<CR>
 "nnoremap <C-j> "cdd:<C-r>c<CR>
 "nnoremap <C-j> "cyy:<C-r>c<CR>
 
-nnoremap gb [{
-nnoremap gB ]}
+"nnoremap gb [{
+"nnoremap gB ]}
+
+" インサートモードで Emacs 風の移動を可能にする
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 
 set path+=**
 set suffixesadd+=.rb,.js,.ts,.jsx,.tsx
@@ -55,10 +73,10 @@ command! Scratch vnew | setlocal buftype=nofile bufhidden=hide noswapfile
 " 無名バッファでgrepをかける
 command! -nargs=1 RgBuf vnew | setlocal buftype=nofile bufhidden=hide noswapfile | execute 'r !rg --vimgrep ' . <q-args>
 
-nnoremap <leader>bd :bd<CR>
-nnoremap <leader>bn :bn<CR>
-nnoremap <leader>bp :bp<CR>
-nnoremap <leader>bb :b#<CR>
+"nnoremap <leader>bd :bd<CR>
+"nnoremap <leader>bn :bn<CR>
+"nnoremap <leader>bp :bp<CR>
+"nnoremap <leader>bb :b#<CR>
 
 syntax on " シンタックスハイライトを有効化
 
@@ -85,7 +103,7 @@ set showtabline=2 "タブラインを常に表示
 "set statusline=%f\ %m%r%=%l/%L
 
 " 左側にファイル名、中央から右側に coc の情報や行番号を配置
-set statusline=%{coc#status()}  " coc.nvim のステータス（これが大事！）
+set statusline=%{coc#status()}  " coc.nvim のステータス
 set statusline+=%=               " ここから右寄せ
 "set statusline+=\ %t\ %m%r          " ファイル名(のみ)、修正フラグ、読込専用フラグ
 set statusline=\ %f\ %m%r          " ファイル名(相対パス)、修正フラグ、読込専用フラグ
@@ -185,20 +203,21 @@ nnoremap <F3> :vimgrep <C-R>=expand('<cword>')<CR> **<CR>:copen<CR>
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
-vmap <C-C> "+y
+vnoremap <C-c> "+y
+vnoremap <D-c> "+y
 
 "ウィンドウの幅を調整
 nnoremap <C-w><C-w> :vs<CR>:q<CR>
 
-nnoremap <Space>tn :tabnew<CR><C-o>
-nnoremap <Space>tl :tabnext<CR>
-nnoremap <Space>th :tabprevious<CR>
+"nnoremap <Space>tn :tabnew<CR><C-o>
+"nnoremap <Space>tl :tabnext<CR>
+"nnoremap <Space>th :tabprevious<CR>
 
 " nnoremap <Space>v :vs<CR>
-nnoremap <Space>? :e ~/.vimrc<CR>
+"nnoremap <Space>? :e ~/.vimrc<CR>
 
 " !押すのが大変だから
-nnoremap <C-;> :!
+"nnoremap <C-;> :!
 
 " q: の代替、ちょっとはやいけど、q: に慣れればそっちでもいい
 "nnoremap <C-;> :<C-f>

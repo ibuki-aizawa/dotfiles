@@ -127,7 +127,8 @@ v() {
   [ -n "$file" ] && $EDITOR "$file"
 }
 
-zz() {
+## ディレクトリ移動zのfzf版
+zf() {
   local dir
   dir=$(z -l | fzf --height 15 \
     --layout=reverse \
@@ -137,6 +138,11 @@ zz() {
     --nth 2.. --tac \
     | awk '{print $2}')
   [ -n "$dir" ] && cd "$dir"
+}
+
+vf() {
+  fzf --walker-skip=.git,node_modules,dist,.next,build \
+      --bind "enter:execute(nvim {})+accept"
 }
 
 ## Interactive Grep to Nvim
@@ -379,3 +385,8 @@ export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 # fzf で fd を使う
 # export FZF_DEFAULT_COMMAND='fd -H --type f'
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/ibukiaizawa/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
