@@ -56,22 +56,28 @@
 "nnoremap gB ]}
 
 " インサートモードで Emacs 風の移動を可能にする
+" デフォルトの <C-a> は前回の挿入で入力した文字列を入力する
 inoremap <C-a> <Home>
+" デフォルトの <C-e> は下の行の文字を入力
 inoremap <C-e> <End>
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+" inoremap <C-f> <Right>
+" inoremap <C-b> <Left>
+" デフォルトの <C-d> はインデントを減らす
+inoremap <C-d> <Del>
+" デフォルトの <C-k> は特殊文字入力
+inoremap <C-k> <C-o>D
 
 set path+=**
 set suffixesadd+=.rb,.js,.ts,.jsx,.tsx
 
 " パスを別バッファで見比べてひらく
-nnoremap gF :vert wincmd f<CR>
+" nnoremap gF :vert wincmd f<CR>
 
 " 無名バッファを作る
-command! Scratch vnew | setlocal buftype=nofile bufhidden=hide noswapfile
+" command! Scratch vnew | setlocal buftype=nofile bufhidden=hide noswapfile
 
 " 無名バッファでgrepをかける
-command! -nargs=1 RgBuf vnew | setlocal buftype=nofile bufhidden=hide noswapfile | execute 'r !rg --vimgrep ' . <q-args>
+" command! -nargs=1 RgBuf vnew | setlocal buftype=nofile bufhidden=hide noswapfile | execute 'r !rg --vimgrep ' . <q-args>
 
 "nnoremap <leader>bd :bd<CR>
 "nnoremap <leader>bn :bn<CR>
@@ -194,7 +200,7 @@ set splitbelow "スプリット
 "vmap { {zz
 "vmap } }zz
 
-nnoremap <F3> :vimgrep <C-R>=expand('<cword>')<CR> **<CR>:copen<CR>
+" nnoremap <F3> :vimgrep <C-R>=expand('<cword>')<CR> **<CR>:copen<CR>
 
 "nnoremap <C-e> 5<C-e>M
 "nnoremap <C-y> 5<C-y>M
@@ -226,8 +232,8 @@ nnoremap <C-w><C-w> :vs<CR>:q<CR>
 "nnoremap <Leader>gb :set splitright <Bar> vnew <Bar> setlocal buftype=nofile <Bar> exec 'read !git blame ' . expand('%') <Bar> set scrollbind <Bar> wincmd p <Bar> set scrollbind<CR>
 "nnoremap <Leader>gb :set splitright <Bar> vnew <Bar> setlocal buftype=nofile <Bar> exe 'r !git blame ' . shellescape(expand('%:p')) <Bar> set scrollbind <Bar> wincmd p <Bar> set scrollbind<CR>
 
-nnoremap <Right> :tabnext<CR>
-nnoremap <Left> :tabprevious<CR>
+" nnoremap <Right> :tabnext<CR>
+" nnoremap <Left> :tabprevious<CR>
 
 let g:IMState = 0
 autocmd InsertEnter * let &iminsert = g:IMState
