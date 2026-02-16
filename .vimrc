@@ -1,5 +1,8 @@
 " Vim configuration file
 
+" 以下のコマンドで gl に割りあたっているコマンドを調べる
+" :verbose nmap gl
+
 " vim 備忘
 " zz 中央にスクロール
 " zt 上にスクロール
