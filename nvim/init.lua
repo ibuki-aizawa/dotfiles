@@ -464,6 +464,7 @@ local Plug = vim.fn['plug#'];
 
 -- plug
 vim.call('plug#begin')
+Plug 'vim-jp/vimdoc-ja'
 
 Plug('junegunn/fzf')
 Plug('junegunn/fzf.vim')
