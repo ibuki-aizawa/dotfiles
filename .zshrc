@@ -197,6 +197,8 @@ rfa() {
 if [[ "$OSTYPE" == "linux"* ]]; then
   # linux の場合は、batcat になっている
   alias bat='batcat'
+  alias fd='fdfind'
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # macOS
@@ -348,7 +350,6 @@ fi
 export PATH="/usr/local/Python27/bin/:$PATH"
 
 if [[ "$OSTYPE" == "linux"* ]]; then
-  alias fd='fdfind'
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
