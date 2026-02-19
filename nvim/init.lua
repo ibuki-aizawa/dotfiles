@@ -1,7 +1,6 @@
 local vim = vim;
 local global = vim.g
 
-
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
@@ -700,6 +699,59 @@ keymap('n', '<Space>fg', ':GFiles<CR>', opts)
 -- keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
 -- keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
 
+local ns = vim.api.nvim_create_namespace("mark_signs")
+
+local marks = {
+  ".", "^", "\"", "'", "`", "[", "]",
+}
+
+-- a〜z, A〜Z を追加
+for c = string.byte("a"), string.byte("z") do
+  table.insert(marks, string.char(c))
+end
+for c = string.byte("A"), string.byte("Z") do
+  table.insert(marks, string.char(c))
+end
+
+-- 行ごとにマークをまとめて表示
+local function update_marks(buf)
+  vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+
+  -- 行番号 → {マーク, マーク, ...}
+  local grouped = {}
+
+  for _, m in ipairs(marks) do
+    local pos = vim.api.nvim_buf_get_mark(buf, m)
+    if pos and pos[1] > 0 then
+      local line = pos[1] - 1
+      grouped[line] = grouped[line] or {}
+      table.insert(grouped[line], m)
+    end
+  end
+
+  -- 行ごとに extmark を置く
+  for line, ms in pairs(grouped) do
+    local text = " --- " .. table.concat(ms, " ") .. ""
+    vim.api.nvim_buf_set_extmark(buf, ns, line, -1, {
+      virt_text = { { text, "Folded" } },
+      virt_text_pos = "eol",
+    })
+  end
+end
+
+-- 起動時に反映
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function(ev)
+    update_marks(ev.buf)
+  end,
+})
+
+-- カーソル移動時に更新
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+  callback = function()
+    update_marks(vim.api.nvim_get_current_buf())
+  end,
+})
 
 -- コパイロット
 keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
