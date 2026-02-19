@@ -715,38 +715,34 @@ for c = string.byte("0"), string.byte("9") do
   table.insert(marks, string.char(c))
 end
 
--- ★ ここから追加：+ と - の可視化
--- local cursor_line = vim.api.nvim_win_get_cursor(0)[1] - 1
--- local last_line = vim.api.nvim_buf_line_count(buf) - 1
-
--- '-'（前の行）
--- if cursor_line - 1 >= 0 then
---   grouped[cursor_line - 1] = grouped[cursor_line - 1] or {}
---   table.insert(grouped[cursor_line - 1], "-")
--- end
---
--- -- '+'（次の行）
--- if cursor_line + 1 <= last_line then
---   grouped[cursor_line + 1] = grouped[cursor_line + 1] or {}
---   table.insert(grouped[cursor_line + 1], "+")
--- end
-
 -- 行ごとにマークをまとめて表示
 local function update_marks(buf)
-  if not buf or not vim.api.nvim_buf_is_valid(buf) then
+  if not buf or not vim.api.nvim_buf_is_valid(buf) or type(buf) ~= "number" then
+    return
+  end
+
+  if vim.fn.bufwinid(buf) == -1 then
+    return
+  end
+
+  local win = vim.api.nvim_get_current_win()
+  if not vim.api.nvim_win_is_valid(win) then
     return
   end
 
   vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
 
   local grouped = {}
+  local last_line = vim.api.nvim_buf_line_count(buf) - 1
 
   for _, m in ipairs(marks) do
     local pos = vim.api.nvim_buf_get_mark(buf, m)
     if pos and pos[1] > 0 then
       local line = pos[1] - 1
-      grouped[line] = grouped[line] or {}
-      table.insert(grouped[line], m)
+      if line >= 0 and line <= last_line then
+        grouped[line] = grouped[line] or {}
+        table.insert(grouped[line], m)
+      end
     end
   end
 
