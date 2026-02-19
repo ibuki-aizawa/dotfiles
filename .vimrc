@@ -1,5 +1,6 @@
 " Vim configuration file
 
+
 " 以下のコマンドで gl に割りあたっているコマンドを調べる
 " :verbose nmap gl
 
@@ -202,6 +203,10 @@ set splitbelow "スプリット
 "vmap <C-d> <C-d>zz
 "vmap { {zz
 "vmap } }zz
+
+set scroll=10
+"nnoremap <C-d> <C-d>zz
+"nnoremap <C-u> <C-u>zz
 
 " nnoremap <F3> :vimgrep <C-R>=expand('<cword>')<CR> **<CR>:copen<CR>
 

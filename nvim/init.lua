@@ -1,6 +1,7 @@
 local vim = vim;
 local global = vim.g
 
+
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
@@ -25,9 +26,9 @@ local keymap = vim.api.nvim_set_keymap
 keymap('n', '<D-s>', ':wa<CR>', opts);
 keymap('n', '<D-w>', ':qa<CR>', opts);
 
-keymap('n', 'n', 'nzz', opts);
-keymap('n', 'N', 'Nzz', opts);
-keymap('n', '*', '*zz', opts);
+-- keymap('n', 'n', 'nzz', opts);
+-- keymap('n', 'N', 'Nzz', opts);
+-- keymap('n', '*', '*zz', opts);
 
 -- コマンドラインで %% と打つと、今のファイルがあるディレクトリに置換する
 vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%:h') . '/' : '%%'", { expr = true })
