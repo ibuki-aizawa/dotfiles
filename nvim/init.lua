@@ -702,22 +702,43 @@ keymap('n', '<Space>fg', ':GFiles<CR>', opts)
 local ns = vim.api.nvim_create_namespace("mark_signs")
 
 local marks = {
-  ".", "^", "\"", "'", "`", "[", "]",
+  ".", "^", "\"", "'", "`", "[", "]", "<", ">"
 }
 
--- a〜z, A〜Z を追加
 for c = string.byte("a"), string.byte("z") do
   table.insert(marks, string.char(c))
 end
 for c = string.byte("A"), string.byte("Z") do
   table.insert(marks, string.char(c))
 end
+for c = string.byte("0"), string.byte("9") do
+  table.insert(marks, string.char(c))
+end
+
+-- ★ ここから追加：+ と - の可視化
+-- local cursor_line = vim.api.nvim_win_get_cursor(0)[1] - 1
+-- local last_line = vim.api.nvim_buf_line_count(buf) - 1
+
+-- '-'（前の行）
+-- if cursor_line - 1 >= 0 then
+--   grouped[cursor_line - 1] = grouped[cursor_line - 1] or {}
+--   table.insert(grouped[cursor_line - 1], "-")
+-- end
+--
+-- -- '+'（次の行）
+-- if cursor_line + 1 <= last_line then
+--   grouped[cursor_line + 1] = grouped[cursor_line + 1] or {}
+--   table.insert(grouped[cursor_line + 1], "+")
+-- end
 
 -- 行ごとにマークをまとめて表示
 local function update_marks(buf)
+  if not buf or not vim.api.nvim_buf_is_valid(buf) then
+    return
+  end
+
   vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
 
-  -- 行番号 → {マーク, マーク, ...}
   local grouped = {}
 
   for _, m in ipairs(marks) do
@@ -730,11 +751,16 @@ local function update_marks(buf)
   end
 
   -- 行ごとに extmark を置く
+  local win_width = vim.api.nvim_win_get_width(0)
+  local right_col_base = win_width - 6
+
   for line, ms in pairs(grouped) do
-    local text = " --- " .. table.concat(ms, " ") .. ""
+    local text = "<< " .. table.concat(ms, " ") .. " >>"
+    local right_col = right_col_base - #text
     vim.api.nvim_buf_set_extmark(buf, ns, line, -1, {
       virt_text = { { text, "Folded" } },
-      virt_text_pos = "eol",
+      -- virt_text_pos = "eol",
+      virt_text_win_col = right_col
     })
   end
 end
