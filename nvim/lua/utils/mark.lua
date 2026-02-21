@@ -1,5 +1,7 @@
 local vim = vim;
 
+local M = {}
+
 local ns = vim.api.nvim_create_namespace("mark_signs")
 
 local marks = {
@@ -17,7 +19,7 @@ for c = string.byte("0"), string.byte("9") do
 end
 
 -- 行ごとにマークをまとめて表示
-local function update_marks(buf)
+function M.update_marks(buf)
   if not buf or not vim.api.nvim_buf_is_valid(buf) or type(buf) ~= "number" then
     return
   end
@@ -62,16 +64,4 @@ local function update_marks(buf)
   end
 end
 
--- 起動時に反映
-vim.api.nvim_create_autocmd("BufReadPost", {
-  callback = function(ev)
-    update_marks(ev.buf)
-  end,
-})
-
--- カーソル移動時に更新
-vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-  callback = function()
-    update_marks(vim.api.nvim_get_current_buf())
-  end,
-})
+return M
