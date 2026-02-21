@@ -1,5 +1,7 @@
 local vim = vim;
 
+require('iron')
+
 -- iron
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",

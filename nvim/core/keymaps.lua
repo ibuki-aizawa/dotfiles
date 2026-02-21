@@ -1,3 +1,5 @@
+local vim = vim;
+
 -- keymap
 local opts = {
 	noremap = true,

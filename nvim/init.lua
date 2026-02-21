@@ -4,44 +4,19 @@ local global = vim.g
 -- Neovim configuration file
 vim.cmd('source ~/.vimrc')
 
--- COC 設定
-vim.cmd('source ~/.config/nvim/coc.vim')
-
 -- undo ファイル用のディレクトリをvimと別に設定する
 vim.cmd('set undodir=~/.nvim/undo')
 
 -- 読み込み
-require('git')
-require('keymap')
+require('plugins.coc.init')
+
+require('core.autocmds')
+require('core.options')
+require('core.commands')
+require('core.keymaps')
+
 require('mark')
-
--- ターミナルをインサートモードで開く
-vim.cmd('autocmd TermOpen * startinsert')
-
--- キャメルケース変換関数
-local function to_camel_case()
-  -- ビジュアルモードの開始点と終了点を取得
-  -- table.unpack を使用
-  local _unpack = table.unpack or unpack
-  local _, s_row, s_col, _ = _unpack(vim.fn.getpos("'<"))
-  local _, e_row, e_col, _ = _unpack(vim.fn.getpos("'>"))
-
-  -- 選択範囲のテキストを取得
-  local lines = vim.api.nvim_buf_get_text(0, s_row - 1, s_col - 1, e_row - 1, e_col, {})
-  if #lines == 0 then return end
-
-  -- 文字列を結合して変換 (snake_case -> camelCase)
-  local text = table.concat(lines, "\n")
-  local camel = text:gsub("(_)([a-z])", function(_, l)
-    return l:upper()
-  end)
-
-  -- バッファに書き戻し
-  vim.api.nvim_buf_set_text(0, s_row - 1, s_col - 1, e_row - 1, e_col, { camel })
-end
-
--- ユーザーコマンド :Camel の登録
-vim.api.nvim_create_user_command('Camel', to_camel_case, { range = true })
+require('git')
 
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
