@@ -8,15 +8,13 @@ vim.cmd('source ~/.vimrc')
 vim.cmd('set undodir=~/.nvim/undo')
 
 -- 読み込み
-require('plugins.coc.init')
+--require('plugins.coc.init')
 
-require('core.autocmds')
-require('core.options')
-require('core.commands')
-require('core.keymaps')
+require('core')
+require('plugins')
 
-require('mark')
-require('git')
+-- require('mark')
+-- require('git')
 
 -- https://github.com/junegunn/vim-plug
 local Plug = vim.fn['plug#'];
