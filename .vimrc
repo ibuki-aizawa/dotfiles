@@ -204,7 +204,7 @@ set splitbelow "スプリット
 "vmap { {zz
 "vmap } }zz
 
-set scroll=15
+set scroll=10
 "nnoremap <C-d> <C-d>zz
 "nnoremap <C-u> <C-u>zz
 
