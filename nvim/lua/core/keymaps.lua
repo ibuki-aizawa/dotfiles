@@ -132,3 +132,7 @@ keymap('n', '<Space>fg', ':GFiles<CR>', opts)
 
 -- コパイロット
 keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
+
+-- ノーマルモードで gl を叩くと GitLog を実行
+--vim.keymap.set('n', 'gl', ':GitLog<CR>', { silent = true })
+

@@ -1,7 +1,8 @@
 local vim = vim;
+local M = {}
 
 -- git blame 表示関数 色付き版
-local function git_blame_current_buf()
+function M.git_blame_current_buf()
   local path = vim.fn.expand('%:p')
   local current_line = vim.fn.line('.')
 
@@ -31,12 +32,8 @@ local function git_blame_current_buf()
   vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
 end
 
--- vim.keymap.set('n', 'gb', git_blame_current_buf, { desc = 'Git Blame (Short)' })
--- vim.keymap.set('n', '<Leader>gb', git_blame_current_buf, { desc = 'Git Blame (Leader)' })
-vim.api.nvim_create_user_command('GitBlame', function() git_blame_current_buf() end, {})
-
 -- Git Diff を表示する共通コア関数
-local function show_git_diff(scope)
+function M.show_git_diff(scope)
   local cmd = 'git diff'
   if scope == 'current' then
     cmd = cmd .. ' ' .. vim.fn.shellescape(vim.fn.expand('%:p'))
@@ -62,7 +59,7 @@ local function show_git_diff(scope)
 end
 
 -- Git Log: 現在のウィンドウで表示
-local function git_log_current_file()
+function M.git_log_current_file()
     local file_path = vim.fn.expand('%:p')
     if file_path == "" then return end
 
@@ -88,7 +85,7 @@ local function git_log_current_file()
 end
 
 -- Git Show: 指定したハッシュの詳細を今のウィンドウで表示
-local function git_show_commit(opts)
+function M.git_show_commit(opts)
     local hash = opts.args
     if hash == "" then
         hash = vim.fn.expand('<cword>')
@@ -118,32 +115,8 @@ local function git_show_commit(opts)
     vim.cmd('normal! gg')
 end
 
-vim.api.nvim_create_user_command('GitLog', git_log_current_file, {})
-vim.api.nvim_create_user_command('GitShow', git_show_commit, { nargs = '?' })
-
--- コマンド登録
-vim.api.nvim_create_user_command('GitLog', git_log_current_file, {})
-
-
--- エイリアス
-vim.cmd([[ cabbrev gl GitLog ]])
-
--- ノーマルモードで gl を叩くと GitLog を実行
-vim.keymap.set('n', 'gl', ':GitLog<CR>', { silent = true })
-
--- コマンド登録 (引数ありを許容)
-vim.api.nvim_create_user_command('GitShow', git_show_commit, { nargs = '?' })
-
--- エイリアス
-vim.cmd([[ cabbrev gsh GitShow ]])
-
--- カレントバッファ版
-vim.api.nvim_create_user_command('GitDiff', function() show_git_diff('current') end, {})
--- 全体版
-vim.api.nvim_create_user_command('GitDiffAll', function() show_git_diff('all') end, {})
-
 -- git status を表示する関数
-local function git_status_project()
+function M.git_status_project()
   vim.cmd('enew')
 
   -- bufhidden=hide に変更（前回の気づきを反映！）
@@ -156,13 +129,13 @@ local function git_status_project()
   -- ★ 1. ファイル名に色をつける (Syntaxハイライト)
   -- modified: などの後のファイル名を「Directory(青系)」や「String(緑系)」で目立たせる
   vim.cmd([[
-  syntax match GitStatusModified /modified: \+.\+/
-  syntax match GitStatusNew /new file: \+.\+/
-  syntax match GitStatusFile /.\+$/ containedin=GitStatusModified,GitStatusNew contained
+    syntax match GitStatusModified /modified: \+.\+/
+    syntax match GitStatusNew /new file: \+.\+/
+    syntax match GitStatusFile /.\+$/ containedin=GitStatusModified,GitStatusNew contained
 
-  highlight default link GitStatusModified Comment
-  highlight default link GitStatusFile Directory
-  highlight default link GitStatusNew Special
+    highlight default link GitStatusModified Comment
+    highlight default link GitStatusFile Directory
+    highlight default link GitStatusNew Special
   ]])
 
   -- ★ 2. 初期カーソル位置を最初の modified ファイルへ移動
@@ -183,13 +156,4 @@ local function git_status_project()
   vim.keymap.set('n', 'q', ':bd<CR>', { buffer = true, silent = true })
 end
 
--- コマンド登録
-vim.api.nvim_create_user_command('GitStatus', git_status_project, {})
-
--- Lua から Vim script のコマンドを実行する
-vim.cmd([[
-  cabbrev gd GitDiff
-  cabbrev gda GitDiffAll
-  cabbrev gb GitBlame
-  cabbrev gs GitStatus
-]])
+return M
