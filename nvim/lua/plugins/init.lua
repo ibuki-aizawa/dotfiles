@@ -1,29 +1,35 @@
 local vim = vim;
 
--- https://github.com/junegunn/vim-plug
-local Plug = vim.fn['plug#'];
+local M = {}
 
--- plug
-vim.call('plug#begin')
-Plug 'vim-jp/vimdoc-ja'
+function M.init()
+  -- https://github.com/junegunn/vim-plug
+  local Plug = vim.fn['plug#'];
 
-Plug('junegunn/fzf')
-Plug('junegunn/fzf.vim')
+  -- plug
+  vim.call('plug#begin')
+  Plug 'vim-jp/vimdoc-ja'
 
-Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
--- Plug('lambdalisue/fern.vim')
--- Plug('lambdalisue/fern-git-status.vim')
--- Plug('mattn/emmet-vim')
+  Plug('junegunn/fzf')
+  Plug('junegunn/fzf.vim')
 
--- Python
-Plug 'Vigemus/iron.nvim'
+  Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+  -- Plug('lambdalisue/fern.vim')
+  -- Plug('lambdalisue/fern-git-status.vim')
+  -- Plug('mattn/emmet-vim')
 
-Plug('navarasu/onedark.nvim')
--- Plug('Mofiqul/vscode.nvim')
-Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
+  -- Python
+  Plug 'Vigemus/iron.nvim'
 
-Plug 'rust-lang/rust.vim'
+  Plug('navarasu/onedark.nvim')
+  -- Plug('Mofiqul/vscode.nvim')
+  Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
-Plug 'github/copilot.vim'
+  Plug 'rust-lang/rust.vim'
 
-vim.call('plug#end')
+  Plug 'github/copilot.vim'
+
+  vim.call('plug#end')
+end
+
+return M
