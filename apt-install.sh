@@ -13,6 +13,8 @@ sudo apt install -y socat
 sudo apt install -y python3-pip
 sudo apt install -y ipython3
 
+sudo apt install -y lua5.4
+
 sudo apt install -y htop
 sudo apt install -y vim
 

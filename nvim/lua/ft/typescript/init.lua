@@ -116,6 +116,7 @@ function M.run_jest_realtime()
 
   -- 4. 非同期実行（リアルタイム・ストリーミング）
   -- vim.fn.jobstart({ "npx", "jest", "--no-colors", file }, {
+  local command = "npm run api test -- -- --no-coloers" .. file
   vim.fn.jobstart({ "npm", "run", "api", "test", "--", "--", "--no-colors", file }, {
     -- ここを false にするのが肝！
     stdout_buffered = false,

@@ -2,6 +2,22 @@ local vim = vim;
 
 local M = {}
 
+-- 文字列を区切り文字で分割する
+function M.split(str, sep)
+  local t = {}
+
+  if sep == nil then
+    -- 省略時はスペース
+    sep = "%S+"
+  end
+
+  for word in str:gmatch(sep) do
+    table.insert(t, word)
+  end
+
+  return t
+end
+
 -- キャメルケース変換関数
 function M.to_camel_case()
   -- ビジュアルモードの開始点と終了点を取得
