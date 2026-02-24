@@ -1,5 +1,6 @@
 local vim = vim;
-local table = require('utils.table')
+--local table = require('utils.table')
+local ustr = require('utils.string')
 
 local buf = {}
 
@@ -27,17 +28,23 @@ local function show_error(chan_id, data, name)
 end
 
 local function run()
-  local c = { "ls", "-l" }
+  local str = "ls -l"
+  local out = ustr.split(str)
+  --local out = vim.fn.systemlist('ls -l')
+  local s = table.concat(out, "\n")
+  vim.api.nvim_echo({{s, "None"}}, false, {})
+
+  --local c = { "ls", "-l" }
   --print(table.join(c, " "))
-  vim.fn.jobstart(
-    --table.join(c, ' '),
-    'ls',
-    {
-      on_stdout = show_result,
-      --on_stderr = show_error,
-      on_exit = flash,
-    }
-  )
+  --vim.fn.jobstart(
+  --  --table.join(c, ' '),
+  --  'ls',
+  --  {
+  --    on_stdout = show_result,
+  --    --on_stderr = show_error,
+  --    on_exit = flash,
+  --  }
+  --)
 end
 
 vim.api.nvim_create_user_command(

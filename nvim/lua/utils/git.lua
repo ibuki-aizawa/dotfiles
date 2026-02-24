@@ -40,7 +40,7 @@ function M.show_git_diff(scope)
   end
 
   vim.cmd('enew')
-  vim.cmd('setlocal buftype=nofile bufhidden=wipe noswapfile filetype=diff')
+  vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=diff')
 
   -- 外部コマンド実行（エラーハンドリング込）
   local output = vim.fn.system(cmd)
@@ -119,7 +119,6 @@ end
 function M.git_status_project()
   vim.cmd('enew')
 
-  -- bufhidden=hide に変更（前回の気づきを反映！）
   vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=gitcommit')
 
   -- git status を実行

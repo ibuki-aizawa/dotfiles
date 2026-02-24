@@ -1,8 +1,16 @@
 local vim = vim;
 
+local uex = require('utils.ex')
+
 vim.api.nvim_create_user_command(
-  "ExToBuffer",
-  require('utils.fn').command_to_buffer,
+  "ExecuteCommand",
+  uex.execute_command,
+  { nargs = "+", complete = "command" }
+)
+
+vim.api.nvim_create_user_command(
+  "ExecuteCommandSplit",
+  uex.execute_command_split,
   { nargs = "+", complete = "command" }
 )
 
