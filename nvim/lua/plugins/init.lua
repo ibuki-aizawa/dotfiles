@@ -1,5 +1,7 @@
 local vim = vim;
 
+require('plugins.coc')
+
 local M = {}
 
 function M.init()
