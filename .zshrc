@@ -28,6 +28,19 @@ SAVEHIST=1000000
 # setopt emacs
 setopt vi
 
+# zshの例：Ctrl-z で中断したジョブをフォアグラウンドに戻す
+fancy-ctrl-z() {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 function peco_history() {
   BUFFER=`history -$HISTSIZE | sort -r | cut -d ' ' -f 4- | awk '!a[$0]++' | peco`
   zle reset-prompt
