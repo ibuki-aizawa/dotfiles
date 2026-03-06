@@ -33,10 +33,19 @@ vim.keymap.set('c', '%t', "getcmdtype() == ':' ? expand('%:t') : '%t'", { expr =
 -- %h : ファイル名だけ（拡張子なし） (例: login.ts -> login)
 vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr = true })
 
--- keymap('n', 'gj', '15jzz', opts);
--- keymap('n', 'gk', '15kzz', opts);
--- keymap('n', 'gl', '15lzz', opts);
--- keymap('n', 'gh', '15hzz', opts);
+-- emacs風のキーバインド
+keymap('i', '<C-p>', '<Up>', opts);
+keymap('i', '<C-n>', '<Down>', opts);
+keymap('i', '<C-f>', '<Right>', opts);
+-- vimのデフォルトの <C-d> はインデントを減らす
+keymap('i', '<C-b>', '<Left>', opts);
+
+-- vimのデフォルトの <C-a> は前回の挿入で入力した文字列を入力する
+keymap('i', '<C-a>', '<Home>', opts);
+-- vimのデフォルトの <C-e> は下の行の文字を入力
+keymap('i', '<C-e>', '<End>', opts);
+-- vimのデフォルトの <C-k> は特殊文字入力
+keymap('i', '<C-k>', '<C-o>D', opts);
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);

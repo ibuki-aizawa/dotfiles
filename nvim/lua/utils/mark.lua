@@ -54,7 +54,7 @@ function M.update_marks(buf)
   local right_col_base = win_width - 6
 
   for line, ms in pairs(grouped) do
-    local text = "<< " .. table.concat(ms, " ") .. " >>"
+    local text = "" .. table.concat(ms, " ") .. ""
     local right_col = right_col_base - #text
     vim.api.nvim_buf_set_extmark(buf, ns, line, -1, {
       virt_text = { { text, "Folded" } },
