@@ -51,7 +51,7 @@ function M.update_marks(buf)
 
   -- 行ごとに extmark を置く
   local win_width = vim.api.nvim_win_get_width(0)
-  local right_col_base = win_width - 6
+  local right_col_base = win_width - 7
 
   for line, ms in pairs(grouped) do
     local text = "" .. table.concat(ms, " ") .. ""
