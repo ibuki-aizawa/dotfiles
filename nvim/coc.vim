@@ -51,7 +51,7 @@ nmap <silent><nowait> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation
 nmap <silent><nowait> gd <Plug>(coc-definition)
 nmap <silent><nowait> gy <Plug>(coc-type-definition)
-nmap <silent><nowait> gi <Plug>(coc-implementation)
+"nmap <silent><nowait> gi <Plug>(coc-implementation)
 nmap <silent><nowait> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -169,8 +169,8 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Git change decorations
 " navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
+nmap [c <Plug>(coc-git-prevchunk)
+nmap ]c <Plug>(coc-git-nextchunk)
 " navigate conflicts of current buffer
 " nmap [c <Plug>(coc-git-prevconflict)
 " nmap ]c <Plug>(coc-git-nextconflict)

@@ -9,8 +9,8 @@ local opts = {
 local keymap = vim.api.nvim_set_keymap
 
 -- command + s で保存(macOS)
-keymap('n', '<D-s>', ':wa<CR>', opts);
-keymap('n', '<D-w>', ':qa<CR>', opts);
+-- keymap('n', '<D-s>', ':wa<CR>', opts);
+-- keymap('n', '<D-w>', ':qa<CR>', opts);
 
 -- keymap('n', 'n', 'nzz', opts);
 -- keymap('n', 'N', 'Nzz', opts);
@@ -90,34 +90,34 @@ keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 -- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
 
 -- ビジュアルモード用のキーマップ (例: <leader>cc)
-vim.keymap.set('v', '<leader>cc', ':Camel<CR>', { silent = true })
+-- vim.keymap.set('v', '<leader>cc', ':Camel<CR>', { silent = true })
 
 -- coc のフォーマットを使用する
 -- keymap('n', '=', '<Plug>(coc-format-selected)', opts);
 -- keymap('n', '==', 'gg<Plug>(coc-format-selected)G<C-o>zz', opts);
 
 -- keymap('n', '<C-/', ':CocCommand explorer<CR>', opts)
-keymap('n', 'gd', '<Plug>(coc-definition)', opts)
-keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
-keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
+-- keymap('n', 'gd', '<Plug>(coc-definition)', opts)
+-- keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
+-- keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
 keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
 keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
-keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
+-- keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 
 keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
 keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
 -- keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
-keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
 keymap("n", "]e", "<Plug>(coc-diagnostic-next)", opts)
+keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
 
 -- keymap("n", "<Space>[", "<Plug>(coc-diagnostic-prev)", opts)
 -- keymap("n", "<Space>]", "<Plug>(coc-diagnostic-next)", opts)
 
-keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)", opts)
-keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)", opts)
+-- keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)", opts)
+-- keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)", opts)
 
 -- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)
@@ -129,36 +129,39 @@ keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
 
 -- エラー一覧
 keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
-keymap('n', 'ge', ':CocDiagnostics<CR>', opts);
+-- keymap('n', 'ge', ':CocDiagnostics<CR>', opts);
 
 -- keymap('n', '<Space>f', ':CocList grep<CR>', opts)
 
-keymap('n', '<Space>w', ':wa<CR>', opts);
-keymap('n', '<Space>q', ':q<CR>', opts);
-keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
+-- keymap('n', '<Space>w', ':wa<CR>', opts);
+-- keymap('n', '<Space>q', ':q<CR>', opts);
+-- keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 
 -- fzf.vim
 
--- keymap('n', '<Space><Space>', ':Files<CR>', opts)
-keymap('n', '<Space>ff', ':Files<CR>', opts)
-keymap('n', '<Space>fb', ':Buffer<CR>', opts)
-keymap('n', '<Space>fl', ':Lines<CR>', opts)
-keymap('n', '<Space>fr', ':Rg<CR>', opts)
--- keymap('n', '<Space>fg', ':Rg<CR>', opts)
-keymap('n', '<Space>fj', ':Jumps<CR>', opts)
-keymap('n', '<Space>fw', ':Windows<CR>', opts)
-keymap('n', '<Space>fh', ':History<CR>', opts)
-keymap('n', '<Space>fm', ':Marks<CR>', opts)
-keymap('n', '<Space>fc', ':Commands<CR>', opts)
+keymap('n', '<Space>f', ':Files<CR>', opts)
+keymap('n', '<Space>r', ':Rg<CR>', opts)
+keymap('n', '<Space>b', ':Buffer<CR>', opts)
 
-keymap('n', '<Space>bf', ':Buffer<CR>', opts)
-keymap('n', '<Space>bl', ':BLines<CR>', opts)
-keymap('n', '<Space>bt', ':BTags<CR>', opts)
-keymap('n', '<Space>bm', ':BMarks<CR>', opts)
-keymap('n', '<Space>bc', ':BCommands<CR>', opts)
-
-keymap('n', '<Space>gf', ':GFiles<CR>', opts)
-keymap('n', '<Space>fg', ':GFiles<CR>', opts)
+-- keymap('n', '<Space>ff', ':Files<CR>', opts)
+-- keymap('n', '<Space>fb', ':Buffer<CR>', opts)
+-- keymap('n', '<Space>fl', ':Lines<CR>', opts)
+-- keymap('n', '<Space>fr', ':Rg<CR>', opts)
+-- -- keymap('n', '<Space>fg', ':Rg<CR>', opts)
+-- keymap('n', '<Space>fj', ':Jumps<CR>', opts)
+-- keymap('n', '<Space>fw', ':Windows<CR>', opts)
+-- keymap('n', '<Space>fh', ':History<CR>', opts)
+-- keymap('n', '<Space>fm', ':Marks<CR>', opts)
+-- keymap('n', '<Space>fc', ':Commands<CR>', opts)
+--
+-- keymap('n', '<Space>bf', ':Buffer<CR>', opts)
+-- keymap('n', '<Space>bl', ':BLines<CR>', opts)
+-- keymap('n', '<Space>bt', ':BTags<CR>', opts)
+-- keymap('n', '<Space>bm', ':BMarks<CR>', opts)
+-- keymap('n', '<Space>bc', ':BCommands<CR>', opts)
+--
+-- keymap('n', '<Space>gf', ':GFiles<CR>', opts)
+-- keymap('n', '<Space>fg', ':GFiles<CR>', opts)
 
 -- 設定ファイル
 -- keymap('n', '<Space>?', ':tabnew ~/.config/nvim/init.lua<CR>', opts);
