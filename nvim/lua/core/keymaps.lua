@@ -39,6 +39,14 @@ vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr
 vim.keymap.set('n', ']n', [[/\d\+<CR>]], { silent = true, desc = "Next number" })
 vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" })
 
+-- Tab でバッファ巡回
+vim.keymap.set('n', '<Tab>', ':bn<CR>')
+vim.keymap.set('n', '<S-Tab>', ':bp<CR>')
+
+-- Tab でバッファ巡回
+vim.keymap.set('n', '<C-Tab>', 'gt<CR>')
+vim.keymap.set('n', '<C-S-Tab>', 'gt<CR>')
+
 -- emacs風のキーバインド
 
 -- keymap('i', '<C-p>', '<Up>', opts);
