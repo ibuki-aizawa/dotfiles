@@ -56,3 +56,33 @@ vim.api.nvim_create_user_command('SearchNumber', function()
     print("数字は見つかりませんでした")
   end
 end, { desc = "Search and jump to the next number" })
+
+-- 関数（カッコの塊）を行単位で検索して選択状態にする
+vim.api.nvim_create_user_command('SelectNextFunctionLines', function()
+    -- 1. ヴィジュアルモードを強制終了してノーマルモードに戻る
+    -- feedkeys を使うか、単純に一度 esc を送るイメージです
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), 'n', true)
+
+    -- 少し待機（モード切り替えを確実にするため）してから実行
+    vim.schedule(function()
+      -- 現在の設定を保存しておく
+      local save_wrapscan = vim.opt.wrapscan:get()
+
+      -- この関数内だけラップスキャンをオフに
+      vim.opt.wrapscan = false
+      vim.fn.setreg('/', [[\v\{]])
+
+      -- 検索実行
+      local status, err = pcall(vim.cmd, 'normal! n')
+
+      -- 設定を元に戻す
+      vim.opt.wrapscan = save_wrapscan
+
+      if status then
+          vim.cmd('normal! va{Vo')
+      else
+          -- 検索失敗時のメッセージ（"search hit BOTTOM" を防ぐ）
+          print("これより先にブロックはありません")
+      end
+    end)
+end, { desc = "Reset selection and jump to next block" })
