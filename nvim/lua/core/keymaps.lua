@@ -33,27 +33,11 @@ vim.keymap.set('c', '%t', "getcmdtype() == ':' ? expand('%:t') : '%t'", { expr =
 -- %h : ファイル名だけ（拡張子なし） (例: login.ts -> login)
 vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr = true })
 
--- 移動
--- ]n で次の数字へジャンプ
-
-vim.keymap.set('n', ']n', function()
-  -- \d\+ : 数値にマッチ
-  -- W    : wrapscan をオフ（末尾で止まる）
-  local found = vim.fn.search([[\d\+]], 'W')
-  if found == 0 then
-    print("これより先に数値はありません")
-  end
-end, { desc = "Jump to next number without affecting search register" })
-
--- 前の数値へジャンプ
-vim.keymap.set('n', '[n', function()
-  -- b    : backward（後ろ向きに検索）
-  -- W    : wrapscan をオフ
-  local found = vim.fn.search([[\d\+]], 'bW')
-  if found == 0 then
-    print("これより前に数値はありません")
-  end
-end, { desc = "Jump to previous number without affecting search register" })
+-- ]n / [n で数字へジャンプ
+-- vim.keymap.set('n', ']n', function() vim.fn.search([[\d\+]], 'W') end, { desc = "Next number" })
+-- vim.keymap.set('n', '[n', function() vim.fn.search([[\d\+]], 'bW') end, { desc = "Prev number" })
+vim.keymap.set('n', ']n', [[/\d\+<CR>]], { silent = true, desc = "Next number" })
+vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" })
 
 -- emacs風のキーバインド
 
