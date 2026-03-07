@@ -106,18 +106,18 @@ keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
 keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 
 keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
-keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)zz', opts);
+keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
 -- keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
 keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
-keymap("n", "[e", "<Plug>(coc-diagnostic-prev)zz", opts)
-keymap("n", "]e", "<Plug>(coc-diagnostic-next)zz", opts)
+keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
+keymap("n", "]e", "<Plug>(coc-diagnostic-next)", opts)
 
--- keymap("n", "<Space>[", "<Plug>(coc-diagnostic-prev)zz", opts)
--- keymap("n", "<Space>]", "<Plug>(coc-diagnostic-next)zz", opts)
+-- keymap("n", "<Space>[", "<Plug>(coc-diagnostic-prev)", opts)
+-- keymap("n", "<Space>]", "<Plug>(coc-diagnostic-next)", opts)
 
-keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)zz", opts)
-keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)zz", opts)
+keymap("n", "<C-p>", "<Plug>(coc-diagnostic-prev)", opts)
+keymap("n", "<C-n>", "<Plug>(coc-diagnostic-next)", opts)
 
 -- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)
