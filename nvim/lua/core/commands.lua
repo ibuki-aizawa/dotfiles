@@ -45,3 +45,14 @@ vim.cmd([[
   cabbrev gsh GitShow
 ]])
 
+-- 次の数字を検索してジャンプ
+vim.api.nvim_create_user_command('SearchNumber', function()
+  -- / は検索履歴に残るため、あえて履歴を汚さない search() 関数を使う手もありますが、
+  -- 'n' キーで次々飛びたいなら、検索レジスタ (@/) を書き換えるのが正解です。
+  vim.fn.setreg('/', [[\d\+]])
+  -- 検索を実行（n キーと同じ挙動）
+  local status = pcall(vim.cmd, 'normal! n')
+  if not status then
+    print("数字は見つかりませんでした")
+  end
+end, { desc = "Search and jump to the next number" })

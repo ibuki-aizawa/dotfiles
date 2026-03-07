@@ -34,8 +34,19 @@ vim.keymap.set('c', '%t', "getcmdtype() == ':' ? expand('%:t') : '%t'", { expr =
 vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr = true })
 
 -- emacs風のキーバインド
-keymap('i', '<C-p>', '<Up>', opts);
-keymap('i', '<C-n>', '<Down>', opts);
+
+-- keymap('i', '<C-p>', '<Up>', opts);
+-- vim.keymap.set('i', '<C-p>', function()
+--   -- return '<C-p>'
+--   return vim.fn.pumvisible() == 1 and '<C-p>' or '<Up>'
+-- end, { expr = true, replace_keycodes = true, desc = 'Prev item or Up' })
+
+-- keymap('i', '<C-n>', '<Down>', opts);
+-- vim.keymap.set('i', '<C-n>', function()
+--   -- return '<C-n>'
+--   return vim.fn.pumvisible() == 1 and '<C-n>' or '<Down>'
+-- end, { expr = true, replace_keycodes = true, desc = 'Next item or Down' })
+
 keymap('i', '<C-f>', '<Right>', opts);
 -- vimのデフォルトの <C-d> はインデントを減らす
 keymap('i', '<C-b>', '<Left>', opts);
