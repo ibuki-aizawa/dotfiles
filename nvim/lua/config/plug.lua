@@ -20,6 +20,13 @@ function M.init()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
+  -- nvim-cmp
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+
+  -- oil.vim (ファイルエクスプローラ）
+  Plug 'stevearc/oil.nvim'
+
   -- Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
   -- Plug('lambdalisue/fern.vim')
   -- Plug('lambdalisue/fern-git-status.vim')

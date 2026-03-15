@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd('FileType', {
         },
         { upward = true })[1]
       ),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
     })
   end,
 })
@@ -33,6 +34,7 @@ vim.api.nvim_create_autocmd('FileType', {
       root_dir = vim.fs.dirname(
         vim.fs.find({ 'tsconfig.json', 'package.json', '.git' }, { upward = true })[1]
       ),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
     })
   end,
 })
