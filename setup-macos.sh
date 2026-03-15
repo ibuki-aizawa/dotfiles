@@ -43,5 +43,3 @@ rbenv global 3.2.2
 
 # database
 brew install postgresql@17
-
-
