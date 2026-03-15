@@ -218,6 +218,11 @@ fi
 alias clip='pbcopy'
 
 # Git
+function git() {
+  args=("${@/head/HEAD}")
+  command git "${args[@]}"
+}
+
 alias g='git'
 
 alias gs='git status'

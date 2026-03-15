@@ -9,6 +9,7 @@ require('config.commands')
 require('config.lsp')
 require('config.cmp')
 require('config.oil')
+require('config.neo-tree')
 
 -- エラーが出るので、treesitter を止める
 vim.treesitter.stop()

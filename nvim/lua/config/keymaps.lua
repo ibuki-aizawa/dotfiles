@@ -100,18 +100,18 @@ keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
 -- keymap('n', 'gd', '<Plug>(coc-definition)', opts)
 -- keymap('n', 'gy', '<Plug>(coc-type-definition)', opts)
 -- keymap('n', 'gi', '<Plug>(coc-implementation)', opts)
-keymap('n', 'gr', '<Plug>(coc-references)', opts)
+-- keymap('n', 'gr', '<Plug>(coc-references)', opts)
 
-keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
+-- keymap('n', '<C-.>', '<Plug>(coc-fix-current)', opts)
 -- keymap('n', '<D-.>', '<Plug>(coc-fix-current)', opts)
 
-keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
-keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
+-- keymap('n', '<F2>', '<Plug>(coc-rename)', opts)
+-- keymap('n', '<F8>', '<Plug>(coc-diagnostic-next)', opts);
 -- keymap('n', '<F11>', 'yy:e! <C-r>0<CR>', opts);
-keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
+-- keymap('n', '<F12>', '<Plug>(coc-definition)', opts)
 
-keymap("n", "]e", "<Plug>(coc-diagnostic-next)", opts)
-keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
+-- keymap("n", "]e", "<Plug>(coc-diagnostic-next)", opts)
+-- keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
 
 -- keymap("n", "<Space>[", "<Plug>(coc-diagnostic-prev)", opts)
 -- keymap("n", "<Space>]", "<Plug>(coc-diagnostic-next)", opts)
@@ -122,13 +122,13 @@ keymap("n", "[e", "<Plug>(coc-diagnostic-prev)", opts)
 -- keymap('n', '<C-S-D>', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<C-e>', ':CocCommand explorer<CR>', opts)
 
-keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
+-- keymap('n', '<Space>.', '<Plug>(coc-fix-current)', opts)
 
 -- エクスプローラー
-keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
+-- keymap('n', '<Space>e', ':CocCommand explorer<CR>', opts)
 
 -- エラー一覧
-keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
+-- keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
 -- keymap('n', 'ge', ':CocDiagnostics<CR>', opts);
 
 -- keymap('n', '<Space>f', ':CocList grep<CR>', opts)
@@ -142,6 +142,9 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', builtin.find_files)
 vim.keymap.set('n', '<leader>g', builtin.live_grep)
 vim.keymap.set('n', '<leader>b', builtin.buffers)
+
+vim.keymap.set('n', '<C-p>', builtin.find_files)
+vim.keymap.set('n', '<C-n>', builtin.buffers)
 
 -- LSP
 -- vim.keymap.set('n', '<leader>lf', function()

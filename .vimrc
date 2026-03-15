@@ -213,8 +213,8 @@ set splitbelow "スプリット
 "nnoremap <C-e> 5<C-e>M
 "nnoremap <C-y> 5<C-y>M
 
-"Escの2回押しでハイライト消去
-nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
+"Escでハイライト消去
+nnoremap <Esc> :nohlsearch<CR>
 
 "ビジュアルモード時ctrl+cでシステムクリップボードにコピー
 vnoremap <C-c> "+y

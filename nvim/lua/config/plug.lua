@@ -1,6 +1,6 @@
 local vim = vim;
 
-require('config.coc')
+-- require('config.coc')
 
 local M = {}
 
@@ -26,6 +26,10 @@ function M.init()
 
   -- oil.vim (ファイルエクスプローラ）
   Plug 'stevearc/oil.nvim'
+
+  -- ファイルエクスプローラ
+  Plug 'nvim-neo-tree/neo-tree.nvim'
+  Plug 'MunifTanjim/nui.nvim'
 
   -- Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
   -- Plug('lambdalisue/fern.vim')
