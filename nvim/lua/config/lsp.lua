@@ -51,9 +51,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.keymap.set('n', '<leader>f', function ()
     --   vim.lsp.buf.format({ async = true })
     -- end, opts)
+    -- vim.keymap.set('n', '=', function()
+    --   vim.lsp.buf.format({ async = true })
+    -- end, opts)
+
     vim.keymap.set('n', '=', function()
-      vim.lsp.buf.format({ async = true })
-    end, opts)
+      vim.opt.operatorfunc = 'v:lua.lsp_format_operator'
+      return 'g@'
+    end, { buffer = args.buf, expr = true })
+
+    _G.lsp_format_operator = function()
+      vim.lsp.buf.format({
+        async = true,
+        range = {
+          start = vim.api.nvim_buf_get_mark(0, '['),
+          ['end'] = vim.api.nvim_buf_get_mark(0, ']'),
+        }
+      })
+    end
 
     vim.keymap.set('v', '=', function()
       vim.lsp.buf.format({
