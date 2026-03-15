@@ -30,5 +30,5 @@ vim.cmd.colorscheme "catppuccin"
 -- vim.cmd("autocmd CursorHold * silent call CocActionAsync('highlight')")
 
 -- コパイロット
-global.copilot_no_tab_map = true
+-- global.copilot_no_tab_map = true
 

@@ -137,11 +137,22 @@ keymap('n', '<Space>d', ':CocDiagnostics<CR>', opts);
 -- keymap('n', '<Space>q', ':q<CR>', opts);
 -- keymap('n', '<Space>wq', ':wa<CR>:qa<CR>', opts);
 
--- fzf.vim
+-- telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files)
+vim.keymap.set('n', '<leader>fg', builtin.live_grep)
+vim.keymap.set('n', '<leader>fb', builtin.buffers)
 
-keymap('n', '<Space>f', ':Files<CR>', opts)
-keymap('n', '<Space>r', ':Rg<CR>', opts)
-keymap('n', '<Space>b', ':Buffer<CR>', opts)
+-- LSP
+-- vim.keymap.set('n', '<leader>lf', function()
+--   vim.lsp.buf.format({ async = true })
+-- end)
+-- vim.keymap.set('n', '<leader>lr', builtin.lsp_references)
+
+-- fzf.vim
+-- keymap('n', '<Space>f', ':Files<CR>', opts)
+-- keymap('n', '<Space>r', ':Rg<CR>', opts)
+-- keymap('n', '<Space>b', ':Buffer<CR>', opts)
 
 -- keymap('n', '<Space>ff', ':Files<CR>', opts)
 -- keymap('n', '<Space>fb', ':Buffer<CR>', opts)
@@ -168,7 +179,7 @@ keymap('n', '<Space>b', ':Buffer<CR>', opts)
 -- keymap('n', '<Space>r', ':so ~/.config/nvim/init.lua<CR>', opts);
 
 -- コパイロット
-keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
+-- keymap('i', '<C-j>', 'copilot#Accept(\"<CR>\")', {expr = true, silent = true, script = true})
 
 -- ノーマルモードで gl を叩くと GitLog を実行
 --vim.keymap.set('n', 'gl', ':GitLog<CR>', { silent = true })

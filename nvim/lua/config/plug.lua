@@ -1,6 +1,6 @@
 local vim = vim;
 
-require('plugins.coc')
+require('config.coc')
 
 local M = {}
 
@@ -12,24 +12,29 @@ function M.init()
   vim.call('plug#begin')
   Plug 'vim-jp/vimdoc-ja'
 
-  Plug('junegunn/fzf')
-  Plug('junegunn/fzf.vim')
+  -- fzf
+  -- Plug('junegunn/fzf')
+  -- Plug('junegunn/fzf.vim')
 
-  Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+  -- telescope
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+
+  -- Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
   -- Plug('lambdalisue/fern.vim')
   -- Plug('lambdalisue/fern-git-status.vim')
   -- Plug('mattn/emmet-vim')
 
   -- Python
-  Plug 'Vigemus/iron.nvim'
+  -- Plug 'Vigemus/iron.nvim'
 
-  Plug('navarasu/onedark.nvim')
+  --Plug('navarasu/onedark.nvim')
   -- Plug('Mofiqul/vscode.nvim')
   Plug('catppuccin/nvim', { ['as'] = 'catppuccin' })
 
   Plug 'rust-lang/rust.vim'
 
-  Plug 'github/copilot.vim'
+  --Plug 'github/copilot.vim'
 
   vim.call('plug#end')
 end
