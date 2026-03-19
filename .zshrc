@@ -387,7 +387,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:~/Library/Android/sdk/cmdline-tools/latest/bin/
 # emulator
 export PATH=$PATH:~/Library/Android/sdk/emulator/
-alias pixel='emulator -avd Pixel_8_API_35'
+alias pixel='emulator -avd Pixel_Fold_API_36'
 
 [[ -f ~/repo/z/z.sh ]] && source ~/repo/z/z.sh
 
