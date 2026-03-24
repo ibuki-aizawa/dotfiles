@@ -5,6 +5,7 @@ require('neo-tree').setup({
       ['<C-b>'] = 'close_window',
       ['h'] = 'close_node',
       ['l'] = 'open',
+      ['z'] = 'none',
       ['p'] = {
         'toggle_preview',
         config = {
@@ -13,6 +14,14 @@ require('neo-tree').setup({
           use_image_nvim = true,
         },
       },
+    },
+  },
+  filesystem = {
+    follow_current_file = {
+      -- 自動で追従
+      enabled = true,
+      -- 別のファイルに移った時、前のディレクトリを閉じるか
+      leave_dirs_open = false,
     }
   }
 })
