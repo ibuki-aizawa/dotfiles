@@ -11,5 +11,7 @@ require('config.cmp')
 require('config.oil')
 require('config.neo-tree')
 
+require('config.conform')
+
 -- エラーが出るので、treesitter を止める
 vim.treesitter.stop()

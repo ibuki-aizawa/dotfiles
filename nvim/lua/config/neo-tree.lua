@@ -26,7 +26,7 @@ require('neo-tree').setup({
   }
 })
 
--- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>t', ':Neotree toggle<CR>', { silent = true }  -- t = tree
 -- VSCode 風
 vim.keymap.set('n', '<C-b>', ':Neotree toggle<CR>', { silent = true })

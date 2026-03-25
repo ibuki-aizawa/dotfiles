@@ -47,6 +47,8 @@ function M.init()
 
   --Plug 'github/copilot.vim'
 
+  Plug 'stevearc/conform.nvim'
+
   vim.call('plug#end')
 end
 

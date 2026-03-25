@@ -16,6 +16,10 @@ vim.opt.grepprg = table.concat({
 }, ' ')
 vim.opt.grepformat = '%f:%l:%c:%m'
 
+-- ファイル名として認める
+vim.opt.isfname:append("[")
+vim.opt.isfname:append("]")
+
 -- colorscheme
 
 -- require('onedark').setup {
