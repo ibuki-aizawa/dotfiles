@@ -20,9 +20,16 @@ function M.init()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
+  Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
+
   -- nvim-cmp
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+
+  -- autopairs
+  Plug 'windwp/nvim-autopairs'
 
   -- oil.vim (ファイルエクスプローラ）
   Plug 'stevearc/oil.nvim'
