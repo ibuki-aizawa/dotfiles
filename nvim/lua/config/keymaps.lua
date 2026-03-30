@@ -44,8 +44,21 @@ vim.keymap.set('n', '<Tab>', ':bn<CR>')
 vim.keymap.set('n', '<S-Tab>', ':bp<CR>')
 
 -- Tab でバッファ巡回
-vim.keymap.set('n', '<C-Tab>', 'gt<CR>')
-vim.keymap.set('n', '<C-S-Tab>', 'gt<CR>')
+-- vim.keymap.set('n', '<C-Tab>', 'gt<CR>')
+-- vim.keymap.set('n', '<C-S-Tab>', 'gt<CR>')
+
+-- オペレータ待機モード (o) で、直前の変更範囲をターゲットにする
+-- ターゲットにする範囲の定義
+local motions = {
+  { key = 'ic', mode = 'v', desc = '直前の変更範囲（文字）' },
+  { key = 'iC', mode = 'V', desc = '直前の変更範囲（行）' },
+  { key = 'C', mode = 'V', desc = '直前の変更範囲（行）' },
+}
+
+for _, m in ipairs(motions) do
+  local cmd = string.format(':<C-u>normal! `[%s`]<CR>', m.mode)
+  vim.keymap.set({'o', 'x'}, m.key, cmd, { silent = true, desc = m.desc })
+end
 
 -- emacs風のキーバインド
 
