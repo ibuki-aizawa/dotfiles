@@ -8,30 +8,10 @@ local opts = {
 
 local keymap = vim.api.nvim_set_keymap
 
--- command + s で保存(macOS)
--- keymap('n', '<D-s>', ':wa<CR>', opts);
--- keymap('n', '<D-w>', ':qa<CR>', opts);
-
--- keymap('n', 'n', 'nzz', opts);
--- keymap('n', 'N', 'Nzz', opts);
--- keymap('n', '*', '*zz', opts);
-
--- コマンドラインで %% と打つと、今のファイルがあるディレクトリに置換する
-vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%:h') . '/' : '%%'", { expr = true })
-
--- %: : ディレクトリ + 今のファイル名
--- これで :e %: と打つと "path/to/current_file.lua" が展開される
-vim.keymap.set('c', '%:', "getcmdtype() == ':' ? expand('%:p') : '%:'", { expr = true })
-
--- %. : 拡張子抜きのフルパス (例: main.lua -> main)
--- 「main_spec.lua」などを隣に作りたい時に便利！
-vim.keymap.set('c', '%.', "getcmdtype() == ':' ? expand('%:p:r') : '%.'", { expr = true })
-
--- %t : ファイル名だけ (例: path/to/login.ts -> login.ts)
-vim.keymap.set('c', '%t', "getcmdtype() == ':' ? expand('%:t') : '%t'", { expr = true })
-
--- %h : ファイル名だけ（拡張子なし） (例: login.ts -> login)
-vim.keymap.set('c', '%h', "getcmdtype() == ':' ? expand('%:t:r') : '%h'", { expr = true })
+-- コマンドモード展開
+vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%') : '%%'", { expr = true })
+vim.keymap.set('c', '%:p', "getcmdtype() == ':' ? expand('%:p') : '%:p'", { expr = true })
+vim.keymap.set('c', '%:h', "getcmdtype() == ':' ? expand('%:h') . '/' : '%:h'", { expr = true })
 
 -- ]n / [n で数字へジャンプ
 -- vim.keymap.set('n', ']n', function() vim.fn.search([[\d\+]], 'W') end, { desc = "Next number" })

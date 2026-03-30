@@ -61,14 +61,19 @@ end
 -- Git Log: 現在のウィンドウで表示
 function M.git_log_current_file()
     local file_path = vim.fn.expand('%:p')
-    if file_path == "" then return end
 
     -- 分割せずに今のウィンドウで新しいバッファを開く
     vim.cmd('enew')
     local log_buf = vim.api.nvim_get_current_buf()
     vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=git')
 
-    local log_cmd = "git log --pretty=format:'%h %ad %s' --date=short --follow -- " .. vim.fn.shellescape(file_path)
+    local log_cmd
+    if file_path == "" then
+      log_cmd = "git log --pretty=format:'%h %ad %s' --date=short"
+    else
+      log_cmd = "git log --pretty=format:'%h %ad %s' --date=short --follow -- " .. vim.fn.shellescape(file_path)
+    end
+
     local output = vim.fn.systemlist(log_cmd)
     vim.api.nvim_buf_set_lines(log_buf, 0, -1, false, output)
 
