@@ -20,6 +20,9 @@ vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.isfname:append("[")
 vim.opt.isfname:append("]")
 
+-- gf で行番号付きのパスを解釈できるようにする
+vim.opt.isfname:append(":")
+
 -- colorscheme
 
 -- require('onedark').setup {

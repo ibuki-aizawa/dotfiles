@@ -60,6 +60,35 @@ for _, m in ipairs(motions) do
   vim.keymap.set({'o', 'x'}, m.key, cmd, { silent = true, desc = m.desc })
 end
 
+vim.keymap.set("n", "gf", function()
+  local cfile = vim.fn.expand("<cfile>")
+
+  -- 1. まず、パスに ":" が含まれているか確認
+  if string.find(cfile, ":") then
+    -- ファイル名、行番号、列番号を分離 (例: file.ts:10:5)
+    local file, line, col = string.match(cfile, "([^:]+):(%d+):?(%d*)")
+
+    -- 分離した「ファイル名部分」が実際に存在するかチェック
+    if file and vim.fn.filereadable(file) == 1 then
+      vim.cmd("edit " .. file)
+      local l = tonumber(line) or 1
+      local c = tonumber(col) or 0
+      -- 安全に行移動（存在しない行を指定してもエラーにならないよう pcall）
+      pcall(vim.api.nvim_win_set_cursor, 0, {l, c})
+      pcall(vim.cmd, "normal! zz")
+      return
+    end
+  end
+
+  -- 2. ":" が含まれない、またはファイルが見つからない場合は標準の gf を実行
+  --  ok が false の場合はファイルが見つからないエラーを表示
+  local ok = pcall(vim.cmd, "normal! gF") -- 'gF' は標準でファイル:行番号に対応している場合があるためこちらを試行
+  if not ok then
+      -- gF もダメなら通常の gf
+      pcall(vim.cmd, "normal! gf")
+  end
+end, { desc = "Improved gf with line number support" })
+
 -- emacs風のキーバインド
 
 -- keymap('i', '<C-p>', '<Up>', opts);

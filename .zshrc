@@ -122,7 +122,7 @@ v() {
       return 0
     fi
 
-    list=$(fd -H -E ".git" --type f "$search" 2> /dev/null)
+    list=$(fd -H -E ".git" -p "$search" 2> /dev/null)
 
     if [ -z "$list" ]; then
       echo "No matching files found."
