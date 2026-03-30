@@ -24,3 +24,15 @@ vim.api.nvim_create_user_command(
   end,
   {}
 );
+
+vim.api.nvim_create_user_command('Npm', function(opts)
+  vim.cmd('!npm ' .. opts.args)
+end, {
+  nargs = '*',
+  complete = 'shellcmd' -- ここを追加するとファイルパスなどの補完が効くようになります
+})
+
+vim.cmd([[
+  cabbrev npm Npm
+  cabbrev nr Npm run
+]])

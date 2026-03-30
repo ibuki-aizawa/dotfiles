@@ -16,3 +16,6 @@ ln -sf $(pwd)/nvim ~/.config/
 
 # emacs
 ln -s $(pwd)/.emacs.d ~/.emacs.d
+
+# ripgrep
+ln -s $(pwd)/.ripgreprc ~/.ripgreprc

@@ -14,6 +14,16 @@ vim.api.nvim_create_user_command(
   { nargs = "+", complete = "command" }
 )
 
+vim.api.nvim_create_user_command(
+  "RipGrep",
+  uex.RipGrep,
+  { nargs = "+", complete = "command" }
+)
+
+vim.cmd([[
+  cabbrev rg RipGrep
+]])
+
 -- ユーザーコマンド :Camel の登録
 vim.api.nvim_create_user_command(
   'Camel',
@@ -44,6 +54,59 @@ vim.cmd([[
   cabbrev gl GitLog
   cabbrev gsh GitShow
 ]])
+
+vim.api.nvim_create_user_command('Git', function(opts)
+  vim.cmd('!git ' .. opts.args)
+end, {
+  nargs = '*',
+  complete = 'shellcmd' -- ここを追加するとファイルパスなどの補完が効くようになります
+})
+
+vim.cmd([[
+  cabbrev git Git
+  cabbrev fetch Git fetch
+  cabbrev pull Git pull
+  cabbrev push Git push
+  cabbrev gw Git switch
+  cabbrev ga Git add
+  cabbrev gc Git commit
+]])
+
+-- 直前のコマンド結果を現在のバッファに挿入する関数
+vim.api.nvim_create_user_command('PutEx', function()
+  local last_cmd = vim.fn.getreg(':')
+  if last_cmd ~= "" then
+    local output = vim.fn.execute(last_cmd)
+    local lines = vim.split(output, "\n")
+    vim.api.nvim_put(lines, "l", true, true)
+  end
+end, {})
+
+-- 前回のExコマンドの結果を確認する
+vim.api.nvim_create_user_command('ShowEx', function()
+  -- 1. 直前のコマンドを取得
+  local last_cmd = vim.fn.getreg(':')
+  if last_cmd == "" then
+    print("直前のコマンドが見つかりません")
+    return
+  end
+
+  -- 2. コマンドを実行して結果を取得
+  local output = vim.fn.execute(last_cmd)
+  local lines = vim.split(output, "\n")
+
+  -- 3. 新しいバッファを作成して設定
+  vim.cmd('vnew') -- 垂直分割で新しいバッファを開く（水平なら 'new'）
+  local buf = vim.api.nvim_get_current_buf()
+
+  -- バッファの種類をスクラッチ（保存不要な一時ファイル）に設定
+  vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+  vim.api.nvim_buf_set_option(buf, 'bufhidden', 'hide')
+  vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+
+  -- 4. 結果をバッファに書き込む
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+end, {})
 
 -- 次の数字を検索してジャンプ
 vim.api.nvim_create_user_command('SearchNumber', function()

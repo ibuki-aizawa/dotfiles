@@ -122,7 +122,7 @@ v() {
       return 0
     fi
 
-    list=$(fd -H -E ".git" -p "$search" 2> /dev/null)
+    list=$(fd -H -E ".git" --type f -p "$search" 2> /dev/null)
 
     if [ -z "$list" ]; then
       echo "No matching files found."
@@ -410,3 +410,5 @@ fpath=(/Users/ibukiaizawa/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
