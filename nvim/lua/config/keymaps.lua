@@ -209,3 +209,52 @@ vim.keymap.set('n', '<C-n>', builtin.buffers)
 -- ノーマルモードで gl を叩くと GitLog を実行
 --vim.keymap.set('n', 'gl', ':GitLog<CR>', { silent = true })
 
+-- Lua評価＆次行出力関数
+local function eval_lua_and_append()
+  local mode = vim.api.nvim_get_mode().mode
+  local lines
+
+  if mode:match("[vV]") then
+    -- ビジュアルモード: 選択範囲を取得
+    -- 一度ノーマルモードに戻して選択範囲を確定させる
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", true)
+    local start_line = vim.api.nvim_buf_get_mark(0, "<")[1]
+    local end_line = vim.api.nvim_buf_get_mark(0, ">")[1]
+    lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+  else
+    -- ノーマルモード: カレント行を取得
+    lines = {vim.api.nvim_get_current_line()}
+  end
+
+  -- コードを結合して実行準備
+  local code = table.concat(lines, "\n")
+
+  -- Luaとして評価（先頭に return を付けて試行し、失敗したらそのまま実行）
+  local func, err = load("return " .. code)
+  if not func then
+    func, err = load(code)
+  end
+
+  if func then
+    local ok, result = pcall(func)
+    if ok then
+      -- 結果を文字列に変換して次の行に挿入
+      _G.res = result
+      local output = vim.inspect(result)
+      local last_line = mode:match("[vV]") and vim.api.nvim_buf_get_mark(0, ">")[1] or vim.api.nvim_win_get_cursor(0)[1]
+      vim.api.nvim_buf_set_lines(0, last_line, last_line, false, { "-- => " .. output })
+    else
+      print("Error: " .. result)
+    end
+  else
+    print("Error: " .. err)
+  end
+end
+
+P = vim.inspect
+sin = math.sin
+cos = math.cos
+pi = math.pi
+
+-- キーマッピング
+vim.keymap.set({'n', 'v'}, '<leader>j', eval_lua_and_append, { desc = "Evaluate Lua and append result" })
