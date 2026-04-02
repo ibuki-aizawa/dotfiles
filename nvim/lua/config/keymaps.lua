@@ -258,3 +258,14 @@ pi = math.pi
 
 -- キーマッピング
 vim.keymap.set({'n', 'v'}, '<leader>j', eval_lua_and_append, { desc = "Evaluate Lua and append result" })
+
+-- [数字]<Leader>k で、任意の行数上から持ってくる
+vim.keymap.set('n', '<Leader>k', function()
+  local count = vim.v.count == 0 and 1 or vim.v.count
+  vim.cmd('.-' .. count .. 't.')
+end, { silent = true, desc = "Take line from [count] above" })
+
+vim.keymap.set('n', '<Leader>j', function()
+  local count = vim.v.count == 0 and 1 or vim.v.count
+  vim.cmd('.+' .. count .. 't.')
+end, { silent = true, desc = "Take line from [count] below" })
