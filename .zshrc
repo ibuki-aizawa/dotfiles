@@ -275,9 +275,9 @@ note() {
   fi
 
   if [ $# -eq 0 ]; then
-    filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d.md"`
   else
-    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.md"`
   fi
 
   # ファイルがなければ、前回のノートの内容をコピーする
@@ -297,18 +297,18 @@ note() {
   $EDITOR $filename
 }
 
-notecat() {
+catnote() {
   if [ $# -eq 0 ]; then
-    filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d.md"`
   else
-    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.txt"`
+    filename=$NOTES_DIR/`\date +"%Y%m%d_$1.md"`
   fi
 
   $CAT $filename
 }
 
 # Function to search notes
-notegrep() {
+grepnote() {
   if [ ! -d $NOTES_DIR ]; then
     echo "Notes directory does not exist."
     return 1
@@ -327,30 +327,6 @@ notegrep() {
 # Function to open the notes directory
 notes() {
   $EDITOR $NOTES_DIR
-}
-
-notetail() {
-  filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
-
-  if [ $# -eq 1 ]; then
-    n=$1
-  else
-    n=20
-  fi
-
-  tail -n $n $filename
-}
-
-notehead() {
-  filename=$NOTES_DIR/`\date +"%Y%m%d.txt"`
-
-  if [ $# -eq 1 ]; then
-    n=$1
-  else
-    n=20
-  fi
-
-  head -n $n $filename
 }
 
 # l () {
