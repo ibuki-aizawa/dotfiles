@@ -165,8 +165,8 @@ vim.keymap.set('n', '<leader>f', builtin.find_files)
 vim.keymap.set('n', '<leader>g', builtin.live_grep)
 vim.keymap.set('n', '<leader>b', builtin.buffers)
 
-vim.keymap.set('n', '<C-p>', builtin.find_files)
-vim.keymap.set('n', '<C-n>', builtin.buffers)
+-- vim.keymap.set('n', '<C-p>', builtin.find_files)
+-- vim.keymap.set('n', '<C-n>', builtin.buffers)
 
 -- LSP
 -- vim.keymap.set('n', '<leader>lf', function()
@@ -269,3 +269,12 @@ vim.keymap.set('n', '<Leader>j', function()
   local count = vim.v.count == 0 and 1 or vim.v.count
   vim.cmd('.+' .. count .. 't.')
 end, { silent = true, desc = "Take line from [count] below" })
+
+-- Quickfix ウィンドウをトグル（開いていれば閉じ、エラーがあれば開く）
+-- <leader>q (Space + q) で実行
+vim.keymap.set('n', '<leader>q', ':cw<CR>', { silent = true, desc = 'Toggle Quickfix' })
+vim.keymap.set('n', '[q', ':cprevious<CR>', { silent = true, desc = 'Previous Quickfix Item' })
+vim.keymap.set('n', ']q', ':cnext<CR>', { silent = true, desc = 'Next Quickfix Item' })
+
+vim.keymap.set('n', '<C-k>', ':cprevious<CR>zz', { silent = true, desc = 'Previous Quickfix Item' })
+vim.keymap.set('n', '<C-j>', ':cnext<CR>zz', { silent = true, desc = 'Next Quickfix Item' })

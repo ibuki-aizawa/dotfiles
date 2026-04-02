@@ -18,3 +18,12 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     mark.update_marks(vim.api.nvim_get_current_buf())
   end,
 })
+
+-- Quickfix を自動で開く
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  group = vim.api.nvim_create_augroup("AutoOpenQuickfix", { clear = true }),
+  pattern = { "[^l]*" }, -- location list 以外（つまり quickfix）が対象
+  callback = function()
+    vim.cmd("cwindow")
+  end,
+})
