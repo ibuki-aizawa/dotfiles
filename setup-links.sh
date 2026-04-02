@@ -19,3 +19,6 @@ ln -s $(pwd)/.emacs.d ~/.emacs.d
 
 # ripgrep
 ln -s $(pwd)/.ripgreprc ~/.ripgreprc
+
+# npmrc
+ln -s $(pwd)/.npmrc ~/.npmrc
