@@ -210,7 +210,7 @@ rfa() {
 if [[ "$OSTYPE" == "linux"* ]]; then
   # linux の場合は、batcat になっている
   alias bat='batcat'
-  alias fd='fdfind'
+  # alias fd='fdfind'
   export PATH="$HOME/.local/bin:$PATH"
 fi
 

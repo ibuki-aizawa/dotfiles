@@ -205,3 +205,5 @@ fi
 if [[ -f "$HOME/repo/z/z.sh" ]]; then
 	. "$HOME/repo/z/z.sh"
 fi
+
+export PATH="~/.cargo/bin/:$PATH"
