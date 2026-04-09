@@ -6,9 +6,16 @@ function M.run_jest_realtime()
   local path = vim.api.nvim_buf_get_name(0)
 
   local src_buf = vim.api.nvim_get_current_buf()
-  local file = vim.fn.expand('%:p')
-  if not file:match('%.spec%.ts$') then
-    file = vim.fn.expand('%:p:r') .. ".spec.ts"
+  local file = vim.fn.expand('%:t')
+
+  if file:match('%.tsx$') then
+    if not file:match('%.spec%.tsx$') then
+      file = vim.fn.expand('%:p:r') .. ".spec.tsx"
+    end
+  else
+    if not file:match('%.spec%.ts$') then
+      file = vim.fn.expand('%:p:r') .. ".spec.ts"
+    end
   end
 
   local buf_name = "JEST_RESULT"
