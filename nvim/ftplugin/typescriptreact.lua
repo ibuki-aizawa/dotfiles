@@ -15,7 +15,7 @@ vim.api.nvim_create_user_command(
   'SwitchTestFile',
   function ()
     local file = vim.fn.expand('%:p')
-    if file:match('%.spec%.ts$') then
+    if file:match('%.spec%.tsx$') then
       file = vim.fn.expand('%:p:r:r') .. ".tsx"
     else
       file = vim.fn.expand('%:p:r') .. ".spec.tsx"
