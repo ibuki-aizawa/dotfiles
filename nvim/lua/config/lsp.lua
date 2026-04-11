@@ -40,6 +40,20 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'rust' },
+  callback = function()
+    vim.lsp.start({
+      name = 'rust-analyzer',
+      cmd = { 'rust-analyzer' },
+      root_dir = vim.fs.dirname(
+        vim.fs.find({ '.git' }, { upward = true })[1]
+      ),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    })
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
   callback = function()
     vim.lsp.start({
