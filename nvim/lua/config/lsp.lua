@@ -53,6 +53,24 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'prisma' },
+  callback = function()
+    vim.lsp.start({
+      name = 'prisma-language-server',
+      cmd = { 'prisma-language-server', '--stdio' },
+      root_dir = vim.fs.dirname(
+        vim.fs.find({ 'package.json', '.git' }, { upward = true })[1]
+      ),
+      settings = {
+        prisma = {
+        }
+      },
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    })
+  end,
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function (args)
     local opts = { buffer = args.buf }

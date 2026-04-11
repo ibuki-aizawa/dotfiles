@@ -13,6 +13,7 @@ require('config.neo-tree')
 
 require('config.telescope')
 require('config.conform')
+require('config.treesitter')
 
 -- エラーが出るので、treesitter を止める
-vim.treesitter.stop()
+-- vim.treesitter.stop()
