@@ -24,7 +24,8 @@ function M.init()
 
   -- treesitter
   -- 安定版（v0.9.3）を指定
-  Plug('nvim-treesitter/nvim-treesitter', { ['tag'] = 'v0.9.3', ['do'] = ':TSUpdate' })
+  -- Plug('nvim-treesitter/nvim-treesitter', { ['tag'] = 'v0.9.3', ['do'] = ':TSUpdate' })
+  Plug('nvim-treesitter/nvim-treesitter', { ['tag'] = 'main', ['do'] = ':TSUpdate' })
 
   -- nvim-cmp
   Plug 'hrsh7th/nvim-cmp'

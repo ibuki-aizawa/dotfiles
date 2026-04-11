@@ -1,5 +1,5 @@
 
-require"nvim-treesitter.configs".setup {
+require"nvim-treesitter".setup {
   ensure_installed = { "prisma", "lua", "vim", "typescript" },
   highlight = {
     enable = true,
@@ -35,7 +35,7 @@ configs.setup {
   -- ハイライト機能の有効化
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true,
+    additional_vim_regex_highlighting = false,
   },
 
   -- インデント機能の有効化（実験的）
