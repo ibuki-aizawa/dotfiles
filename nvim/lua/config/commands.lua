@@ -1,6 +1,7 @@
 local vim = vim;
 
 local uex = require('utils.ex')
+local edit = require('utils.edit')
 
 vim.api.nvim_create_user_command(
   "ExecuteCommand",
@@ -153,3 +154,9 @@ end, {
 
 -- previous 版は、ヴィジュアルモード時の挙動が微妙
 vim.api.nvim_create_user_command('SelectFunctionObjectPrevious', 'SelectFunctionObject prev', {})
+
+vim.api.nvim_create_user_command('ToggleQuote', function(opts)
+  local q = opts.args ~= "" and opts.args or "'"
+  -- rangeが0（指定なし）ならカーソル行(.)を対象にする
+  edit.toggle_quotes_in_range(opts.line1, opts.line2, q)
+end, { range = true, nargs = '?' })
