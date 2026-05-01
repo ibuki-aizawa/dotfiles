@@ -20,8 +20,10 @@ vim.keymap.set('n', ']n', [[/\d\+<CR>]], { silent = true, desc = "Next number" }
 vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" })
 
 -- Tab でバッファ巡回
-vim.keymap.set('n', '<Tab>', ':bn<CR>')
-vim.keymap.set('n', '<S-Tab>', ':bp<CR>')
+vim.keymap.set('n', '<Tab>', 'gt')
+vim.keymap.set('n', '<S-Tab>', 'gT')
+vim.keymap.set('n', '<C-n>', ':enew<CR>')
+vim.keymap.set('n', '<C-S-n>', ':tabnew<CR>')
 
 -- Tab でバッファ巡回
 -- vim.keymap.set('n', '<C-Tab>', 'gt<CR>')
