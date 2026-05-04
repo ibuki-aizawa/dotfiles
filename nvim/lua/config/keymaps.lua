@@ -20,8 +20,8 @@ vim.keymap.set('n', ']n', [[/\d\+<CR>]], { silent = true, desc = "Next number" }
 vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" })
 
 -- Tab でバッファ巡回
-vim.keymap.set('n', '<Tab>', 'gt')
-vim.keymap.set('n', '<S-Tab>', 'gT')
+-- vim.keymap.set('n', '<Tab>', 'gt')
+-- vim.keymap.set('n', '<S-Tab>', 'gT')
 vim.keymap.set('n', '<C-n>', ':enew<CR>')
 vim.keymap.set('n', '<C-S-n>', ':tabnew<CR>')
 
@@ -109,6 +109,8 @@ keymap('i', '<C-k>', '<C-o>D', opts);
 
 -- ターミナルからスムーズにウィンドウ切り替えできるように
 keymap('t', '<C-w>', '<C-\\><C-n><C-w>', opts);
+keymap('t', 'gt', '<C-\\><C-n>gt', opts);
+keymap('t', 'gT', '<C-\\><C-n>gT', opts);
 
 -- ターミナル終了
 -- keymap('t', '<C-;>', '<C-\\>exit<CR>', opts);
@@ -166,6 +168,8 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', builtin.find_files)
 vim.keymap.set('n', '<leader>g', builtin.live_grep)
 vim.keymap.set('n', '<leader>b', builtin.buffers)
+vim.keymap.set('n', '<leader>l', builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<leader>*', builtin.grep_string)
 
 -- vim.keymap.set('n', '<C-p>', builtin.find_files)
 -- vim.keymap.set('n', '<C-n>', builtin.buffers)

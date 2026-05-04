@@ -85,6 +85,10 @@ alias vif='vi $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
 alias fcat='cat $(fzf --walker-skip=.git,node_modules,dist,.next,build)'
 
+alias viewmd='glow'
+alias mdview='glow'
+alias readme_reader='glow'
+
 alias vr='nvim -c "normal! '\''0"'
 alias vv='nvim -c "normal! '\''0"'
 
