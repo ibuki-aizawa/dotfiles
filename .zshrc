@@ -26,7 +26,12 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # setopt emacs
-setopt vi
+# setopt vi
+
+# Ctrl-x Ctrl-e で現在の入力行を Vim で編集する
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
 # zshの例：Ctrl-z で中断したジョブをフォアグラウンドに戻す
 fancy-ctrl-z() {
