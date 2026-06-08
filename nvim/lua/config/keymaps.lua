@@ -22,8 +22,8 @@ vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" }
 -- Tab でバッファ巡回
 -- vim.keymap.set('n', '<Tab>', 'gt')
 -- vim.keymap.set('n', '<S-Tab>', 'gT')
-vim.keymap.set('n', '<C-n>', ':enew<CR>')
-vim.keymap.set('n', '<C-S-n>', ':tabnew<CR>')
+-- vim.keymap.set('n', '<C-n>', ':enew<CR>')
+-- vim.keymap.set('n', '<C-S-n>', ':tabnew<CR>')
 
 -- Tab でバッファ巡回
 -- vim.keymap.set('n', '<C-Tab>', 'gt<CR>')
@@ -95,6 +95,14 @@ keymap('i', '<C-a>', '<Home>', opts);
 keymap('i', '<C-e>', '<End>', opts);
 -- vimのデフォルトの <C-k> は特殊文字入力
 keymap('i', '<C-k>', '<C-o>D', opts);
+
+-- 上下の移動
+keymap('i', '<C-n>', '<Down>', opts)
+keymap('i', '<C-p>', '<Up>', opts)
+
+-- 予測変換
+keymap('i', '<M-n>', '<C-n>', opts)
+keymap('i', '<M-p>', '<C-p>', opts)
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
