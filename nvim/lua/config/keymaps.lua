@@ -97,12 +97,12 @@ keymap('i', '<C-e>', '<End>', opts);
 keymap('i', '<C-k>', '<C-o>D', opts);
 
 -- 上下の移動
-keymap('i', '<C-n>', '<Down>', opts)
-keymap('i', '<C-p>', '<Up>', opts)
+-- keymap('i', '<C-n>', '<Down>', opts)
+-- keymap('i', '<C-p>', '<Up>', opts)
 
 -- 予測変換
-keymap('i', '<M-n>', '<C-n>', opts)
-keymap('i', '<M-p>', '<C-p>', opts)
+-- keymap('i', '<M-n>', '<C-n>', opts)
+-- keymap('i', '<M-p>', '<C-p>', opts)
 
 -- ウィンドウ切り替え
 -- keymap('n', '<C-h>', '<C-w>h', opts);
