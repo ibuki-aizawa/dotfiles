@@ -9,15 +9,17 @@ local opts = {
 local keymap = vim.api.nvim_set_keymap
 
 -- コマンドモード展開
-vim.keymap.set('c', '%%', "getcmdtype() == ':' ? expand('%') : '%%'", { expr = true })
-vim.keymap.set('c', '%:p', "getcmdtype() == ':' ? expand('%:p') : '%:p'", { expr = true })
-vim.keymap.set('c', '%:h', "getcmdtype() == ':' ? expand('%:h') . '/' : '%:h'", { expr = true })
+vim.keymap.set('c', '%\t', "getcmdtype() == ':' ? expand('%') : '%%'", { expr = true })
+vim.keymap.set('c', '%p\t', "getcmdtype() == ':' ? expand('%:p') : '%:p'", { expr = true })
+vim.keymap.set('c', '%h\t', "getcmdtype() == ':' ? expand('%:h') . '/' : '%:h'", { expr = true })
 
 -- ]n / [n で数字へジャンプ
 -- vim.keymap.set('n', ']n', function() vim.fn.search([[\d\+]], 'W') end, { desc = "Next number" })
 -- vim.keymap.set('n', '[n', function() vim.fn.search([[\d\+]], 'bW') end, { desc = "Prev number" })
 vim.keymap.set('n', ']n', [[/\d\+<CR>]], { silent = true, desc = "Next number" })
 vim.keymap.set('n', '[n', [[?\d\+<CR>]], { silent = true, desc = "Prev number" })
+
+vim.keymap.set('n', 'gl', ':RipGrep <C-r><C-w><CR>')
 
 -- Tab でバッファ巡回
 -- vim.keymap.set('n', '<Tab>', 'gt')

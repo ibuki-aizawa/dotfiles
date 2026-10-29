@@ -1,6 +1,8 @@
 local vim = vim;
 local global = vim.g
 
+-- vim.opt.fileencodings = { "ucs-bom", "utf-8", "utf-16", "cp932", "sjis", "euc-jp", "default" }
+
 -- use rg for external-grep
 vim.opt.grepprg = table.concat({
   'rg',
@@ -30,6 +32,7 @@ vim.opt.isfname:append(":")
 -- }
 -- require('onedark').load()
 vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "catppuccin-frappe"
 -- vim.cmd.colorscheme "habamax"
 -- vim.cmd.colorscheme "xamabah"
 
@@ -38,4 +41,15 @@ vim.cmd.colorscheme "catppuccin"
 
 -- コパイロット
 -- global.copilot_no_tab_map = true
+
+if vim.fn.has("win32") == 1 then
+  -- PowerShell 7 (pwsh) があれば優先し、なければ Windows PowerShell を使用
+  local powershell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+
+  vim.o.shell = powershell
+  -- -NoProfile を除外して $PROFILE (エイリアス設定等) を読み込ませる
+  vim.o.shellcmdflag = "-NoLogo -ExecutionPolicy RemoteSigned -Command"
+  vim.o.shellquote = ""
+  vim.o.shellxquote = ""
+end
 

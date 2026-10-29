@@ -85,6 +85,18 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'cs', 'fsharp' },
+  callback = function()
+    vim.lsp.start({
+      name = 'csharp-ls',
+      cmd = { 'csharp-ls' },
+      root_dir = vim.fs.root(0, { "*.sln", "*.csproj", ".git" }),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    })
+  end,
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function (args)
     local opts = { buffer = args.buf }

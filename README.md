@@ -56,10 +56,37 @@ sudo usermod -s /bin/zsh $(id -un)
 ```ps1
 Set-ExecutionPolicy RemoteSigned
 
-echo '$script = "$(pwd)/profile.ps1"
+winget install fd
+winget install fzf
+
+# nvim config
+New-Item -ItemType SymbolicLink -Path "~\.vimrc" -Target "$(pwd)/.vimrc"
+New-Item -ItemType SymbolicLink -Path "~\AppData\Local\nvim" -Target "$(pwd)/nvim"
+
+iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
+
+# .profile.ps1
+New-Item -ItemType SymbolicLink -Path "~/.profile.ps1" -Target "$(pwd)/.profile.ps1"
+
+echo '$script = "~/.profile.ps1"
 
 if (Test-Path $script) {
     . $script
 }
 ' > $profile
+
+# plug install
+nvim
+:PlugInstall
+```
+
+### If `libfzf.dll` is not found, build it:
+
+```ps1
+winget install GnuWin32.Make
+# Add to Path: C:\Program Files (x86)\GnuWin32\bin
+winget install cmake
+cd ~\AppData\Local\nvim-data\plugged\telescope-fzf-native.nvim
+make
 ```

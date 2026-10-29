@@ -67,11 +67,9 @@ function M.git_log_current_file()
     local log_buf = vim.api.nvim_get_current_buf()
     vim.cmd('setlocal buftype=nofile bufhidden=hide noswapfile filetype=git')
 
-    local log_cmd
-    if file_path == "" then
-      log_cmd = "git log --pretty=format:'%h %ad %s' --date=short"
-    else
-      log_cmd = "git log --pretty=format:'%h %ad %s' --date=short --follow -- " .. vim.fn.shellescape(file_path)
+    local log_cmd = { "git", "log", "--pretty=format:%h %ad %s", "--date=short" }
+    if file_path ~= "" then
+        vim.list_extend(log_cmd, { "--follow", "--", file_path })
     end
 
     local output = vim.fn.systemlist(log_cmd)

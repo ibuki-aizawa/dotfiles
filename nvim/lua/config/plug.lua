@@ -21,6 +21,7 @@ function M.init()
   Plug 'nvim-telescope/telescope.nvim'
 
   Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
+  -- Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install' }
 
   -- treesitter
   -- 安定版（v0.9.3）を指定
