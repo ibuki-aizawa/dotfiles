@@ -73,6 +73,8 @@ echo '$script = "~/.profile.ps1"
 
 if (Test-Path $script) {
     . $script
+} else {
+    echo "$script is not found."
 }
 ' > $profile
 
@@ -84,9 +86,12 @@ nvim
 ### If `libfzf.dll` is not found, build it:
 
 ```ps1
+# Install gcc, make, cmake
+winget install BrechtSanders.WinLibs.POSIX.UCRT.LLVM
 winget install GnuWin32.Make
 # Add to Path: C:\Program Files (x86)\GnuWin32\bin
 winget install cmake
+
 cd ~\AppData\Local\nvim-data\plugged\telescope-fzf-native.nvim
 make
 ```

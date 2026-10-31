@@ -6,10 +6,10 @@
 
 if ($host.Name -eq 'ConsoleHost' -and -not $env:NVIM) {
   # 文字コードをutf-8に
-  # $PSDefaultParameterValues['Get-Content:Encoding'] = 'utf8'
-  # $null = chcp 65001
-  # [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-  # $OutputEncoding = [System.Text.Encoding]::UTF8
+  $PSDefaultParameterValues['Get-Content:Encoding'] = 'utf8'
+  $null = chcp 65001
+  [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+  $OutputEncoding = [System.Text.Encoding]::UTF8
 
   # chcp 932
 
@@ -93,24 +93,15 @@ if (Test-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswher
 # Remove-Item alias:cat -ErrorAction SilentlyContinue
 # function cat { Get-Content -Encoding utf8 $args }
 
-# Get-Help のページャーを指定
-# help ラップ関数でカスタマイズする
-# function help {
-#   try {
-#     if (Get-Command less -ErrorAction SilentlyContinue) {
-#       # less があれば less を使用する
-#       Get-Help @args | less
-#     } else {
-#       Get-Help @args
-#       # Get-Help @args | more
-#       # Get-Help @args | Out-Host -Paging
-#       # Get-Help @args | Out-String -Stream
-#       # Get-Help @args | Out-String -Stream | Out-Host -Paging
-#     }
-#   } catch {
-#     # Q キーでの中断で発生する例外を正常終了とする
-#   }
-# }
+# ページャーを設定
+if (Get-Command bat -ErrorAction SilentlyContinue) {
+  $env:PAGER = 'bat'
+} elseif (Get-Command less -ErrorAction SilentlyContinue) {
+  $env:PAGER = 'less'
+}
+
+# help 関数を上書き定義
+. ~/repo/dotfiles/help.ps1
 
 # touch っぽいコマンド
 function touch {
