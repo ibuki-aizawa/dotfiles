@@ -1,5 +1,9 @@
 
 require('telescope').setup({
+  defaults ={
+    layout_strategy = "current_buffer",
+    border = false,
+  },
   extensions = {
     fzf = {
       fuzzy = true,                    -- fuzzy searchを有効に
