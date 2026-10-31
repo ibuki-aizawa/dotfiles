@@ -112,7 +112,7 @@ function help {
 
         $originalTitle = $Host.UI.RawUI.WindowTitle
         try {
-          $Host.UI.RawUI.WindowTitle = "Help: $Name"
+          $Host.UI.RawUI.WindowTitle = "man $Name"
 
           $pagerCommandInfo = Get-Command -Name $pagerCommand -ErrorAction Ignore
           if ($pagerCommandInfo -eq $null) {
