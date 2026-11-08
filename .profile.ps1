@@ -10,6 +10,7 @@ if ($host.Name -eq 'ConsoleHost' -and -not $env:NVIM) {
   $null = chcp 65001
   [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
   $OutputEncoding = [System.Text.Encoding]::UTF8
+  $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
 
   # chcp 932
 
