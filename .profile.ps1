@@ -34,10 +34,12 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()
   }
 
-  Set-PSReadLineKeyHandler -Chord 'Ctrl+j' -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
-  }
+  Set-PSReadLineKeyHandler -Chord 'Ctrl+f' -Function AcceptNextSuggestionWord
+
+  # Set-PSReadLineKeyHandler -Chord 'Ctrl+j' -ScriptBlock {
+  #   [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()
+  #   [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+  # }
 }
 
 # エイリアス
